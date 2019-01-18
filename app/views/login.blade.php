@@ -3,6 +3,7 @@
 @stop
 <html>
   <head>
+      <title>Authentication</title>
     <link rel="stylesheet" href="{{asset('assets/css/login/login.css')}}">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -39,7 +40,7 @@
                         </div>
 
                          <button type="submit" class="btn btn-primary">Login</button>
-                        
+
                     </form>
                  </div>
             </div>
