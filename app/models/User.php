@@ -23,7 +23,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
-	public function getAvatar() {
-			return asset($this->image);
-	}
 }

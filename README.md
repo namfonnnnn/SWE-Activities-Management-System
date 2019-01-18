@@ -1,7 +1,2 @@
-﻿# SWE-Activities-Management-System
+# SWE-Activities-Management-System
 Senior Project
-
-
-   
-
-

@@ -19,28 +19,28 @@
   </form>
   <table class="table table-striped" style="margin-top:20px">
       <thead>
-         <tr>
-            <th class="text-center" style="padding-right:40px">ชื่อกิจกรรม</th>
-            <th class="text-center" style="padding-right:50px">อาจารย์ที่ปรึกษา</th>
-            <th class="text-center" style="padding-right:40px">ปีการศึกษาที่เข้าร่วม</th>
-            <th class="text-center" style="padding-right:40px">นักศึกษาที่เข้าร่วม</th>
-            <th class="text-center" style="padding-right:40px">นักศึกษาที่ไม่เข้าร่วม</th>
+         <tr class="table-success">
+            <th class="text-center">ชื่อกิจกรรม</th>
+            <th class="text-center">อาจารย์ที่รับผิดชอบ</th>
+            <th class="text-center">นักศึกษาที่เข้าร่วมทั้งหมด</th>
+            <th class="text-center">นักศึกษาที่เข้าร่วม</th>
+            <th class="text-center">นักศึกษาที่ไม่เข้าร่วม</th>
          </tr>
       </thead>
       <tbody>
          <tr>
-            <td class="text-left">ค่ายScrum</td>
-            <td class="text-left">กิจกรรมเสริมหลักสูตร</td>
-            <td class="text-left">ผู้ช่วยศาสตราจารย์ ฐิมาพร เพชรแก้ว </td>
-            <td class="text-left">22</td>
-            <td class="text-left">5</td>
+            <td class="text-center">ค่ายScrum</td>
+            <td class="text-center">ผู้ช่วยศาสตราจารย์ ฐิมาพร เพชรแก้ว</td>
+            <td class="text-center">27</td>
+            <td class="text-center">22</td>
+            <td class="text-center">5</td>
          </tr>
          <tr>
-            <td class="text-left">รับน้องทะเล</td>
-            <td class="text-left">กิจกรรมนักศึกษา</td>
-            <td class="text-left">อาจารย์ ดร. พุทธิพร ธนธรรมเมธี </td>
-            <td class="text-left">20</td>
-            <td class="text-left">3</td>
+            <td class="text-center">รับน้องทะเล</td>
+            <td class="text-center">ผู้ช่วยศาสตราจารย์ ฐิมาพร เพชรแก้ว</td>
+            <td class="text-center">23</td>
+            <td class="text-center">20</td>
+            <td class="text-center">3</td>
          </tr>
          <tr>     
       </tbody>

@@ -18,38 +18,11 @@
                   <a class="nav-link" href="{{url('/home')}}">หน้าหลัก <span class="sr-only">(current)</span></a>
                 </li>
               </ul>
-              @if(Auth::check())
-                  @if(Auth::user()->type == "student")
               <ul class="navbar-nav my-lg-0">
-                  <li class="nav-item dropdown {{ Request::is('profile/*') ? 'active' : ''}}">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     โปรไฟล์นักศึกษา
-                    </a>
-                  <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์นักศึกษา</a>
-                    <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์นักศึกษา</a>
-                    <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
-                  </div>
-                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">ข้อมูลนักศึกษา</a>
+                </li>
               </ul>
-          @else
-
-              <ul class="navbar-nav my-lg-0">
-                  <li class="nav-item dropdown {{ Request::is('profile/*') ? 'active' : ''}}">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     ข้อมูลส่วนตัว
-                    </a>
-                  <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์ส่วนตัว</a>
-                    <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
-                    <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
-                  </div>
-                  </li>
-              </ul>
-          @endif
-
-          @if(Auth::check())
-              @if(Auth::user()->type != "student")
               <ul class="navbar-nav my-lg-0">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,28 +43,20 @@
                   </a>
                   <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="{{url('/manage/user/student')}}">นักศึกษา</a>
-                      <a class="dropdown-item" href="{{url('/manage/user/teach')}}">อาจารย์</a>
-                      <a class="dropdown-item" href="{{url('/manage/user/president')}}">ประธานหลักสูตร</a>
-                      @if(Auth::user()->roleID == 2)
-                      <a class="dropdown-item" href="{{url('/manage/user/admin')}}">ผู้ดูแลระบบ</a>
-                        @endif
+                      <a class="dropdown-item" href="{{url('/manage/user/teacher')}}">อาจารย์</a>
                   </div>
                 </li>
               </ul>
-          @endif
-          @endif
               <ul class="login navbar-nav ml-md-auto d-none d-md-flex" style="margin-left:50px">
                 <li class="nav-item dropdown ">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</a>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ชื่อ login</a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
-                      <a class="dropdown-item" href="{{url('/logout')}}">ออกจากระบบ</a>
+                      <a class="dropdown-item" href="#">แก้ไขโปรไฟล์</a>
+                      <a class="dropdown-item" href="#">แก้ไขรหัสผ่าน</a>
+                      <a class="dropdown-item" href="{{url('/home')}}">ออกจากระบบ</a>
                   <div>
                 </li>
               </ul>
-
-          @endif
-
             </div>
           </nav>
       <div class="container">
