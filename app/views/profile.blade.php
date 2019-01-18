@@ -33,7 +33,6 @@
                     ข้อมูลส่วนตัว
 
                 @endif
-                
 
             </li>
         </ol>
@@ -94,7 +93,19 @@
                 </div>
 
                 @if($user->type == 'student')
-                    
+                    <div class="col-lg-6 col-md-12">
+                        <div class="wrap">
+                            <div class="search">
+                                <form class="" method="get">
+                                    <input type="hidden" name="userID" value="{{Request::get('userID')}}">
+                                    <input type="hidden" name="year" value="{{Request::get('year')}}">
+                                <input type="text" value="{{Request::get('s')}}" class="searchTerm" name="s" placeholder="Search">
+                                <button type="submit" class="searchButton btn">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                </form>
+                            </div>
+                        </div>
 
                         <br>
                         <div class="panel panel-primary">
@@ -106,12 +117,17 @@
 
                                     <div class="col-xs-18 text-right">
 
-                                        <div style="    padding-left: 15px;"> </div>
+                                        <div style="    padding-left: 15px;"> กิจกรรมที่ต้องเข้าร่วม</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="#">
-                           
+                                <div class="panel-footer">
+
+                                    <span class="pull-left"> กิจกรรมที่ต้องเข้าร่วมทั้งหมด</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -151,7 +167,7 @@
                                     animationEnabled: true,
                                     theme: "light2",
                                     title:{
-                                        text: ""
+                                        text: "กราฟการเข้าร่วมกิจกรรมของนักศึกษา"
                                     },
                                     legend:{
                                         cursor: "pointer",

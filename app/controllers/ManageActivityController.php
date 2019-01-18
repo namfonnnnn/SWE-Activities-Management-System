@@ -102,7 +102,7 @@ class ManageActivityController extends BaseController {
 			}else{
 				$activity = new Activity;
 			}
-			
+
 			$activity->activity_name = Input::get("activityname");
 			$activity->description = Input::get("activitydetail");
 			$activity->teacher = json_encode(Input::get("teacher"));
@@ -131,7 +131,7 @@ class ManageActivityController extends BaseController {
 		}else{
 			return Redirect::to('manage/activity/summary/useradd')->with('message','บันทึกสำเร็จ');
 		}
-		
+
 		// return $activity->coverTime(Input::get('daystart'));
 	}
 
@@ -157,9 +157,11 @@ class ManageActivityController extends BaseController {
 		return View::make('manage.activity_detail');
 	}
 
-	public function showActivityStatus()
+	public function showActivityStatus($id)
 	{
-		return View::make('manage.activity_check_status');
+		$activity = Activity::find($id);
+		$register = \DB::table('checking')->where('activityID', $id)->get();
+		return View::make('manage.activity_check_status', ['activity' => $activity, 'register'=>$register]);
 	}
 
 

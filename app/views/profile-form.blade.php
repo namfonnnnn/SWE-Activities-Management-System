@@ -81,7 +81,7 @@
                 </div>
             </div>
             @if(Auth::user()->type == 'student')
-                <div class="col-lg-6 col-md-12 text-right">
+                <div class="col-lg-6 col-md-12">
                     <div class="wrap">
                         <div class="search">
                             <input type="text" class="searchTerm" placeholder="Search">
@@ -100,12 +100,17 @@
 
                                 <div class="col-xs-18 text-right">
 
-                                    <div style="    padding-left: 15px;"></div>
+                                    <div style="    padding-left: 15px;">กิจกรรมที่ต้องเข้าร่วม</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
-                            
+                            <div class="panel-footer">
+
+                                <span class="pull-left">กิจกรรมที่ต้องเข้าร่วมทั้งหมด</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
                         </a>
                     </div>
                 </div>

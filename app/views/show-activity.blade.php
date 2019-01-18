@@ -46,15 +46,8 @@
             <small>วันที่เริ่ม : {{ Carbon\Carbon::parse($activity->day_start)->addYears('543')->format('d/m/Y') }} {{$activity->time_start}} ถึง {{ Carbon\Carbon::parse($activity->day_end)->addYears('543')->format('d/m/Y') }} {{$activity->time_end}} </small>
             <br>
             <small>เทอม : {{$activity->term_year}} ปีการศึกษา : {{ $activity->sector }}</small>
-            <br>
-            <small>นักศึกษาที่ต้องเข้าร่วม : {{$activity->student}} </small>
-            <br>
-            <small> ชั้นปีที่ : {{ $activity->student }} </small>
-            <br>
-            <small>อาจารย์ที่รับผิดชอบ : {{$activity->teacher}} </small>
-            <br>
-            <small> สถานที่จัดกกิจกรรม : {{ $activity->location }}</small>
             <p>
+
                 {{ $activity->description }}
             </p>
             {{-- @if(Carbon\Carbon::now() >= Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $activity->day_start. " " .$activity->time_start) ) --}}

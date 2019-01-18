@@ -51,12 +51,12 @@
 
                                 <div class="col-md-12 text-center">
                                     <br>
-                                    <span class="welcome">ยินดีต้องรับ อาจารย์<b><a href="{{url('profile/edit')}}">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</a></b></span>
+                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</a></b></span>
                                     <br>
 <br><br><br>
                                     <div class="box-system">
                                         <h1>ระบบกิจกรรมหลังสูตร SWE</h1>
-                                        <span>หลักสูตร วิศวกรรมซอฟต์แวร์ มหาวิทยาลัยวลัยลักษณ์</span>
+                                        <span>หลักสูตร วิศวกรรมซอฟต์แวร์ มหาวิทยาลัย</span>
                                     </div>
                                 </div>
 
