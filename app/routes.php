@@ -55,9 +55,14 @@ Route::get('/manage/activity/detail', 'ManageActivityController@showActivityDeta
 
 Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
 
+Route::get('/manage/user/student/add', 'ManageUserController@showUserStudentadd');
+
 Route::get('/manage/user/student', 'ManageUserController@showUserStudent');
 
 Route::get('/manage/user/teacher', 'ManageUserController@showUserTeacher');
+
+Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacheradd');
+
 
 
 
@@ -82,27 +87,27 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 // Route::get('/logout', 'UserController@getLogout');
 // Route::post('/login', 'UserController@postLogin');
 
-Route::get('/profile', 'UserController@getProfile');
-Route::get('/profile/edit', 'UserController@getProfileUpdate');
-Route::post('/profile/edit', 'UserController@postProfileUpdate');
-Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
-Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
-Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
-Route::group(array('prefix'=>'students'), function () {
-	Route::get('/index', 'StudentController@index');
-});
+// Route::get('/profile', 'UserController@getProfile');
+// Route::get('/profile/edit', 'UserController@getProfileUpdate');
+// Route::post('/profile/edit', 'UserController@postProfileUpdate');
+// Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
+// Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
+// Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
+// Route::group(array('prefix'=>'students'), function () {
+// 	Route::get('/index', 'StudentController@index');
+// });
 
-Route::group(array('prefix'=>'manage') , function () {
+// Route::group(array('prefix'=>'manage') , function () {
 
 
-	Route::resource('activity', 'ActivityController');
-	Route::resource('user/student', 'StudentController');
-	Route::resource('user/teach', 'TeachController');
-	Route::resource('user/president', 'PresidentController');
-	Route::resource('user/admin', 'AdminController');
-	Route::resource('activity-type', 'ActivityTypeController');
-	Route::group(array('prefix' => 'user'), function () {
+// 	Route::resource('activity', 'ActivityController');
+// 	Route::resource('user/student', 'StudentController');
+// 	Route::resource('user/teach', 'TeachController');
+// 	Route::resource('user/president', 'PresidentController');
+// 	Route::resource('user/admin', 'AdminController');
+// 	Route::resource('activity-type', 'ActivityTypeController');
+// 	Route::group(array('prefix' => 'user'), function () {
 
-	});
+// 	});
 
-});
+// });
