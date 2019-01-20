@@ -27,25 +27,33 @@
          <div class="col-sm-4">
             <div class="form-group">
                <label for="name">ชื่อ</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="ชื่อ" >
+               <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
+               <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
             </div>
             <div class="form-group">
                <label for="name">นามสกุล</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="นามสกุล" >
+               <input type="text" class="form-control {{$errors->has('lastname') ? 'is-invalid' : ''}}" id="lastname" name="lastname" value="{{$text_lastname}}" placeholder ="นามสกุล" >
+               <small class="form-text text-danger">{{$errors->first('lastname')}}</small>
             </div>
             <div class="form-group">
                <label for="name">อีเมล</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="อีเมล" >
+               <input type="text" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" id="email" name="email" value="{{$text_email}}" placeholder ="อีเมล" >
+               <small class="form-text text-danger">{{$errors->first('email')}}</small>
             </div>
             <div class="form-group">
                <label for="name">เบอร์โทรศัพท์</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="เบอร์โทรศัพท์" >
-            </div><div class="form-group">
+               <input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder ="เบอร์โทรศัพท์" >
+               <small class="form-text text-danger">{{$errors->first('tel')}}</small>
+            </div>
+            <div class="form-group">
                <label for="name">ห้องทำงาน</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="ห้องทำงาน" >
-            </div><div class="form-group">
+               <input type="text" class="form-control {{$errors->has('room') ? 'is-invalid' : ''}}" id="room" name="room" value="{{$text_room}}" placeholder ="ห้องทำงาน" >
+               <small class="form-text text-danger">{{$errors->first('room')}}</small>
+            </div>
+            <div class="form-group">
                <label for="name">รหัสผ่าน</label>
-               <input type="text" class="form-control" id="activityname" name="activityname" value="" placeholder ="รหัสผ่าน" >
+               <input type="text" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+               <small class="form-text text-danger">{{$errors->first('password')}}</small>
             </div>
             <br>
             <button type="submit" class="btn btn-success">บันทึก</button>
