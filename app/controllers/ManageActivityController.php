@@ -76,6 +76,17 @@ class ManageActivityController extends BaseController {
 	}
 	public function actionActivityAdd($id = null)
 	{
+		if(isset($id)){
+			$redirect_to = 'manage/activity/edit/'.$id;
+			$success_redirect_to = 'manage/activity/edit/'.$id;
+			$success_message ='แก้ไขสำเร็จ';
+		}
+		else{
+			$redirect_to = 'manage/activity/add/';
+			$success_redirect_to = 'manage/activity';
+			$success_message ='บันทึกสำเร็จ';
+		}
+
 		$rules = array(
 			'activityname' => 'required',
 			'daystart' => 'required|date_format:d/m/Y',
@@ -91,46 +102,36 @@ class ManageActivityController extends BaseController {
 		$validator = Validator::make(Input::all(),$rules);
 
 		if($validator->fails()){
-			if(isset($id)){
-				return Redirect::to('manage/activity/edit/'.$id)->withInput()->withErrors($validator);
-			}else{
-				return Redirect::to('manage/activity/add')->withInput()->withErrors($validator);
-			}
+			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
-			if(isset($id)){
-				$activity = Activity::find($id);
-			}else{
-				$activity = new Activity;
-			}
 
-			$activity->activity_name = Input::get("activityname");
-			$activity->description = Input::get("activitydetail");
-			$activity->teacher = json_encode(Input::get("teacher"));
-			$activity->day_start = $activity->coverTime(Input::get("daystart"));
-			$activity->day_end = $activity->coverTime(Input::get("dayend"));
-			$activity->time_start = Input::get("timestart");
-			$activity->time_end = Input::get("timeend");
-			$activity->term_year = Input::get("term");
-			$activity->sector = Input::get("sector");
-			$activity->location = Input::get("location");
-			$activity->image = Input::get("file");
-			$activity->student = json_encode(Input::get("years"));
+		if(isset($id)){
+			$activity = Activity::find($id);
+		}else{
+			$activity = new Activity;
+		}
+
+		$activity->activity_name = Input::get("activityname");
+		$activity->description = Input::get("activitydetail");
+		$activity->teacher = json_encode(Input::get("teacher"));
+		$activity->day_start = $activity->coverTime(Input::get("daystart"));
+		$activity->day_end = $activity->coverTime(Input::get("dayend"));
+		$activity->time_start = Input::get("timestart");
+		$activity->time_end = Input::get("timeend");
+		$activity->term_year = Input::get("term");
+		$activity->sector = Input::get("sector");
+		$activity->location = Input::get("location");
+		$activity->image = Input::get("file");
+		$activity->student = json_encode(Input::get("years"));
+		
 		try {
 			$reuslt = $activity->save();
 		}
 		catch ( \Exception $e ) {
-			if(isset($id)){
-				return Redirect::to('manage/activity/edit/'.$id)->withInput()->with('error', $e->getMessage());
-			}else{
-				return Redirect::to('manage/activity/add')->withInput()->with('error', $e->getMessage());
-			}
+			return Redirect::to($redirect_to)->withInput()->with('error', $e->getMessage());
+		}
 
-		}
-		if(isset($id)){
-			return Redirect::to('manage/activity/edit/'.$id)->withInput()->with('message','แก้ไขสำเร็จ');
-		}else{
-			return Redirect::to('manage/activity/summary/useradd')->with('message','บันทึกสำเร็จ');
-		}
+		return Redirect::to($success_redirect_to)->withInput()->with('message', $success_message);
 
 		// return $activity->coverTime(Input::get('daystart'));
 	}
