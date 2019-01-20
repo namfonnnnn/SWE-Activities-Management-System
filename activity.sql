@@ -120,6 +120,7 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `prefix` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `image` text COLLATE utf8_unicode_ci,
@@ -135,20 +136,38 @@ CREATE TABLE `students` (
   CONSTRAINT `students_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `students` (`id`, `user_id`, `firstname`, `lastname`, `image`, `year`, `tel`, `email`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(58112418,	34,	'ฉลองราช',	'ประสิทธิวงศ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:08:25',	NULL,	'2019-01-20 03:08:25',	NULL),
-(58112970,	22,	'ชิดชนก',	' ยีสมัน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:47:47',	NULL,	'2019-01-20 02:47:47',	NULL),
-(58113341,	23,	'ฏอฮีเราะฮ์',	'ฮูซัยนี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:49:34',	NULL,	'2019-01-20 02:49:34',	NULL),
-(58120379,	27,	'วุฒิชัย',	'เพ็ชร์ทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:54:22',	NULL,	'2019-01-20 02:54:22',	NULL),
-(58122516,	11,	'หฤษฎ์',	'คงทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-19 23:08:31',	NULL,	'2019-01-19 23:08:31',	NULL),
-(58140500,	24,	'กิตปกรณ์',	'ทองเงิน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:50:33',	NULL,	'2019-01-20 02:50:33',	NULL),
-(58141623,	25,	'ทัศวัฒน์',	'รัตนพันธ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:51:15',	NULL,	'2019-01-20 02:51:15',	NULL),
-(58142753,	35,	'ประภาพร',	'มั่งมี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:09:18',	NULL,	'2019-01-20 03:09:18',	NULL),
-(58143033,	32,	'พงศธร',	'จันด้วง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:02:54',	NULL,	'2019-01-20 03:02:54',	NULL),
-(58144924,	36,	'ศุภณัฐ',	'คุ้มปิยะผล',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:10:08',	NULL,	'2019-01-20 03:10:08',	NULL),
-(58145236,	31,	'สุดารัตน์',	'ผิวอ่อน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:01:20',	NULL,	'2019-01-20 03:01:20',	NULL),
-(58148602,	33,	'สิริพร',	'พุทธวิริยะ',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:03:39',	NULL,	'2019-01-20 03:03:39',	NULL),
-(58222516,	37,	'58222516',	'58222516',	NULL,	'5822',	NULL,	NULL,	'2019-01-20 03:53:40',	NULL,	'2019-01-20 03:53:40',	NULL);
+INSERT INTO `students` (`id`, `user_id`, `prefix`, `firstname`, `lastname`, `image`, `year`, `tel`, `email`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(58112418,	34,	'',	'ฉลองราช',	'ประสิทธิวงศ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:08:25',	NULL,	'2019-01-20 03:08:25',	NULL),
+(58112970,	22,	'',	'ชิดชนก',	' ยีสมัน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:47:47',	NULL,	'2019-01-20 02:47:47',	NULL),
+(58113341,	23,	'',	'ฏอฮีเราะฮ์',	'ฮูซัยนี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:49:34',	NULL,	'2019-01-20 02:49:34',	NULL),
+(58120379,	27,	'',	'วุฒิชัย',	'เพ็ชร์ทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:54:22',	NULL,	'2019-01-20 02:54:22',	NULL),
+(58122516,	11,	'',	'หฤษฎ์',	'คงทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-19 23:08:31',	NULL,	'2019-01-19 23:08:31',	NULL),
+(58140500,	24,	'',	'กิตปกรณ์',	'ทองเงิน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:50:33',	NULL,	'2019-01-20 02:50:33',	NULL),
+(58141623,	25,	'',	'ทัศวัฒน์',	'รัตนพันธ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:51:15',	NULL,	'2019-01-20 02:51:15',	NULL),
+(58142753,	35,	'',	'ประภาพร',	'มั่งมี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:09:18',	NULL,	'2019-01-20 03:09:18',	NULL),
+(58143033,	32,	'',	'พงศธร',	'จันด้วง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:02:54',	NULL,	'2019-01-20 03:02:54',	NULL),
+(58144924,	36,	'',	'ศุภณัฐ',	'คุ้มปิยะผล',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:10:08',	NULL,	'2019-01-20 03:10:08',	NULL),
+(58145236,	31,	'',	'สุดารัตน์',	'ผิวอ่อน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:01:20',	NULL,	'2019-01-20 03:01:20',	NULL),
+(58148602,	33,	'',	'สิริพร',	'พุทธวิริยะ',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:03:39',	NULL,	'2019-01-20 03:03:39',	NULL),
+(58222516,	37,	'',	'58222516',	'58222516',	NULL,	'5822',	NULL,	NULL,	'2019-01-20 03:53:40',	NULL,	'2019-01-20 03:53:40',	NULL);
+
+DROP TABLE IF EXISTS `teachers`;
+CREATE TABLE `teachers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `prefix` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `firstname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `lastname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `image` text COLLATE utf8_unicode_ci NOT NULL,
+  `tel` int(10) NOT NULL,
+  `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -206,4 +225,4 @@ INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname
 (5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
 (6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
 
--- 2019-01-20 09:10:34
+-- 2019-01-20 09:48:00
