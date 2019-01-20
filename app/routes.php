@@ -70,6 +70,11 @@ Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacheradd'
 Route::get('/manage/user/student/add', 'ManageUserController@showUserStudentAdd');
 Route::post('/manage/user/student/add', 'ManageUserController@actionUserStudentAdd');
 
+Route::get('/manage/user/student/edit/{id}', 'ManageUserController@showUserStudentEdit');
+Route::post('/manage/user/student/edit/{id}', 'ManageUserController@actionUserStudentAdd');
+
+Route::get('/manage/user/student/delete/{id}', 'ManageUserController@actionUserStudentDelete');
+
 Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacherAdd');
 
 Route::get('/student_profile', 'StudentProfileController@studentProfile');
