@@ -7,28 +7,35 @@
 
 
 
-<form method="post" class="form-horizontal" autocomplete="off">
-    <div class="container">
-        <ul class="errorMessages"></ul>
-        <div class="row">
-           
-           <div class="col-md-6" style="margin-top:50px">
-              <h2>นักศึกษา</h2>
-              <hr>
-           </div>
-        </div>
-        
+<div class="container">
+   <ul class="errorMessages"></ul>
+   <div class="row">
+      <div class="col-md-6" style="margin-top:50px">
+         <h2>นักศึกษา</h2>
+         <hr>
+      </div>
+   </div>
    </div>
    <form>
       <div class="input-group">  
-         <input type="text" id="s" name="s" class="form-control" placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ">  
+         <input type="text" id="q" name="q" class="form-control" placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ" value="{{$q}}">  
          <span class="input-group-btn">      
          <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
          </span> 
       </div>
    </form>
-   
-   
+
+   <span class="form-group">
+      <select id="years" name="years"  placeholder ="ภาคการศึกษา" class="form-control {{$errors->has('term') ? 'is-invalid' : ''}}">
+         <option value="">- เลือกชั้นปี -</option>
+         <option value="1">ชั้นปีที่ 1</option>
+         <option value="2">ชั้นปีที่ 2</option>
+         <option value="3">ชั้นปีที่ 3</option>
+         <option value="4">ชั้นปีที่ 4</option>
+         <option value="5">ชั้นปีที่อื่นๆ</option>
+      </select>
+   </span>
+  
     <span class="input-group-btn">      
       <a href="{{url('/manage/user/student/add')}}"style="right"class="btn btn-outline-secondary btn-secondary" >เพิ่มนักศึกษา</a>
     </span>
@@ -43,7 +50,19 @@
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
-      
+      <tbody>
+         @foreach ($students as $student)
+            <tr>
+               <td class="text-center">{{ $student->id }}</td>
+               <td class="text-center">{{ $student->firstname }} {{ $student->lastname }}</td>
+               <td class="text-center">  
+                  <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm">แก้ไข</a>  
+                  <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm">ลบ</a>
+               </td>
+            </tr>
+         @endforeach
+      </tbody>
    </table>
+   <?php echo $students->links('partials.pagination'); ?>
 </div>
 @stop
