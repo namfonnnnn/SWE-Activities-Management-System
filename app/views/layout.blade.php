@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-top:30px">
               <ul class="navbar-nav my-lg-0">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">หน้าหลัก <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#">หน้าหลัก</a>
                 </li>
               </ul>
               <ul class="navbar-nav my-lg-0">
