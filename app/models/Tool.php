@@ -12,4 +12,28 @@ class Tool
 		 }
 		 return $reuslt;
 	}
+	public function formatDateToDatepicker($day)
+	{
+		if($day != ''){
+			$day = strtr($day, '/', '-');
+			return date('Y-m-d',strtotime($day));
+		}else{
+			return '';
+		}
+	}
+	public function formatTimeToDatepicker($time)
+	{
+
+		if($time != ''){
+			$a      = preg_split('/[: ]/', $time);
+			$time = $a[0].':'.$a[1];
+			return $time;
+		}else{
+			return '';
+		}
+	}
+	public function nowForDatepicker()
+	{
+		return date("Y-m-d",strtotime(Carbon\Carbon::now()));
+	}
 }
