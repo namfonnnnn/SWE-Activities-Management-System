@@ -40,13 +40,5 @@ class Activity extends Eloquent {
 		else
 			return null;
 	}
-	public function day_startNomalFormat()
-	{
-		return date('d/m/Y',strtotime($this->day_start));
-	}
-	public function day_endNomalFormat()
-	{
-		return date('d/m/Y',strtotime($this->day_end));
-	}
 	
 }

@@ -25,7 +25,22 @@
       </div>
    </form>
 
-   <span class="form-group">
+   <div class="input-group">
+      <select id="years" name="years"  placeholder ="ภาคการศึกษา" class="form-control {{$errors->has('term') ? 'is-invalid' : ''}}">
+         <option value="">- เลือกชั้นปี -</option>
+         <option value="1">ชั้นปีที่ 1</option>
+         <option value="2">ชั้นปีที่ 2</option>
+         <option value="3">ชั้นปีที่ 3</option>
+         <option value="4">ชั้นปีที่ 4</option>
+         <option value="5">ชั้นปีที่อื่นๆ</option>
+      </select>
+      <div class="input-group-append">
+      <a href="{{url('/manage/user/student/add')}}"style="right"class="btn btn-outline-success btn-success" >เพิ่มนักศึกษา</a>
+         <button class="btn btn-outline-info" type="submit" value="เพิ่มไฟล์" >เพิ่มไฟล์</button>
+      </div>
+   </div>
+
+   <!-- <span class="input-group">
       <select id="years" name="years"  placeholder ="ภาคการศึกษา" class="form-control {{$errors->has('term') ? 'is-invalid' : ''}}">
          <option value="">- เลือกชั้นปี -</option>
          <option value="1">ชั้นปีที่ 1</option>
@@ -41,7 +56,7 @@
     </span>
     <span class="input-group-btn">      
         <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">  
-    </span>
+    </span> -->
    <table class="table table-striped" style="margin-top:20px">
       <thead>
          <tr class="table-success">
@@ -56,8 +71,8 @@
                <td class="text-center">{{ $student->id }}</td>
                <td class="text-center">{{ $student->firstname }} {{ $student->lastname }}</td>
                <td class="text-center">  
-                  <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm">แก้ไข</a>  
-                  <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm">ลบ</a>
+                  <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>  
+                  <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                </td>
             </tr>
          @endforeach

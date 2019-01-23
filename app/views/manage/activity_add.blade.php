@@ -38,14 +38,14 @@
                <div class="col">
                   <div class="form-group">
                      <label for="name">วันที่เริ่มกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" name="daystart" value="{{$text_daystart}}" data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" name="daystart" data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
                      <small class="form-text text-danger">{{$errors->first('daystart')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
                      <label for="name">วันที่สิ้นสุดกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('dayend') ? 'is-invalid' : ''}}" id="dayend" name="dayend"  value="{{$text_dayend}}" data-toggle="datetimepicker" data-target="#dayend" placeholder ="00/00/0000">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('dayend') ? 'is-invalid' : ''}}" id="dayend" name="dayend" data-toggle="datetimepicker" data-target="#dayend" placeholder ="00/00/0000">
                      <small class="form-text text-danger">{{$errors->first('dayend')}}</small>
                   </div>
                </div>
@@ -54,14 +54,14 @@
                <div class="col">
                   <div class="form-group">
                      <label for="name">เวลาที่เริ่มกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('timestart') ? 'is-invalid' : ''}}" id="timestart" name="timestart" value="{{$text_timestart}}" data-toggle="datetimepicker"  data-target="#timestart" placeholder ="00:00">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('timestart') ? 'is-invalid' : ''}}" id="timestart" name="timestart" data-toggle="datetimepicker"  data-target="#timestart" placeholder ="00:00">
                      <small class="form-text text-danger">{{$errors->first('timestart')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
                      <label for="name">เวลาที่สิ้นสุดกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('timeend') ? 'is-invalid' : ''}}" id="timeend" name="timeend" value="{{$text_timeend}}" data-toggle="datetimepicker" data-target="#timeend"  placeholder ="00:00">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('timeend') ? 'is-invalid' : ''}}" id="timeend" name="timeend" data-toggle="datetimepicker" data-target="#timeend"  placeholder ="00:00">
                      <small class="form-text text-danger">{{$errors->first('timeend')}}</small>
                   </div>
                </div>
@@ -243,21 +243,25 @@
 <script type="text/javascript">
    $(function () {
       $('#timestart').datetimepicker({
-         format: 'HH:mm',
-         keepOpen:true
+         defaultDate: "{{Tool::nowForDatepicker()}} <?=($text_timestart != '')?$text_timestart:'00:00'?>",
+         format: 'HH:mm'
       });
       $('#timeend').datetimepicker({
+         defaultDate: "{{Tool::nowForDatepicker()}} <?=($text_timeend != '')?$text_timeend:'00:00'?>",
          format: 'HH:mm'
       });
       $('#daystart').datetimepicker({
+         defaultDate: "<?=($text_daystart != '')?$text_daystart:Tool::nowForDatepicker()?>",
          format: 'DD/MM/YYYY',
-         minDate: '<?=Carbon\Carbon::now()?>'
+         minDate: '<?=Tool::nowForDatepicker()?>'
       });
       $('#dayend').datetimepicker({
+         defaultDate: "<?=($text_dayend != '')?$text_dayend:Tool::nowForDatepicker()?>",
          format: 'DD/MM/YYYY',
-         minDate: '<?=Carbon\Carbon::now()?>'
+         minDate: '<?=Tool::nowForDatepicker()?>'
       });
    });
 </script>
+
 @stop
 

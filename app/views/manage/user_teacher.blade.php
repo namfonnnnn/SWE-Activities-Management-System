@@ -28,7 +28,7 @@
    </div>
    <form>
       <div class="input-group">  
-         <input type="text" id="s" name="s" class="form-control" placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ">  
+         <input type="text" id="s" name="s" class="form-control" placeholder="ค้นหาจากชื่ออาจารย์">  
          <span class="input-group-btn">      
          <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
          </span> 
@@ -36,10 +36,10 @@
    </form>
    
     <span class="input-group-btn">      
-        <a href="{{url('/manage/user/teacher/add')}}" class="btn btn-outline-secondary btn-secondary" >เพิ่มอาจารย์</a>
+        <a href="{{url('/manage/user/teacher/add')}}" class="btn btn-outline-success btn-success" >เพิ่มอาจารย์</a>
     </span>
     <span class="input-group-btn">      
-        <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">  
+        <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-info btn-info">  
     </span>
    <table class="table table-striped" style="margin-top:20px">
       <thead>

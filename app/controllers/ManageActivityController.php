@@ -26,6 +26,12 @@ class ManageActivityController extends BaseController {
 		$check_teacher =  $this->validData(Input::old('teacher'), null,[]);
 		$text_location = $this->validData(Input::old('location'), null,'');
 		$check_years =  $this->validData(Input::old('years'), null,[]);
+
+		$text_daystart = Tool::formatDateToDatepicker($text_daystart);
+		$text_dayend = Tool::formatDateToDatepicker($text_dayend);
+		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
+		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
+
 		$data = [
 			'text_activityname'=>$text_activityname,
 			'text_activitydetail'=>$text_activitydetail,
@@ -49,8 +55,8 @@ class ManageActivityController extends BaseController {
 		}
 		$text_activityname = $this->validData(Input::old('activityname'), $activity->activity_name,'');
 		$text_activitydetail = $this->validData(Input::old('activitydetail'), $activity->description,'');
-		$text_daystart = $this->validData(Input::old('daystart'), $activity->day_startNomalFormat(),'');
-		$text_dayend = $this->validData(Input::old('dayend'), $activity->day_startNomalFormat(),'');
+		$text_daystart = $this->validData(Input::old('daystart'), $activity->day_start,'');
+		$text_dayend = $this->validData(Input::old('dayend'), $activity->day_end,'');
 		$text_timestart = $this->validData(Input::old('timestart'), $activity->time_start,'');
 		$text_timeend = $this->validData(Input::old('timeend'), $activity->time_end,'');
 		$checkbox_term = $this->validData(Input::old('term'), $activity->term_year,'');
@@ -58,6 +64,12 @@ class ManageActivityController extends BaseController {
 		$check_teacher =  $this->validData(Input::old('teacher'), $activity->teacherJson(),[]);
 		$text_location = $this->validData(Input::old('location'), $activity->location,'');
 		$check_years =  $this->validData(Input::old('years'), $activity->studentJson(),[]);
+
+		$text_daystart = Tool::formatDateToDatepicker($text_daystart);
+		$text_dayend = Tool::formatDateToDatepicker($text_dayend);
+		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
+		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
+
 		$data = [
 			'activity'=>$activity,
 			'text_activityname'=>$text_activityname,
@@ -77,13 +89,13 @@ class ManageActivityController extends BaseController {
 	public function actionActivityAdd($id = null)
 	{
 		if(isset($id)){
-			$redirect_to = 'manage/activity/edit/'.$id;
-			$success_redirect_to = 'manage/activity/edit/'.$id;
+			$fail_redirect_to = 'manage/activity/edit/'.$id;
+			$success_redirect_to = 'manage/activity/summary/useradd';
 			$success_message ='แก้ไขสำเร็จ';
 		}
 		else{
-			$redirect_to = 'manage/activity/add/';
-			$success_redirect_to = 'manage/activity';
+			$fail_redirect_to = 'manage/activity/add/';
+			$success_redirect_to = 'manage/activity/summary/useradd';
 			$success_message ='บันทึกสำเร็จ';
 		}
 
@@ -102,7 +114,7 @@ class ManageActivityController extends BaseController {
 		$validator = Validator::make(Input::all(),$rules);
 
 		if($validator->fails()){
-			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
+			return Redirect::to($fail_redirect_to)->withInput()->withErrors($validator);
 		}
 
 		if(isset($id)){
@@ -128,7 +140,7 @@ class ManageActivityController extends BaseController {
 			$reuslt = $activity->save();
 		}
 		catch ( \Exception $e ) {
-			return Redirect::to($redirect_to)->withInput()->with('error', $e->getMessage());
+			return Redirect::to($fail_redirect_to)->withInput()->with('error', $e->getMessage());
 		}
 
 		return Redirect::to($success_redirect_to)->withInput()->with('message', $success_message);
@@ -136,6 +148,22 @@ class ManageActivityController extends BaseController {
 		// return $activity->coverTime(Input::get('daystart'));
 	}
 
+	public function actionActivityDelete($id)
+	{
+		$activity = Activity::find($id);
+		if(is_null($activity)){
+			return Redirect::back()->with('error', 'ไม่พบข้อมูลกิจกรรม');
+		}
+
+		try {
+			$activity->delete();
+		}
+		catch ( \Exception $e ) {
+			return Redirect::back()->with('error', $e->getMessage());
+		}
+
+		return Redirect::back()->with('message','ลบข้อมูลกิจกรรมสำเร็จ');
+	}
 
 	public function showActivitySummary()
 	{
