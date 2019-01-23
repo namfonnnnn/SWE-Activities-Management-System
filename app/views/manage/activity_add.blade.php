@@ -38,7 +38,10 @@
                <div class="col">
                   <div class="form-group">
                      <label for="name">วันที่เริ่มกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" name="daystart" data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" <?=($isPastDayStart)?'name="daystart"':''?> data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
+                     @if($isPastDayStart)
+                        <input type="hidden" name="daystart" value="{{$text_daystart}}">
+                     @endif
                      <small class="form-text text-danger">{{$errors->first('daystart')}}</small>
                   </div>
                </div>
@@ -232,8 +235,18 @@
                   </div>
                </div>
             </div>
+
             <small class="form-text text-danger">{{$errors->first('years')}}</small>
 
+            <br>
+
+            <div class="form-group">
+               <label for="exampleFormControlFile1">Example file input</label>
+               <input type="file" class="form-control-file" name="photo">
+            </div>
+            @if($image!='')
+               <img id="" src="{{asset($image)}}" style="max-height:200px;" />
+            @endif
             <br>
             <button type="submit" class="btn btn-success">บันทึก</button>
          </div>
@@ -252,13 +265,21 @@
       });
       $('#daystart').datetimepicker({
          defaultDate: "<?=($text_daystart != '')?$text_daystart:Tool::nowForDatepicker()?>",
-         format: 'DD/MM/YYYY',
-         minDate: '<?=Tool::nowForDatepicker()?>'
+         format: 'DD/MM/YYYY'
+         @if(!$isPastDayStart)
+         ,minDate: '<?=Tool::nowForDatepicker()?>'
+         @else
+         ,disable: true
+         @endif
       });
       $('#dayend').datetimepicker({
          defaultDate: "<?=($text_dayend != '')?$text_dayend:Tool::nowForDatepicker()?>",
-         format: 'DD/MM/YYYY',
-         minDate: '<?=Tool::nowForDatepicker()?>'
+         format: 'DD/MM/YYYY'
+         @if(!$isPastDayEnd)
+         ,minDate: '<?=Tool::nowForDatepicker()?>'
+         @else
+         ,disable: true
+         @endif
       });
    });
 </script>
