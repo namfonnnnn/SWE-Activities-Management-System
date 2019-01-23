@@ -36,4 +36,12 @@ class Tool
 	{
 		return date("Y-m-d",strtotime(Carbon\Carbon::now()));
 	}
+	public function isPastDay($date)
+	{
+		$today = Tool::nowForDatepicker();
+		if (strtotime($date) < strtotime($today))
+			return true;
+		else
+			return false;
+	}
 }
