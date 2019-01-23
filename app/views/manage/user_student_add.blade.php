@@ -30,7 +30,7 @@
                <input type="text" class="form-control {{$errors->has('year') ? 'is-invalid' : ''}}" id="year" name="year" value="{{$text_year}}" placeholder ="ปีการศึกษา" >
                <small class="form-text text-danger">{{$errors->first('year')}}</small>
             </div>
-            <div class="form-group disable">
+            <div class="form-groups">
                <label for="name">รหัสนักศึกษา</label>
                <input type="text" class="form-control  {{$errors->has('id') ? 'is-invalid' : ''}}" id="id" name="id" value="{{$text_id}}" placeholder ="รหัสนักศึกษา" {{isset($id) ? 'disabled' : ''}}>
                <small class="form-text text-danger">{{$errors->first('id')}}</small>

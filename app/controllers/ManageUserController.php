@@ -28,7 +28,23 @@ class ManageUserController extends BaseController {
 	
 	public function showUserTeacherAdd()
 	{
-		return View::make('manage.user_teacher_add');
+		$tool = new Tool;
+		$text_firstname = $tool->validData(Input::old('firstname'), null,'');
+		$text_lastname = $tool->validData(Input::old('lastname'), null,'');
+		$text_email = $tool->validData(Input::old('email'), null,'');
+		$text_tel = $tool->validData(Input::old('tel'), null,'');
+		$text_room = $tool->validData(Input::old('room'), null,'');
+		$text_password = $tool->validData(Input::old('password'), null,'');
+		
+		$data = [
+			'text_firstname'=>$text_firstname,
+			'text_lastname'=>$text_lastname,
+			'text_email'=>$text_email,
+			'text_tel'=>$text_tel,
+			'text_room'=>$text_room,
+			'text_password'=>$text_password
+		];
+		return View::make('manage.user_teacher_add',$data);
 	}
 
     public function showUserStudentAdd()
