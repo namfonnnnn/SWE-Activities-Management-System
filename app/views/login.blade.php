@@ -39,7 +39,7 @@
                             <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
                         </div>
 
-                         <button type="submit" class="btn btn-primary">Login</button>
+                         <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
 
                     </form>
                  </div>
