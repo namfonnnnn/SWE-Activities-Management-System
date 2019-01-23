@@ -62,6 +62,7 @@ class ManageUserController extends BaseController {
 		$text_lastname = $tool->validData(Input::old('lastname'), $student->lastname,'');
 		$text_password = $tool->validData(Input::old('password'), $student->password,'');
 		$data = [
+			'id'=>$id,
 			'text_year'=>$text_year,
 			'text_id'=>$text_id,
 			'text_firstname'=>$text_firstname,
@@ -81,7 +82,6 @@ class ManageUserController extends BaseController {
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
 				'year' => 'required|integer|min:2558',
-				'id' => 'required|min:8|max:8',
 				'firstname' => 'required',
 				'lastname' => 'required'
 			);
@@ -122,6 +122,7 @@ class ManageUserController extends BaseController {
 		}else{
 			$user = new User;
 			$student = new Student;
+			$student->id = Input::get("id");
 		}
 
 		$user->username = Input::get("id");
@@ -135,8 +136,7 @@ class ManageUserController extends BaseController {
 			return Redirect::to($redirect_to)->withInput()->with('error', $e->getMessage());
 		}
 
-		
-		$student->id = Input::get("id");
+
 		$student->user_id = $user->id;
 		$student->firstname = Input::get("firstname");
 		$student->lastname = Input::get("lastname");
