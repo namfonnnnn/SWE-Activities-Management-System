@@ -21,9 +21,9 @@ test
       <thead>
          <tr class="table-success">
             <th class="text-center">ชื่อกิจกรรม</th>
-            <th class="text-center">วันที่จัดกิจกรรม</th>
-            <th class="text-center">วันที่สิ้นสุดกิจกรรม</th>
-            <th class="text-center">อาจารย์ที่รับผิดชอบ</th>
+            <th class="text-center">วันที่เริ่ม - วันที่สิ้นสุด</th>
+            <th class="text-center">สถานที่</th>
+            <th class="text-center">รายละเอียดเพิ่มเติม</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
@@ -31,13 +31,13 @@ test
          @foreach ($activities as $activity)
             <tr>
                <td class="text-center">{{ $activity->activity_name }}</td>
-               <td class="text-center">{{ $activity->day_start }}</td>
-               <td class="text-center">{{ $activity->day_end }}</td>
-               <td class="text-left ">{{ $activity->getTeacherName() }}</td>
+               <td class="text-center">{{ $activity->day_start }} ถึง {{ $activity->day_end }}</td>
+               <td class="text-center">{{ $activity->location }}</td>
+               <td class="text-center ">{{ $activity->description }}</td>
                <td class="text-center">  
-                  <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm">แก้ไข</a>  
-                  <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm">ลบ</a>
-                  <a href="{{url('/manage/activity/check/status')}}" class="btn btn-warning btn-sm">บันทึกการเข้าร่วมกิจกรรม</a>   
+                  <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm"> <i class="far fa-edit"></i></a>  
+                  <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                  <a href="{{url('/manage/activity/check/status')}}" class="btn btn-warning btn-sm"><i class="far fa-calendar-check"></i></a>   
                </td>
             </tr>
          @endforeach
