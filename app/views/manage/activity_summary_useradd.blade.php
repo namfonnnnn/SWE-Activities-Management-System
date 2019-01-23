@@ -35,13 +35,18 @@ test
                <td class="text-center">{{ $activity->location }}</td>
                <td class="text-center ">{{ $activity->description }}</td>
                <td class="text-center">  
-                  <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm"> <i class="far fa-edit"></i></a>  
-                  <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                  <a href="{{url('/manage/activity/check/status')}}" class="btn btn-warning btn-sm"><i class="far fa-calendar-check"></i></a>   
+                  <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"> <i class="far fa-edit"></i></a>  
+                  <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
+                  <a href="{{url('/manage/activity/check/status')}}" class="btn btn-warning btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วมกิจกรรม"><i class="far fa-calendar-check"></i></a>   
                </td>
             </tr>
          @endforeach
       </tbody>
    </table>
 </div>
+<script type="text/javascript">
+   $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+   });
+</script>
 @stop
