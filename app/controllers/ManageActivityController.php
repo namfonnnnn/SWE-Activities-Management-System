@@ -32,6 +32,9 @@ class ManageActivityController extends BaseController {
 		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
 		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
 
+		$isPastDayStart = false;
+		$isPastDayEnd = false;
+
 		$data = [
 			'text_activityname'=>$text_activityname,
 			'text_activitydetail'=>$text_activitydetail,
@@ -43,7 +46,10 @@ class ManageActivityController extends BaseController {
 			'text_sector'=>$text_sector,
 			'check_teacher'=>$check_teacher,
 			'text_location'=>$text_location,
-			'check_years'=>$check_years
+			'check_years'=>$check_years,
+			'image'=>'',
+			'isPastDayStart'=>$isPastDayStart,
+			'isPastDayEnd'=>$isPastDayEnd
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -64,11 +70,15 @@ class ManageActivityController extends BaseController {
 		$check_teacher =  $this->validData(Input::old('teacher'), $activity->teacherJson(),[]);
 		$text_location = $this->validData(Input::old('location'), $activity->location,'');
 		$check_years =  $this->validData(Input::old('years'), $activity->studentJson(),[]);
+		$image = $this->validData($activity->image, $activity->image,'');
 
 		$text_daystart = Tool::formatDateToDatepicker($text_daystart);
 		$text_dayend = Tool::formatDateToDatepicker($text_dayend);
 		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
 		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
+
+		$isPastDayStart = Tool::isPastDay($text_daystart);
+		$isPastDayEnd = Tool::isPastDay($text_dayend);
 
 		$data = [
 			'activity'=>$activity,
@@ -82,7 +92,10 @@ class ManageActivityController extends BaseController {
 			'text_sector'=>$text_sector,
 			'check_teacher'=>$check_teacher,
 			'text_location'=>$text_location,
-			'check_years'=>$check_years
+			'check_years'=>$check_years,
+			'image'=>$image,
+			'isPastDayStart'=>$isPastDayStart,
+			'isPastDayEnd'=>$isPastDayEnd
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -123,6 +136,18 @@ class ManageActivityController extends BaseController {
 			$activity = new Activity;
 		}
 
+		$save_image_path = 'assets/upload/image';
+
+		if (!is_null(Input::file('photo'))){
+
+			$file = Input::file('photo');
+			$file_name = $file->getClientOriginalName();
+			$file->move($save_image_path, $file_name);
+			$path = $file->getRealPath();
+
+			$activity->image = $save_image_path.'/'.$file_name;
+		}
+
 		$activity->activity_name = Input::get("activityname");
 		$activity->description = Input::get("activitydetail");
 		$activity->teacher = json_encode(Input::get("teacher"));
@@ -133,7 +158,7 @@ class ManageActivityController extends BaseController {
 		$activity->term_year = Input::get("term");
 		$activity->sector = Input::get("sector");
 		$activity->location = Input::get("location");
-		$activity->image = Input::get("file");
+
 		$activity->student = json_encode(Input::get("years"));
 		
 		try {
@@ -142,6 +167,7 @@ class ManageActivityController extends BaseController {
 		catch ( \Exception $e ) {
 			return Redirect::to($fail_redirect_to)->withInput()->with('error', $e->getMessage());
 		}
+		
 
 		return Redirect::to($success_redirect_to)->withInput()->with('message', $success_message);
 
