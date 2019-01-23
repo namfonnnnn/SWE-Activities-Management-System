@@ -34,7 +34,7 @@ Route::get('/activity-register/{id}', 'HomeController@registerActivity');
 Route::get('/activity-un-register/{id}', 'HomeController@unRegisterActivity');
 
 Route::get('/home', 'HomeController@showHome');
-Route::get('welcome-teacher', 'HomeController@welcomeTeach');
+Route::get('/welcome-teacher', 'HomeController@welcomeTeach');
 Route::get('/login', 'AuthController@showLogin');
 Route::post('/login', 'AuthController@actionLogin');
 Route::get('/logout', 'AuthController@logout');
@@ -44,6 +44,8 @@ Route::post('/manage/activity/add', 'ManageActivityController@actionActivityAdd'
 
 Route::get('/manage/activity/edit/{id}', 'ManageActivityController@showActivityEdit');
 Route::post('/manage/activity/edit/{id}', 'ManageActivityController@actionActivityAdd');
+
+Route::get('/manage/activity/delete/{id}', 'ManageActivityController@actionActivityDelete');
 
 Route::get('/manage/activity/summary', 'ManageActivityController@showActivitySummary');
 
