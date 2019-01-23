@@ -24,9 +24,8 @@
               <hr>
            </div>
         </div>
-        
    </div>
-   <form>
+   <!-- <form>
       <div class="input-group">  
          <input type="text" id="s" name="s" class="form-control" placeholder="ค้นหาจากชื่ออาจารย์">  
          <span class="input-group-btn">      
@@ -34,7 +33,7 @@
          </span> 
       </div>
    </form>
-   
+    -->
     <span class="input-group-btn">      
         <a href="{{url('/manage/user/teacher/add')}}" class="btn btn-outline-success btn-success" >เพิ่มอาจารย์</a>
     </span>
@@ -44,8 +43,10 @@
    <table class="table table-striped" style="margin-top:20px">
       <thead>
          <tr class="table-success">
-            <th class="text-center">ชื่อ</th>
-            <th class="text-center">สกุล</th>
+            <th class="text-center">ชื่อ-สกุล</th>
+            <th class="text-center">อีเมล</th>
+            <th class="text-center">เบอร์โทรศัพท์</th>
+            <th class="text-center">ห้องทำงาน</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>

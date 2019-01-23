@@ -23,8 +23,27 @@
       
       <hr>
       @include('error')
+      
       <div class="row justify-content-md-center">
-         <div class="col-sm-4">
+         <div class="col-sm-6">
+            <div class="form-group">
+            <label for="name">บทบาทในระบบ</label>
+               <select id="role" name="role" class="form-control">
+                  <option value="">- เลือกบทบาท -</option>
+                  <option value="1">ผู้ดูแลระบบ</option>
+                  <option value="2">อาจารย์</option>
+                  <option value="3">ประธานหลักสูตร</option>
+               </select>
+            </div>
+            <div class="form-group">
+            <label for="name">ตำแหน่ง</label>
+               <select id="role" name="role" class="form-control">
+                  <option value="">- เลือกตำแหน่ง -</option>
+                  <option value="1">นักวิชาการ</option>
+                  <option value="2">อาจารย์</option>
+                  <option value="3">ประธานหลักสูตร</option>
+               </select>
+            </div>
             <div class="form-group">
                <label for="name">ชื่อ</label>
                <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >

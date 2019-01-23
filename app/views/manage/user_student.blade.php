@@ -61,7 +61,7 @@
       <thead>
          <tr class="table-success">
             <th class="text-center">รหัสนักศึกษา</th>
-            <th class="text-center">ชื่อ</th>
+            <th class="text-center">ชื่อ-สกุล</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
