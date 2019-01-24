@@ -89,10 +89,9 @@ CREATE TABLE `position` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `position` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1,	'teacher',	'2019-01-09 23:04:35',	'2019-01-09 23:04:37'),
-(2,	'president',	'2019-01-09 23:04:58',	'2019-01-09 23:05:01'),
-(3,	'professor',	'2019-01-09 23:05:16',	'2019-01-09 23:05:20'),
-(4,	'schoolteacher',	'2019-01-09 23:05:36',	'2019-01-09 23:05:39');
+(1,	'นักวิชาการ',	'2019-01-09 23:04:35',	'2019-01-24 19:45:47'),
+(2,	'อาจารย์',	'2019-01-24 19:45:32',	'2019-01-24 19:45:32'),
+(3,	'ประธานหลักสูตร',	'2019-01-09 23:05:16',	'2019-01-09 23:05:20');
 
 DROP TABLE IF EXISTS `responsible`;
 CREATE TABLE `responsible` (
@@ -113,8 +112,9 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1,	'teacher',	'2019-01-09 23:03:53',	'2019-01-09 23:03:57'),
-(2,	'admin',	'2019-01-09 23:04:10',	'2019-01-09 23:04:13');
+(1,	'ผู้ดูแลระบบ',	'2019-01-09 23:03:53',	'2019-01-09 23:03:57'),
+(2,	'อาจารย์',	'2019-01-09 23:04:10',	'2019-01-09 23:04:13'),
+(3,	'ประธานหลักสูตร',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -234,4 +234,4 @@ INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname
 (5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
 (6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
 
--- 2019-01-24 10:49:55
+-- 2019-01-24 12:47:55
