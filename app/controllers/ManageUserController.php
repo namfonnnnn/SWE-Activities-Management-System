@@ -90,6 +90,7 @@ class ManageUserController extends BaseController {
 		$select_position = $tool->validData(Input::old('position'), $teacher->position_id,'');
 		
 		$data = [
+			'teacher'=>$teacher,
 			'text_firstname'=>$text_firstname,
 			'text_lastname'=>$text_lastname,
 			'text_email'=>$text_email,
@@ -135,6 +136,7 @@ class ManageUserController extends BaseController {
 		$text_lastname = $tool->validData(Input::old('lastname'), $student->lastname,'');
 		$text_password = $tool->validData(Input::old('password'), null,'');
 		$data = [
+			'student'=>$student,
 			'id'=>$id,
 			'text_year'=>$text_year,
 			'text_id'=>$text_id,
@@ -237,7 +239,7 @@ class ManageUserController extends BaseController {
 		$isID = isset($id);
 		if($isID){
 			$redirect_to = 'manage/user/student/edit/'.$id;
-			$success_redirect_to = 'manage/user/student/edit/'.$id;
+			$success_redirect_to = 'manage/user/student';
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
 				'year' => 'required|integer|min:2558',
