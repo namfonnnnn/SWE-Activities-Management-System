@@ -54,6 +54,24 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('headteacher', function()
+{
+	if(!Auth::user()->isHeadTeacher())
+		return Redirect::guest('/manage')->with('error', 'คุณไม่มีสิทธิในการเข้าใช้งาน');
+});
+
+Route::filter('admin', function()
+{
+	if(!Auth::user()->isAdmin())
+		return Redirect::guest('/manage')->with('error', 'คุณไม่มีสิทธิในการเข้าใช้งาน');
+});
+
+Route::filter('teacher', function()
+{
+	if(!Auth::user()->isTeacher())
+		return Redirect::guest('/manage')->with('error', 'คุณไม่มีสิทธิในการเข้าใช้งาน');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
