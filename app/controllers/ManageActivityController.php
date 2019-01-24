@@ -115,7 +115,7 @@ class ManageActivityController extends BaseController {
 		$rules = array(
 			'activityname' => 'required',
 			'daystart' => 'required|date_format:d/m/Y',
-			'dayend' => 'required|date_format:d/m/Y',
+			'dayend' => 'required|date_format:d/m/Y|before_or_equal:daystart',
 			'timestart' => 'required|date_format:H:m',
 			'timeend' => 'required|date_format:H:m',
 			'sector' => 'required',
@@ -124,7 +124,10 @@ class ManageActivityController extends BaseController {
 			'teacher' => 'required_without_all',
 			'years' => 'required_without_all'
 		);
-		$validator = Validator::make(Input::all(),$rules);
+		$message = [
+			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม'
+		];
+		$validator = Validator::make(Input::all(),$rules,$message);
 
 		if($validator->fails()){
 			return Redirect::to($fail_redirect_to)->withInput()->withErrors($validator);
@@ -198,8 +201,17 @@ class ManageActivityController extends BaseController {
 
 	public function showActivitySummaryUseradd()
 	{
-		$activities = Activity::get();
-		return View::make('manage.activity_summary_useradd',['activities' => $activities]);
+		if(Input::get('q') != NULL && Input::get('q') != ""){
+			$q = Input::get('q');
+			$activities = Activity::Where('activity_name','like','%'.$q.'%');
+		}
+		else {
+			$q = '';
+			$activities = new Activity;
+		}
+		$activities = $activities->paginate(10);
+		$activities->appends(['q'=>$q]);
+		return View::make('manage.activity_summary_useradd',['activities' => $activities,'q'=>$q]);
 	}
 
 	public function showActivityConclude()
