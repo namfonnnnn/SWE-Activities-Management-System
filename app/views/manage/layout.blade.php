@@ -1,3 +1,10 @@
+<?php
+ $login_name = '';
+
+ if(!is_null(Auth::user()->getFullName())){
+   $login_name = Auth::user()->getFullName();
+ }
+?>
 <html>
    <head>
       <title>@yield('title')</title>
@@ -49,11 +56,11 @@
               </ul>
               <ul class="login navbar-nav ml-md-auto d-none d-md-flex" style="margin-left:50px">
                 <li class="nav-item dropdown ">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ชื่อ login</a>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$login_name}}</a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="#">แก้ไขโปรไฟล์</a>
                       <a class="dropdown-item" href="#">แก้ไขรหัสผ่าน</a>
-                      <a class="dropdown-item" href="{{url('/home')}}">ออกจากระบบ</a>
+                      <a class="dropdown-item" href="{{url('/logout')}}">ออกจากระบบ</a>
                   <div>
                 </li>
               </ul>
