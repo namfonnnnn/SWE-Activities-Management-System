@@ -32,6 +32,9 @@ class ManageActivityController extends BaseController {
 		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
 		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
 
+		$isPastDayStart = false;
+		$isPastDayEnd = false;
+
 		$data = [
 			'text_activityname'=>$text_activityname,
 			'text_activitydetail'=>$text_activitydetail,
@@ -43,7 +46,10 @@ class ManageActivityController extends BaseController {
 			'text_sector'=>$text_sector,
 			'check_teacher'=>$check_teacher,
 			'text_location'=>$text_location,
-			'check_years'=>$check_years
+			'check_years'=>$check_years,
+			'image'=>'',
+			'isPastDayStart'=>$isPastDayStart,
+			'isPastDayEnd'=>$isPastDayEnd
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -64,11 +70,15 @@ class ManageActivityController extends BaseController {
 		$check_teacher =  $this->validData(Input::old('teacher'), $activity->teacherJson(),[]);
 		$text_location = $this->validData(Input::old('location'), $activity->location,'');
 		$check_years =  $this->validData(Input::old('years'), $activity->studentJson(),[]);
+		$image = $this->validData($activity->image, $activity->image,'');
 
 		$text_daystart = Tool::formatDateToDatepicker($text_daystart);
 		$text_dayend = Tool::formatDateToDatepicker($text_dayend);
 		$text_timestart = Tool::formatTimeToDatepicker($text_timestart);
 		$text_timeend = Tool::formatTimeToDatepicker($text_timeend);
+
+		$isPastDayStart = Tool::isPastDay($text_daystart);
+		$isPastDayEnd = Tool::isPastDay($text_dayend);
 
 		$data = [
 			'activity'=>$activity,
@@ -82,7 +92,10 @@ class ManageActivityController extends BaseController {
 			'text_sector'=>$text_sector,
 			'check_teacher'=>$check_teacher,
 			'text_location'=>$text_location,
-			'check_years'=>$check_years
+			'check_years'=>$check_years,
+			'image'=>$image,
+			'isPastDayStart'=>$isPastDayStart,
+			'isPastDayEnd'=>$isPastDayEnd
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -102,7 +115,7 @@ class ManageActivityController extends BaseController {
 		$rules = array(
 			'activityname' => 'required',
 			'daystart' => 'required|date_format:d/m/Y',
-			'dayend' => 'required|date_format:d/m/Y',
+			'dayend' => 'required|date_format:d/m/Y|before_or_equal:daystart',
 			'timestart' => 'required|date_format:H:m',
 			'timeend' => 'required|date_format:H:m',
 			'sector' => 'required',
@@ -111,7 +124,10 @@ class ManageActivityController extends BaseController {
 			'teacher' => 'required_without_all',
 			'years' => 'required_without_all'
 		);
-		$validator = Validator::make(Input::all(),$rules);
+		$message = [
+			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม'
+		];
+		$validator = Validator::make(Input::all(),$rules,$message);
 
 		if($validator->fails()){
 			return Redirect::to($fail_redirect_to)->withInput()->withErrors($validator);
@@ -121,6 +137,18 @@ class ManageActivityController extends BaseController {
 			$activity = Activity::find($id);
 		}else{
 			$activity = new Activity;
+		}
+
+		$save_image_path = 'assets/upload/image';
+
+		if (!is_null(Input::file('photo'))){
+
+			$file = Input::file('photo');
+			$file_name = $file->getClientOriginalName();
+			$file->move($save_image_path, $file_name);
+			$path = $file->getRealPath();
+
+			$activity->image = $save_image_path.'/'.$file_name;
 		}
 
 		$activity->activity_name = Input::get("activityname");
@@ -133,7 +161,7 @@ class ManageActivityController extends BaseController {
 		$activity->term_year = Input::get("term");
 		$activity->sector = Input::get("sector");
 		$activity->location = Input::get("location");
-		$activity->image = Input::get("file");
+
 		$activity->student = json_encode(Input::get("years"));
 		
 		try {
@@ -142,6 +170,7 @@ class ManageActivityController extends BaseController {
 		catch ( \Exception $e ) {
 			return Redirect::to($fail_redirect_to)->withInput()->with('error', $e->getMessage());
 		}
+		
 
 		return Redirect::to($success_redirect_to)->withInput()->with('message', $success_message);
 
@@ -172,8 +201,17 @@ class ManageActivityController extends BaseController {
 
 	public function showActivitySummaryUseradd()
 	{
-		$activities = Activity::get();
-		return View::make('manage.activity_summary_useradd',['activities' => $activities]);
+		if(Input::get('q') != NULL && Input::get('q') != ""){
+			$q = Input::get('q');
+			$activities = Activity::Where('activity_name','like','%'.$q.'%');
+		}
+		else {
+			$q = '';
+			$activities = new Activity;
+		}
+		$activities = $activities->paginate(10);
+		$activities->appends(['q'=>$q]);
+		return View::make('manage.activity_summary_useradd',['activities' => $activities,'q'=>$q]);
 	}
 
 	public function showActivityConclude()

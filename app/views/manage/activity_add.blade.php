@@ -38,14 +38,20 @@
                <div class="col">
                   <div class="form-group">
                      <label for="name">วันที่เริ่มกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" name="daystart" data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('daystart') ? 'is-invalid' : ''}}" id="daystart" <?=(!$isPastDayStart)?'name="daystart"':''?> data-toggle="datetimepicker" data-target="#daystart" placeholder ="00/00/0000">
+                     @if($isPastDayStart)
+                        <input type="hidden" name="daystart" value="{{Tool::formatDateForsave($text_daystart)}}">
+                     @endif
                      <small class="form-text text-danger">{{$errors->first('daystart')}}</small>
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
                      <label for="name">วันที่สิ้นสุดกิจกรรม</label>
-                     <input type="text" class="form-control datetimepicker-input {{$errors->has('dayend') ? 'is-invalid' : ''}}" id="dayend" name="dayend" data-toggle="datetimepicker" data-target="#dayend" placeholder ="00/00/0000">
+                     <input type="text" class="form-control datetimepicker-input {{$errors->has('dayend') ? 'is-invalid' : ''}}" id="dayend" <?=(!$isPastDayEnd)?'name="dayend"':''?> data-toggle="datetimepicker" data-target="#dayend" placeholder ="00/00/0000">
+                     @if($isPastDayEnd)
+                        <input type="hidden" name="dayend" value="{{Tool::formatDateForsave($text_dayend)}}">
+                     @endif
                      <small class="form-text text-danger">{{$errors->first('dayend')}}</small>
                   </div>
                </div>
@@ -232,8 +238,18 @@
                   </div>
                </div>
             </div>
+
             <small class="form-text text-danger">{{$errors->first('years')}}</small>
 
+            <br>
+
+            <div class="form-group">
+               <label for="exampleFormControlFile1">Example file input</label>
+               <input type="file" class="form-control-file" name="photo">
+            </div>
+            @if($image!='')
+               <img id="" src="{{asset($image)}}" style="max-height:200px;" />
+            @endif
             <br>
             <button type="submit" class="btn btn-success">บันทึก</button>
          </div>
@@ -252,13 +268,21 @@
       });
       $('#daystart').datetimepicker({
          defaultDate: "<?=($text_daystart != '')?$text_daystart:Tool::nowForDatepicker()?>",
-         format: 'DD/MM/YYYY',
-         minDate: '<?=Tool::nowForDatepicker()?>'
+         format: 'DD/MM/YYYY'
+         @if(!$isPastDayStart)
+         ,minDate: '<?=Tool::nowForDatepicker()?>'
+         @else
+         ,disable: true
+         @endif
       });
       $('#dayend').datetimepicker({
          defaultDate: "<?=($text_dayend != '')?$text_dayend:Tool::nowForDatepicker()?>",
-         format: 'DD/MM/YYYY',
-         minDate: '<?=Tool::nowForDatepicker()?>'
+         format: 'DD/MM/YYYY'
+         @if(!$isPastDayEnd)
+         ,minDate: '<?=Tool::nowForDatepicker()?>'
+         @else
+         ,disable: true
+         @endif
       });
    });
 </script>
