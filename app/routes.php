@@ -118,3 +118,12 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 // 	});
 
 // });
+
+
+// validate 
+Validator::extend('before_or_equal', function($attribute, $value, $parameters) {
+	// dd(strtotime($value) >= strtotime(Input::get($parameters[0])));
+	$day_end = strtotime(strtr($value, '/', '-'));
+	$day_start = strtotime(strtr(Input::get($parameters[0]), '/', '-'));
+    return $day_end >= $day_start;
+});
