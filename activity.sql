@@ -82,13 +82,13 @@ CREATE TABLE `participation` (
 DROP TABLE IF EXISTS `position`;
 CREATE TABLE `position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `positionName` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `position` (`id`, `positionName`, `created_at`, `updated_at`) VALUES
+INSERT INTO `position` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1,	'teacher',	'2019-01-09 23:04:35',	'2019-01-09 23:04:37'),
 (2,	'president',	'2019-01-09 23:04:58',	'2019-01-09 23:05:01'),
 (3,	'professor',	'2019-01-09 23:05:16',	'2019-01-09 23:05:20'),
@@ -105,14 +105,14 @@ CREATE TABLE `responsible` (
 
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
-  `roleID` int(11) NOT NULL AUTO_INCREMENT,
-  `roleName` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`roleID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `role` (`roleID`, `roleName`, `created_at`, `updated_at`) VALUES
+INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1,	'teacher',	'2019-01-09 23:03:53',	'2019-01-09 23:03:57'),
 (2,	'admin',	'2019-01-09 23:04:10',	'2019-01-09 23:04:13');
 
@@ -155,17 +155,26 @@ DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `position_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `prefix` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `image` text COLLATE utf8_unicode_ci NOT NULL,
   `tel` int(10) NOT NULL,
   `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `room` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   `updated_by` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `position_id` (`position_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `teachers_ibfk_2` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
+  CONSTRAINT `teachers_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -191,7 +200,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `created_by`, `
 (31,	'58145236',	'$2y$10$XoIwwT0UnvxWA5ssUf283eSgxWYz3VSMNBLZFwd9poaJZ5O.vg7Iy',	'2019-01-20 03:01:20',	'',	'2019-01-20 03:01:20',	NULL),
 (32,	'58143033',	'$2y$10$bAUoKVrgiN2nIr/6FZINOub7zFin7j1qWeXgFn7II0hA0RM1oyoWa',	'2019-01-20 03:02:54',	'',	'2019-01-20 03:02:54',	NULL),
 (33,	'58148602',	'$2y$10$aMjdrrG5.P.SDwnXLyBAT.TRTnexVrIxyL3MJ8t1py1jwJj7Ixbji',	'2019-01-20 03:03:39',	'',	'2019-01-20 03:03:39',	NULL),
-(34,	'58112418',	'$2y$10$0yWoF3jyIcqUJK/47SFDKO3MZZ80lbMIV5P7oVe05fnk.6gdMNcIG',	'2019-01-20 03:08:25',	'',	'2019-01-20 03:08:25',	NULL),
+(34,	'',	'$2y$10$ZczyhQGcf4tEeObppttkKO9FwnifNshwE0u1FFJvEltO33EpBqRyK',	'2019-01-23 15:33:40',	'',	'2019-01-23 15:33:40',	NULL),
 (35,	'58142753',	'$2y$10$gv8/9kUY0bPziyuxp5Q18eC3dXCptrPGaNJURei0LuDOy.JDE1mMe',	'2019-01-20 03:09:18',	'',	'2019-01-20 03:09:18',	NULL),
 (36,	'58144924',	'$2y$10$WSeaA6OBNqYGnzvYYh1F.eaQfVkyId/bqgjZbrvL1WShVAAsgqngi',	'2019-01-20 03:10:07',	'',	'2019-01-20 03:10:07',	NULL),
 (37,	'58222516',	'$2y$10$fyE6.77XnSMvr/aVcP/3zO1gD7eUZmeB56p7DZd4qf.U24bBT5Kbq',	'2019-01-20 03:53:40',	'',	'2019-01-20 03:53:40',	NULL);
@@ -225,4 +234,4 @@ INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname
 (5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
 (6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
 
--- 2019-01-20 09:48:00
+-- 2019-01-24 10:49:55
