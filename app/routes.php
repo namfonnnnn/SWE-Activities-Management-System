@@ -11,73 +11,69 @@
 |
 */
 
-Route::get('/', function()
-{
-	return Redirect::to('/login');
-	echo "index test test test test";
-});
-
-//Front-end
-
-//Manage
-// Route::get('/login', function(){
-// 	return View::make('login');
-// });
-
-Route::get('/manage', function(){
-	return Redirect::to('/login');
-	return View::make('manage.index');
-});
-
 Route::get('/show-activity/{id}', 'HomeController@showActivity');
 Route::get('/activity-register/{id}', 'HomeController@registerActivity');
 Route::get('/activity-un-register/{id}', 'HomeController@unRegisterActivity');
-
-Route::get('/home', 'HomeController@showHome');
 Route::get('/welcome-teacher', 'HomeController@welcomeTeach');
+
+
+
+//guest
+Route::get('/', function()
+{
+	return Redirect::to('/home');
+});
+Route::get('/manage', function(){
+	return View::make('manage.index');
+});
+Route::get('/home', 'HomeController@showHome');
+
 Route::get('/login', 'AuthController@showLogin');
 Route::post('/login', 'AuthController@actionLogin');
 Route::get('/logout', 'AuthController@logout');
 
-Route::get('/manage/activity/add', 'ManageActivityController@showActivityAdd');
-Route::post('/manage/activity/add', 'ManageActivityController@actionActivityAdd');
+//student
 
-Route::get('/manage/activity/edit/{id}', 'ManageActivityController@showActivityEdit');
-Route::post('/manage/activity/edit/{id}', 'ManageActivityController@actionActivityAdd');
+//teacher
+Route::group(array('before' => 'teacher') , function () {
+	Route::get('/manage/activity/add', 'ManageActivityController@showActivityAdd');
+	Route::post('/manage/activity/add', 'ManageActivityController@actionActivityAdd');
+	Route::get('/manage/activity/edit/{id}', 'ManageActivityController@showActivityEdit');
+	Route::post('/manage/activity/edit/{id}', 'ManageActivityController@actionActivityAdd');
+	Route::get('/manage/activity/delete/{id}', 'ManageActivityController@actionActivityDelete');
 
-Route::get('/manage/activity/delete/{id}', 'ManageActivityController@actionActivityDelete');
+	Route::get('/manage/activity/summary', 'ManageActivityController@showActivitySummary');
 
-Route::get('/manage/activity/summary', 'ManageActivityController@showActivitySummary');
+	Route::get('/manage/activity/summary/useradd', 'ManageActivityController@showActivitySummaryUseradd');
 
-Route::get('/manage/activity/summary/useradd', 'ManageActivityController@showActivitySummaryUseradd');
+	Route::get('/manage/activity/detail', 'ManageActivityController@showActivityDetail');
 
-Route::get('/manage/activity/conclude', 'ManageActivityController@showActivityConclude');
+	Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
+});
 
-Route::get('/manage/activity/detail', 'ManageActivityController@showActivityDetail');
+//headteacher
+Route::group(array('before' => 'headteacher') , function () {
+	Route::get('/manage/activity/conclude', 'ManageActivityController@showActivityConclude');
+});
 
-Route::get('/manage/activity/check/status/{id}', 'ManageActivityController@showActivityStatus');
+//admin
+Route::group(array('before' => 'admin') , function () {
+	Route::get('/manage/user/student', 'ManageUserController@showUserStudent');
+	Route::get('/manage/user/student/add', 'ManageUserController@showUserStudentAdd');
+	Route::post('/manage/user/student/add', 'ManageUserController@actionUserStudentAdd');
+	Route::get('/manage/user/student/edit/{id}', 'ManageUserController@showUserStudentEdit');
+	Route::post('/manage/user/student/edit/{id}', 'ManageUserController@actionUserStudentAdd');
+	Route::get('/manage/user/student/delete/{id}', 'ManageUserController@actionUserStudentDelete');
 
-Route::get('/manage/user/student/add', 'ManageUserController@showUserStudentadd');
-
-Route::get('/manage/user/student', 'ManageUserController@showUserStudent');
-
-Route::get('/manage/user/teacher', 'ManageUserController@showUserTeacher');
-
-Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacheradd');
-
-
+	Route::get('/manage/user/teacher', 'ManageUserController@showUserTeacher');
+	Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacherAdd');
+	Route::post('/manage/user/teacher/add', 'ManageUserController@actionUserTeacherAdd');
+	Route::get('/manage/user/teacher/edit/{id}', 'ManageUserController@showUserTeacherEdit');
+	Route::post('/manage/user/teacher/edit/{id}', 'ManageUserController@actionUserTeacherAdd');
+	Route::get('/manage/user/teacher/delete/{id}', 'ManageUserController@actionUserTeacherDelete');
+});
 
 
-
-Route::get('/manage/user/student/add', 'ManageUserController@showUserStudentAdd');
-Route::post('/manage/user/student/add', 'ManageUserController@actionUserStudentAdd');
-
-Route::get('/manage/user/student/edit/{id}', 'ManageUserController@showUserStudentEdit');
-Route::post('/manage/user/student/edit/{id}', 'ManageUserController@actionUserStudentAdd');
-
-Route::get('/manage/user/student/delete/{id}', 'ManageUserController@actionUserStudentDelete');
-
-Route::get('/manage/user/teacher/add', 'ManageUserController@showUserTeacherAdd');
 
 Route::get('/student_profile', 'StudentProfileController@studentProfile');
 Route::post('/student_profile','StudentProfileController@showStudentEdit');
@@ -88,14 +84,15 @@ Route::post('/student_form','StudentFormController@showStudentEdit');
 Route::get('/student_upload', 'StudentUploadController@studentUpload');
 Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 
+
 // Saharat Rakdam
 
 // Route::get('/login', 'UserController@getLogin');
 // Route::get('/logout', 'UserController@getLogout');
 // Route::post('/login', 'UserController@postLogin');
 
-// Route::get('/profile', 'UserController@getProfile');
-// Route::get('/profile/edit', 'UserController@getProfileUpdate');
+Route::get('/profile', 'UserController@getProfile');
+Route::get('/profile/edit', 'UserController@getProfileUpdate');
 // Route::post('/profile/edit', 'UserController@postProfileUpdate');
 // Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
 // Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');

@@ -2,8 +2,6 @@
 
 class AuthController extends BaseController {
 
-
-
 	public function showLogin()
 	{
 		return View::make('login');
@@ -12,18 +10,17 @@ class AuthController extends BaseController {
 	public function logout()
 	{
 			Auth::logout();
-
-			return Redirect::to('login');
+			return Redirect::to('/');
 	}
 
 	public function actionLogin()
 	{
 		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))){
 
-			if (Auth::user()->type == "student") {
-				return Redirect::to('profile');
-			} else {
+			if (Auth::user()->isTeacher()) {
 				return Redirect::to('welcome-teacher');
+			} else {
+				return Redirect::to('profile');
 			}
 
 		}else{
