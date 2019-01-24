@@ -35,6 +35,12 @@ class UserController extends Controller {
         $user = Auth::user();
 
     }
+
+    if ($user->teacher != null) {
+        $user->type = 'teacher';
+    } else {
+        $user->type = 'student';
+    }
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
@@ -73,8 +79,9 @@ class UserController extends Controller {
     $history = $history->get();
     $activity = $activity->get();
 
+
     if (empty(Request::get('userID'))) {
-        if (Auth::user()->type != 'student') {
+        if (Auth::user()->teacher !=  null) {
             $activities = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
             return View::make('welcome-teacher', ['activities' => $activities]);
         }
@@ -94,8 +101,24 @@ public function checkStudentActivity($uid, $aid)
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
+    if(!empty(Request::get('userID')))
+    {
+        $userID = Request::get('userID');
+        $user = User::find(Request::get('userID'));
+    } else {
+        $userID = Auth::user()->id;
+        $user = Auth::user();
 
-    return View::make('profile-form');
+    }
+
+    if ($user->teacher != null) {
+        $user->type = 'teacher';
+    } else {
+        $user->type = 'student';
+    }
+
+
+    return View::make('profile-form', array('user' => $user));
   }
 
 
@@ -129,13 +152,35 @@ public function checkStudentActivity($uid, $aid)
       return Redirect::to('/profile/edit')->withInput()->withErrors($validator);
     }
 
-    $user = Student::find(Auth::user()->id);
+    if (Auth::user()->teacher != null) {
+        $user = Teacher::find(Auth::user()->teacher->id);
+        $user->room = Input::get('room_num');
+    } else {
+        $user = Student::find(Auth::user()->student->id);
+    }
+
 
     $user->firstname = Input::get('firstname');
     $user->lastname = Input::get('lastname');
     $user->email = Input::get('email');
-    $user->code = Input::get('code');
     $user->tel = Input::get('tel');
+    if (Input::hasFile('image')) {
+        if (Input::file('image')->isValid())
+        {
+          $destinationPath = 'avatar/'.Auth::user()->id.'/';
+
+          $fileName = date('YmdHis').Input::file('image')->getClientOriginalName();
+
+          Input::file('image')->move($destinationPath, $fileName);
+
+          $user->image = $destinationPath.$fileName;
+
+
+        }
+    }
+
+
+
 
     $user->save();
 
@@ -173,6 +218,7 @@ public function checkStudentActivity($uid, $aid)
       $user->save();
 
     }
+
     return Redirect::to('/profile')->with('status', true)->with('message', 'บันทึกข้อมูลโปรไฟล์เรียบร้อย')->withInput();
   }
 

@@ -1,6 +1,6 @@
 <?php
 
-class Student extends Eloquent{
+class Teacher extends Eloquent{
 
 
 	/**
@@ -8,10 +8,9 @@ class Student extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table = 'students';
-	
+	protected $table = 'teachers';
+
 	public function getAvatar() {
 			return asset($this->image);
 	}
-
 }
