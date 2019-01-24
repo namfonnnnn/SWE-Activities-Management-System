@@ -93,9 +93,9 @@ Route::post('/student_upload','StudentUploadController@actionStudentUpload');
 
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/profile/edit', 'UserController@getProfileUpdate');
-// Route::post('/profile/edit', 'UserController@postProfileUpdate');
-// Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
-// Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
+Route::post('/profile/edit', 'UserController@postProfileUpdate');
+Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
+Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
 // Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');
@@ -117,7 +117,7 @@ Route::get('/profile/edit', 'UserController@getProfileUpdate');
 // });
 
 
-// validate 
+// validate
 Validator::extend('before_or_equal', function($attribute, $value, $parameters) {
 	// dd(strtotime($value) >= strtotime(Input::get($parameters[0])));
 	$day_end = strtotime(strtr($value, '/', '-'));

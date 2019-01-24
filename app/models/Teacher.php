@@ -15,4 +15,8 @@ class Teacher extends Eloquent {
     {
         return $this->firstname.' '.$this->lastname;
     }
+
+	public function getAvatar() {
+			return asset($this->image);
+	}
 }

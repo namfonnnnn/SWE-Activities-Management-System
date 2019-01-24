@@ -17,12 +17,12 @@ class AuthController extends BaseController {
 	{
 		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))){
 
-			if (Auth::user()->isTeacher()) {
-				return Redirect::to('welcome-teacher');
-			} else {
-				return Redirect::to('profile');
-			}
-
+			// if (Auth::user()->isTeacher()) {
+			// 	return Redirect::to('welcome-teacher');
+			// } else {
+			// 	return Redirect::to('profile');
+			// }
+			return Redirect::to('manage');
 		}else{
 			return Redirect::to('login')->with('error','username หรือ password ไม่ถูกต้อง');
 		}

@@ -51,7 +51,12 @@
 
                                 <div class="col-md-12 text-center">
                                     <br>
-                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->firstname}} {{ Auth::user()->lastname}}</a></b></span>
+
+                                    @if(Auth::user()->teacher != NULL)
+                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->firstname}} {{ Auth::user()->teacher->lastname}}</a></b></span>
+                                @else
+                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->student->firstname}} {{ Auth::user()->student->lastname}}</a></b></span>
+                                @endif
                                     <br>
 <br><br><br>
                                     <div class="box-system">
