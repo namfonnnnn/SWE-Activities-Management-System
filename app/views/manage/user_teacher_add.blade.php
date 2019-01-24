@@ -27,22 +27,24 @@
       <div class="row justify-content-md-center">
          <div class="col-sm-6">
             <div class="form-group">
-            <label for="name">บทบาทในระบบ</label>
-               <select id="role" name="role" class="form-control">
+               <label for="name">บทบาทในระบบ</label>
+               <select id="role" name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
                   <option value="">- เลือกบทบาท -</option>
-                  <option value="1">ผู้ดูแลระบบ</option>
-                  <option value="2">อาจารย์</option>
-                  <option value="3">ประธานหลักสูตร</option>
+                  @foreach ($roles as $role)
+                     <option value="{{$role->id}}" <?=($select_role==$role->id)?'selected':''?> >{{$role->name}}</option>
+                  @endforeach
                </select>
+               <small class="form-text text-danger">{{$errors->first('role')}}</small>
             </div>
             <div class="form-group">
-            <label for="name">ตำแหน่ง</label>
-               <select id="role" name="role" class="form-control">
+               <label for="name">ตำแหน่ง</label>
+               <select id="position" name="position" class="form-control {{$errors->has('position') ? 'is-invalid' : ''}}">
                   <option value="">- เลือกตำแหน่ง -</option>
-                  <option value="1">นักวิชาการ</option>
-                  <option value="2">อาจารย์</option>
-                  <option value="3">ประธานหลักสูตร</option>
+                  @foreach ($positions as $position)
+                     <option value="{{$position->id}}" <?=($select_position==$position->id)?'selected':''?> >{{$position->name}}</option>
+                  @endforeach
                </select>
+               <small class="form-text text-danger">{{$errors->first('position')}}</small>
             </div>
             <div class="form-group">
                <label for="name">ชื่อ</label>
@@ -71,7 +73,7 @@
             </div>
             <div class="form-group">
                <label for="name">รหัสผ่าน</label>
-               <input type="text" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+               <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
                <small class="form-text text-danger">{{$errors->first('password')}}</small>
             </div>
             <br>
