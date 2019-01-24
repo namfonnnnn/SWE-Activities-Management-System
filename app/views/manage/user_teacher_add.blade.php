@@ -15,7 +15,7 @@
 
 <form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" method="post">
    <div class="container">
-      @if(isset($activity))
+      @if(isset($teacher))
          <h2 style="margin-top:30px">แก้ไขข้อมูลอาจารย์</h2>
       @else
          <h2 style="margin-top:30px">เพิ่มข้อมูลอาจารย์</h2>

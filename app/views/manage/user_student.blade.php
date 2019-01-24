@@ -8,6 +8,7 @@
 
 
 <div class="container">
+   <br>
    @include('error')
    <div class="row">
       <div class="col-md-6" style="margin-top:50px">
