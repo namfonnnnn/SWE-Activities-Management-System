@@ -27,7 +27,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/home')}}">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                @if($user->type == 'student')
+                @if($user->{$user->type}->type == 'student')
                     โปรไฟล์นักศึกษา
                 @else
                     ข้อมูลส่วนตัว
@@ -54,7 +54,7 @@
                         <div class="row">
                             <p>
                                 <a href="{{url('/profile/upload-avatar')}}">
-                                    <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->getAvatar()}}" alt="x3" width="130" height="130" >
+                                    <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
 
                                 </a>
                             </p>
@@ -69,16 +69,16 @@
 
                                     @endif
                                     <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small></h2></div>
-                                    <div>ชื่อ-นามสกุล : {{ $user->firstname }} {{ $user->lastname }}</div>
+                                    <div>ชื่อ-นามสกุล : {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</div>
                                     @if($user->type == 'student')
-                                        <div>รหัสนักศึกษา : {{ $user->code }}</div>
+                                        <div>รหัสนักศึกษา : {{ $user->{$user->type}->id }}</div>
                                     @else
-                                        <div>ห้อง : {{ $user->room_num }}</div>
+                                        <div>ห้อง : {{ $user->{$user->type}->room_num }}</div>
 
                                     @endif
 
-                                    <div>เบอร์โทร    : {{ $user->tel }}</div>
-                                    <div>อีเมล       : {{ $user->email }}</div>
+                                    <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
+                                    <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
 
 
                                     <div class="col-xs-3">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                @if($user->type == 'student')
+                @if($user->{$user->type}->type == 'student')
                     <div class="col-lg-6 col-md-12">
                         <div class="wrap">
                             <div class="search">
@@ -135,7 +135,7 @@
 
             </div>
             <!-- /.row -->
-            @if($user->type == 'student')
+            @if($user->{$user->type}->type == 'student')
 
                 <div class="row">
 

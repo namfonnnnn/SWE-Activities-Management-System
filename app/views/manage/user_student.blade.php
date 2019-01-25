@@ -8,7 +8,7 @@
 
 
 <div class="container">
-   <ul class="errorMessages"></ul>
+   @include('error')
    <div class="row">
       <div class="col-md-6" style="margin-top:50px">
          <h2>นักศึกษา</h2>
@@ -69,10 +69,10 @@
          @foreach ($students as $student)
             <tr>
                <td class="text-center">{{ $student->id }}</td>
-               <td class="text-center">{{ $student->firstname }} {{ $student->lastname }}</td>
+               <td class="text-center">{{ $student->getFullName() }}</td>
                <td class="text-center">  
-                  <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>  
-                  <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                  <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
+                  <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
                </td>
             </tr>
          @endforeach
@@ -80,4 +80,9 @@
    </table>
    <?php echo $students->links('partials.pagination'); ?>
 </div>
+<script type="text/javascript">
+   $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+   });
+</script>
 @stop
