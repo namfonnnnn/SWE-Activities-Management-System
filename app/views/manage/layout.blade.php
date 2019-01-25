@@ -113,7 +113,7 @@
     <script type="text/javascript">
       $(function () {
         $(".delete-confirm").click(function(e){
-          if(!confirm("ต้องการจะลบ")){
+          if(!confirm("ต้องการจะลบข้อมูลใช่หรือไม่")){
             e.preventDefault();
             return false;
           }
