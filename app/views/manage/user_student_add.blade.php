@@ -30,6 +30,14 @@
                <input type="text" class="form-control {{$errors->has('year') ? 'is-invalid' : ''}}" id="year" name="year" value="{{$text_year}}" placeholder ="ปีการศึกษา" >
                <small class="form-text text-danger">{{$errors->first('year')}}</small>
             </div>
+            <div class="form-group">
+               <label for="exampleFormControlSelect1">คำนำหน้า</label>
+               <select class="form-control" id="prefix" name="prefix" >
+                  <option value="">- คำนำหน้า -</option>
+                  <option value="นาย">นาย</option>
+                  <option value="นางสาว">นางสาว</option>
+               </select>
+            </div>
             <div class="form-groups">
                <label for="name">รหัสนักศึกษา</label>
                <input type="text" class="form-control  {{$errors->has('id') ? 'is-invalid' : ''}}" id="id" name="id" value="{{$text_id}}" placeholder ="รหัสนักศึกษา" {{isset($id) ? 'disabled' : ''}}>
