@@ -22,11 +22,11 @@
   <body>
     <!-- Image and text -->
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #99afdc">
-      <a class="navbar-brand mb-0 h1" href=""><img id="" src="{{asset('assets/image/logo.png')}}" width="120" height="60" /></a>
+      <a class="navbar-brand mb-0 h1" href="{{url('/manage')}}"><img id="" src="{{asset('assets/image/logo.png')}}" width="120" height="60" /></a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-top:30px">
         <ul class="navbar-nav my-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="{{url('/home')}}">หน้าหลัก <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{url('/manage')}}">หน้าหลัก <span class="sr-only">(current)</span></a>
           </li>
         </ul>
 
