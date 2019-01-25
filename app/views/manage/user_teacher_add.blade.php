@@ -26,63 +26,87 @@
       
       <div class="row justify-content-md-center">
          <div class="col-sm-6">
-            <div class="form-group">
-               <label for="name">บทบาทในระบบ</label>
-               <select id="role" name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
-                  <option value="">- เลือกบทบาท -</option>
-                  @foreach ($roles as $role)
-                     <option value="{{$role->id}}" <?=($select_role==$role->id)?'selected':''?> >{{$role->name}}</option>
-                  @endforeach
-               </select>
-               <small class="form-text text-danger">{{$errors->first('role')}}</small>
+
+            <div class="row">
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">บทบาทในระบบ</label>
+                     <select id="role" name="role" class="form-control {{$errors->has('role') ? 'is-invalid' : ''}}">
+                        <option value="">- เลือกบทบาท -</option>
+                        @foreach ($roles as $role)
+                           <option value="{{$role->id}}" <?=($select_role==$role->id)?'selected':''?> >{{$role->name}}</option>
+                        @endforeach
+                     </select>
+                     <small class="form-text text-danger">{{$errors->first('role')}}</small>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">ตำแหน่ง</label>
+                     <select id="position" name="position" class="form-control {{$errors->has('position') ? 'is-invalid' : ''}}">
+                        <option value="">- เลือกตำแหน่ง -</option>
+                        @foreach ($positions as $position)
+                           <option value="{{$position->id}}" <?=($select_position==$position->id)?'selected':''?> >{{$position->name}}</option>
+                        @endforeach
+                     </select>
+                     <small class="form-text text-danger">{{$errors->first('position')}}</small>
+                  </div>
+               </div>
             </div>
-            <div class="form-group">
-               <label for="name">ตำแหน่ง</label>
-               <select id="position" name="position" class="form-control {{$errors->has('position') ? 'is-invalid' : ''}}">
-                  <option value="">- เลือกตำแหน่ง -</option>
-                  @foreach ($positions as $position)
-                     <option value="{{$position->id}}" <?=($select_position==$position->id)?'selected':''?> >{{$position->name}}</option>
-                  @endforeach
-               </select>
-               <small class="form-text text-danger">{{$errors->first('position')}}</small>
+
+            <div class="row">
+               <div class="col">
+                  <div class="form-group">
+                     <label for="exampleFormControlSelect1">คำนำหน้า</label>
+                     <select class="form-control" id="prefix" name="prefix" >
+                        <option value="">คำนำหน้า</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นางสาว">นางสาว</option>
+                        <option value="อาจารย์">อาจารย์</option>
+                        <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
+                        <option value="ศาสตราจารย์">ศาสตราจารย์</option>
+                        <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
+                        <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">ชื่อ</label>
+                     <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
+                     <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">นามสกุล</label>
+                     <input type="text" class="form-control {{$errors->has('lastname') ? 'is-invalid' : ''}}" id="lastname" name="lastname" value="{{$text_lastname}}" placeholder ="นามสกุล" >
+                     <small class="form-text text-danger">{{$errors->first('lastname')}}</small>
+                  </div>
+               </div>
             </div>
-            <div class="form-group">
-               <label for="exampleFormControlSelect1">คำนำหน้า</label>
-               <select class="form-control" id="prefix" name="prefix" >
-                  <option value="">- คำนำหน้า -</option>
-                  <option value="นาย">นาย</option>
-                  <option value="นางสาว">นางสาว</option>
-                  <option value="อาจารย์">อาจารย์</option>
-                  <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
-                  <option value="ศาสตราจารย์">ศาสตราจารย์</option>
-                  <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
-                  <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
-               </select>
+            
+            <div class="row">
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">เบอร์โทรศัพท์</label>
+                     <input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder ="เบอร์โทรศัพท์" >
+                     <small class="form-text text-danger">{{$errors->first('tel')}}</small>
+                  </div>
+               </div>
+               <div class="col">
+                  <div class="form-group">
+                     <label for="name">ห้องทำงาน</label>
+                     <input type="text" class="form-control {{$errors->has('room') ? 'is-invalid' : ''}}" id="room" name="room" value="{{$text_room}}" placeholder ="ห้องทำงาน" >
+                     <small class="form-text text-danger">{{$errors->first('room')}}</small>
+                  </div>
+               </div>
             </div>
-            <div class="form-group">
-               <label for="name">ชื่อ</label>
-               <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
-               <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
-            </div>
-            <div class="form-group">
-               <label for="name">นามสกุล</label>
-               <input type="text" class="form-control {{$errors->has('lastname') ? 'is-invalid' : ''}}" id="lastname" name="lastname" value="{{$text_lastname}}" placeholder ="นามสกุล" >
-               <small class="form-text text-danger">{{$errors->first('lastname')}}</small>
-            </div>
+            
             <div class="form-group">
                <label for="name">อีเมล</label>
                <input type="text" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" id="email" name="email" value="{{$text_email}}" placeholder ="อีเมล" >
                <small class="form-text text-danger">{{$errors->first('email')}}</small>
-            </div>
-            <div class="form-group">
-               <label for="name">เบอร์โทรศัพท์</label>
-               <input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder ="เบอร์โทรศัพท์" >
-               <small class="form-text text-danger">{{$errors->first('tel')}}</small>
-            </div>
-            <div class="form-group">
-               <label for="name">ห้องทำงาน</label>
-               <input type="text" class="form-control {{$errors->has('room') ? 'is-invalid' : ''}}" id="room" name="room" value="{{$text_room}}" placeholder ="ห้องทำงาน" >
-               <small class="form-text text-danger">{{$errors->first('room')}}</small>
             </div>
             <div class="form-group">
                <label for="name">รหัสผ่าน</label>
