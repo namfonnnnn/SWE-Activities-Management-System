@@ -178,8 +178,9 @@ class ManageUserController extends BaseController {
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required',
-				'room' => 'required'
+				'tel' => 'required|numeric|size:10',
+				'room' => 'required',
+				'password' => 'min:8'
 			);
 		}
 		else{
@@ -192,7 +193,7 @@ class ManageUserController extends BaseController {
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required',
+				'tel' => 'required|numeric|size:10',
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
@@ -201,7 +202,16 @@ class ManageUserController extends BaseController {
 
 		
 
-		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
+		$validator = Validator::make(
+			Input::all(),
+			$rules,
+			[
+				'regex'=>'ภาษาไทยเท่านั้น',
+				'tel.numeric'=>'เบอร์โทรค้องเป็นตัวเลข',
+				'tel.size'=>'เบอร์โทรต้องมีความยาว :size',
+			]
+
+		);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
@@ -262,7 +272,8 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'year' => 'required|integer|min:2558',
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
-				'lastname' => 'required|regex:/^[ก-๙ ]+$/'
+				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'password' => 'min:8'
 			);
 		}
 		else{
