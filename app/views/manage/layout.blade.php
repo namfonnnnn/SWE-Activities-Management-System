@@ -65,7 +65,7 @@
       <script type="text/javascript">
         $(function () {
           $(".delete-confirm").click(function(){
-            if (!confirm("ต้องการจะลบข้อมูลใช้หรือไม่")){
+            if (!confirm("ต้องการจะลบข้อมูลใช่หรือไม่")){
               return false;
             }
           });
