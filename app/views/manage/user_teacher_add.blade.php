@@ -47,6 +47,19 @@
                <small class="form-text text-danger">{{$errors->first('position')}}</small>
             </div>
             <div class="form-group">
+               <label for="exampleFormControlSelect1">คำนำหน้า</label>
+               <select class="form-control" id="prefix" name="prefix" >
+                  <option value="">- คำนำหน้า -</option>
+                  <option value="นาย">นาย</option>
+                  <option value="นางสาว">นางสาว</option>
+                  <option value="อาจารย์">อาจารย์</option>
+                  <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
+                  <option value="ศาสตราจารย์">ศาสตราจารย์</option>
+                  <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
+                  <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
+               </select>
+            </div>
+            <div class="form-group">
                <label for="name">ชื่อ</label>
                <input type="text" class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="firstname" name="firstname" value="{{$text_firstname}}" placeholder ="ชื่อ" >
                <small class="form-text text-danger">{{$errors->first('firstname')}}</small>
