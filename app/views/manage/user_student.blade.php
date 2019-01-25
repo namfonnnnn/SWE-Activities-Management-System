@@ -19,13 +19,13 @@
    <div class="input-group">
       <input type="text" id="q" name="q" class="form-control"placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ" value="{{$q}}">
       <div class="input-group-append">
-         <select class="custom-select">
-            <option>- เลือกชั้นปี -</option>
-            <option value="1">ชั้นปีที่ 1</option>
-            <option value="2">ชั้นปีที่ 2</option>
-            <option value="3">ชั้นปีที่ 3</option>
-            <option value="4">ชั้นปีที่ 4</option>
-            <option value="5">ชั้นปีที่อื่นๆ</option>
+         <select class="custom-select" name="year">
+            <option value="">- เลือกชั้นปี -</option>
+            <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
+            <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
+            <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>
+            <option value="4" <?=($year == '4')?'selected':''?>>ชั้นปีที่ 4</option>
+            <option value="5" <?=($year == '5')?'selected':''?>>ชั้นปีที่อื่นๆ</option>
          </select>
          <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
       </div>

@@ -5,20 +5,38 @@ class ManageUserController extends BaseController {
 	
 	public function showUserStudent()
 	{
-		
-		if(Input::get('q') != NULL && Input::get('q') != ""){
+		$q = '';
+		$year = '';
+		$students = new Student;
+		$isQ = Input::get('q') != NULL && Input::get('q') != "";
+		$isYear = Input::get('year') != NULL && Input::get('year') != "";
+
+		if($isYear){
+			$year = Input::get('year');
+			$students = $students->searchYear(Input::get('year'));
+		}
+
+		if($isQ){
 			$q = Input::get('q');
-			$students = Student::where('id','like','%'.$q.'%')
-			->orWhere('firstname','like','%'.$q.'%')
-			->orWhere('lastname','like','%'.$q.'%');
+			$students = $students->where(function ($query) use ($q)
+			{
+				$query->orWhere('id','like','%'.$q.'%')
+				->orWhere('firstname','like','%'.$q.'%')
+				->orWhere('lastname','like','%'.$q.'%');
+			});
 		}
-		else {
-			$q = '';
-			$students = new Student;
-		}
+		
+			
 		$students = $students->paginate(10);
-		$students->appends(['q'=>$q]);
-		return View::make('manage.user_student',['students' => $students,'q'=>$q]);
+
+		if($isQ){
+			$students->appends(['q'=>$q]);
+		}
+		if($isYear){
+			$students->appends(['year'=>Input::get('year')]);
+		}
+
+		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year]);
 	}
 	
 	public function showUserTeacher()
