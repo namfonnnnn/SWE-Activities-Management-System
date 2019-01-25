@@ -175,8 +175,8 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'role' => 'required',
 				'position' => 'required',
-				'firstname' => 'required',
-				'lastname' => 'required',
+				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
+				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
 				'tel' => 'required',
 				'room' => 'required'
@@ -189,19 +189,19 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'role' => 'required',
 				'position' => 'required',
-				'firstname' => 'required',
-				'lastname' => 'required',
+				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
+				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
 				'tel' => 'required',
 				'room' => 'required',
-				'password' => 'required'
+				'password' => 'required|min:8'
 			);
 			
 		}
 
 		
 
-		$validator = Validator::make(Input::all(),$rules);
+		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
@@ -261,8 +261,8 @@ class ManageUserController extends BaseController {
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
 				'year' => 'required|integer|min:2558',
-				'firstname' => 'required',
-				'lastname' => 'required'
+				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
+				'lastname' => 'required|regex:/^[ก-๙ ]+$/'
 			);
 		}
 		else{
@@ -272,14 +272,14 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'year' => 'required|integer|min:2558',
 				'id' => 'required|min:8|max:8',
-				'firstname' => 'required',
-				'lastname' => 'required',
-				'password' => 'required',
+				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
+				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'password' => 'required|min:8'
 			);
 		}
 			
 		
-		$validator = Validator::make(Input::all(),$rules);
+		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
