@@ -106,18 +106,6 @@
 
 
       </div>
-<<<<<<< HEAD
-      <script type="text/javascript">
-        $(function () {
-          $(".delete-confirm").click(function(){
-            if (!confirm("ต้องการจะลบข้อมูลใช่หรือไม่")){
-              return false;
-            }
-          });
-        });
-      </script>
-   </body>
-=======
     </nav>
     <div class="container">
       @yield('content')
@@ -125,7 +113,7 @@
     <script type="text/javascript">
       $(function () {
         $(".delete-confirm").click(function(e){
-          if(!confirm("ต้องการจะลบ")){
+          if(!confirm("ต้องการจะลบข้อมูลใช่หรือไม่")){
             e.preventDefault();
             return false;
           }
@@ -135,5 +123,4 @@
     </script>
     
   </body>
->>>>>>> 063deb602569030846aca983e886260adfd277a3
 </html>
