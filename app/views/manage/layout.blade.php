@@ -40,7 +40,7 @@
           <li class="nav-item dropdown {{ Request::is('profile/*') ? 'active' : ''}}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              โปรไฟล์นักศึกษา
+              โปรไฟล์
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์</a>
