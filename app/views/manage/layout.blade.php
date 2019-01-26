@@ -40,12 +40,12 @@
           <li class="nav-item dropdown {{ Request::is('profile/*') ? 'active' : ''}}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              โปรไฟล์นักศึกษา
+              โปรไฟล์
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์นักศึกษา</a>
-              <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์นักศึกษา</a>
-              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}"></a>
             </div>
           </li>
         </ul>
@@ -60,7 +60,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์ส่วนตัว</a>
               <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
-              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}"></a>
             </div>
           </li>
         </ul>

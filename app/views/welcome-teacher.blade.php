@@ -27,12 +27,7 @@
 @stop
 @section('content')
   <br>
-  <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{url('/')}}">หน้าแรก</a></li>
-    <li class="breadcrumb-item active" aria-current="page">ยินดีต้อนรับ</li>
-  </ol>
-  </nav>
+ 
 
   @include('layouts.alert')
 @section('page_heading','Dashboard')
@@ -78,11 +73,7 @@
                     <table class="table table-striped" style="margin-top:20px">
                        <thead>
                           <tr class="table-success">
-                             <th class="text-center" >ชื่อกิจกรรม</th>
-                             <th class="text-center" >วันที่จัดกิจกรรม</th>
-                             <th class="text-center" >วันที่สิ้นสุดกิจกรรม</th>
-                             <th class="text-center" >อาจารย์ที่ปรึกษา</th>
-                             <th class="text-center" >จัดการ</th>
+                           
                           </tr>
                        </thead>
                        <tbody>
