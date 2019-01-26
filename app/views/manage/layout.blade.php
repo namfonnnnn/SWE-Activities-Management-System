@@ -60,7 +60,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์ส่วนตัว</a>
               <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
-              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}"></a>
             </div>
           </li>
         </ul>
