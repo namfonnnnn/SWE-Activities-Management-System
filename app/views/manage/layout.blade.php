@@ -43,9 +43,9 @@
               โปรไฟล์นักศึกษา
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์นักศึกษา</a>
-              <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์นักศึกษา</a>
-              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}">เปลี่ยนรูปโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile')}}">โปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}"></a>
             </div>
           </li>
         </ul>
