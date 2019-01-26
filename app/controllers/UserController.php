@@ -35,12 +35,14 @@ class UserController extends Controller {
         $user = Auth::user();
 
     }
-
-    if ($user->teacher != null) {
+    if ( Teacher::where('user_id', $user->id)->first() != null) {
         $user->type = 'teacher';
+        $user->teacher = Teacher::where('user_id', $user->id)->first();
     } else {
         $user->type = 'student';
+        $user->student = Student::where('user_id', $user->id)->first();
     }
+
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
     }
@@ -87,7 +89,6 @@ class UserController extends Controller {
         }
     }
 
-
     return View::make('profile', array('user'=>$user,'activity'=>$activity, 'setActivityRec'=>$setActivityRec, 'setActivityReg'=>$setActivityReg, 'history'=>$history));
 
 }
@@ -111,10 +112,12 @@ public function checkStudentActivity($uid, $aid)
 
     }
 
-    if ($user->teacher != null) {
+    if (Teacher::where('user_id', $user->id)->first() != null) {
         $user->type = 'teacher';
+        $user->teacher = Teacher::where('user_id', $user->id)->first();
     } else {
         $user->type = 'student';
+        $user->student = Student::where('user_id', $user->id)->first();
     }
 
 
@@ -152,11 +155,11 @@ public function checkStudentActivity($uid, $aid)
       return Redirect::to('/profile/edit')->withInput()->withErrors($validator);
     }
 
-    if (Auth::user()->teacher != null) {
-        $user = Teacher::find(Auth::user()->teacher->id);
+    if ( Teacher::where('user_id', Auth::user()->id)->first() != null) {
+        $user = Teacher::where('user_id', Auth::user()->id)->first();
         $user->room = Input::get('room_num');
     } else {
-        $user = Student::find(Auth::user()->student->id);
+        $user = Student::where('user_id', Auth::user()->id)->first();
     }
 
 

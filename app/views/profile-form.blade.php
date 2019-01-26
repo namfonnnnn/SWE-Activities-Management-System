@@ -18,6 +18,9 @@
     .avatar-upload .avatar-edit input {
         display: none;
     }
+    .has-error input{
+            border-color: red
+    }
     .avatar-upload .avatar-edit input + label {
         display: inline-block;
         width: 34px;
@@ -72,27 +75,7 @@
 @stop
 @section('content')
     <br>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{url('/home')}}">หน้าแรก</a></li>
-            <li class="breadcrumb-item"><a href="{{url('/profile')}}">
-                @if($user->type == 'student')
-                    โปรไฟล์นักศึกษา
-                @else
-                    ข้อมูลส่วนตัว
 
-                @endif
-            </a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-                @if($user->type == 'student')
-                    แก้ไขโปรไฟล์นักศึกษา
-                @else
-                    แก้ไขข้อมูลส่วนตัว
-
-                @endif
-            </li>
-        </ol>
-    </nav>
 
 
     <!-- /.row -->

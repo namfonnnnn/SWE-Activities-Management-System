@@ -23,11 +23,11 @@
 @stop
 @section('content')
     <br>
-    <nav aria-label="breadcrumb">
+    {{-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/home')}}">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                @if($user->{$user->type}->type == 'student')
+                @if($user->type == 'student')
                     โปรไฟล์นักศึกษา
                 @else
                     ข้อมูลส่วนตัว
@@ -36,12 +36,10 @@
 
             </li>
         </ol>
-    </nav>
+    </nav> --}}
 
     @include('layouts.alert')
     @section('page_heading','Dashboard')
-
-
 
 
 
@@ -68,7 +66,8 @@
                                         ข้อมูลส่วนตัว
 
                                     @endif
-                                    <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small></h2></div>
+                                    {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
+                                </h2></div>
                                     <div>ชื่อ-นามสกุล : {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</div>
                                     @if($user->type == 'student')
                                         <div>รหัสนักศึกษา : {{ $user->{$user->type}->id }}</div>
@@ -93,8 +92,8 @@
                 </div>
 
                 @if($user->type == 'student')
-                    <div class="col-lg-6 col-md-12">
-                        
+                    <div class="col-lg-6 col-md-12 text-right">
+
 
                         <br>
                         <div class="panel panel-primary">
@@ -104,7 +103,7 @@
                                 <div class="row">
 
 
-                                    <div class="col-xs-18 text-right">
+                                    <div class="col-md-12 text-right">
 
                                         <div style="    padding-left: 15px;"> กิจกรรมที่ต้องเข้าร่วม</div>
                                     </div>
@@ -217,6 +216,9 @@
                             <div class="col-md-12">
                                 <h3>กิจกรรมที่ต้องเข้าร่วม</h3>
                             </div>
+                            @if(empty($activity->count()))
+                                ไม่พบข้อมูล
+                            @endif
                             @foreach ($activity as $key => $value)
                             <div class="col-md-4">
                                 <div class="img-activity">
@@ -237,6 +239,9 @@
                             <div class="col-md-12">
                                 <h3>ประวัติกิจกรรมที่เข้าร่วม</h3>
                             </div>
+                            @if(empty($history->count()))
+                                ไม่พบข้อมูล
+                            @endif
                             @foreach ($history as $key => $value)
                             <div class="col-md-4">
                                 <div class="img-activity">

@@ -16,9 +16,9 @@ class Student extends Eloquent{
     }
 
 	public function getAvatar() {
-		return asset($this->image);
+		return empty($this->image) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9": asset($this->image);
 	}
-	
+
 	public function scopeSearchYear($querry,$year)
 	{
 		$now_year = 2561;
@@ -30,7 +30,7 @@ class Student extends Eloquent{
 			$search_year = $now_year - $year;
 			return $querry->where('year','<',$search_year);
 		}
-		
+
 	}
 
 }
