@@ -143,7 +143,7 @@
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="teacher[]" id="teacher1" value="1" {{(in_array("1",$check_teacher))?'checked':''}}>
                      <label class="form-check-label" for="teacher1">                                                                            
-                        ผู้ช่วยศาสตราจารย์ ฐิมาพร  เพชรแก้ว
+                        ผศ. ดร. ฐิมาพร  เพชรแก้ว
                      </label>
                   </div>
                </div>
@@ -151,7 +151,7 @@
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher2" value="2" {{(in_array("2",$check_teacher))?'checked':''}}>
                      <label class="form-check-label" for="teacher2">
-                        อาจารย์ ดร. กรัณรัตน์   ธรรมรักษ์ 
+                         ดร. กรัณรัตน์   ธรรมรักษ์ 
                      </label>
                   </div>
                </div>
@@ -159,7 +159,7 @@
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher3" value="3" {{(in_array("3",$check_teacher))?'checked':''}}>
                      <label class="form-check-label" for="teacher3">
-                        ผู้ช่วยศาสตราจารย์ อุหมาด  หมัดอาด้ำ 
+                        ผศ. อุหมาด  หมัดอาด้ำ 
                      </label>
                   </div>
                </div>
@@ -167,7 +167,7 @@
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher4" value="4" {{(in_array("4",$check_teacher))?'checked':''}}>
                      <label class="form-check-label" for="teacher4">
-                        อาจารย์ ดร. พุทธิพร  ธนธรรมเมธี
+                       ดร. พุทธิพร  ธนธรรมเมธี
                      </label>
                   </div>
                </div>
@@ -175,7 +175,7 @@
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher5" value="5" {{(in_array("5",$check_teacher))?'checked':''}}>
                      <label class="form-check-label" for="teacher5">
-                        ผู้ช่วยศาสตราจารย์ เยาวเรศ  ศิริสถิตย์กุล 
+                        ผศ. เยาวเรศ  ศิริสถิตย์กุล 
                      </label>
                   </div>
                </div>
@@ -197,43 +197,43 @@
             
             <label for="name">นักศึกษาที่เข้าร่วม</label>
             <div class="row">
-               <div class="col-6">
+               <div class="col-2">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="years[]" id="year1" value="1"  {{(in_array("1",$check_years))?'checked':''}}>
                      <label class="form-check-label" for="year1">
-                        นักศึกษาชั้นปีที่ 1
+                        ชั้นปีที่ 1
                      </label>
                   </div>
                </div>
-               <div class="col-6">
+               <div class="col-2">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="years[]" id="year2" value="2" {{(in_array("2",$check_years))?'checked':''}}>
                      <label class="form-check-label" for="year2">
-                        นักศึกษาชั้นปีที่ 2
+                        ชั้นปีที่ 2
                      </label>
                   </div>
                </div>
-               <div class="col-6">
+               <div class="col-2">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="years[]" id="year3" value="3" {{(in_array("3",$check_years))?'checked':''}}>
                      <label class="form-check-label" for="year3">
-                        นักศึกษาชั้นปีที่ 3
+                        ชั้นปีที่ 3
                      </label>
                   </div>
                </div>
-               <div class="col-6">
+               <div class="col-2">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="years[]" id="year4" value="4" {{(in_array("4",$check_years))?'checked':''}}>
                      <label class="form-check-label" for="year4">
-                     นักศึกษาชั้นปีที่ 4
+                        ชั้นปีที่ 4
                      </label>
                   </div>
                </div>
-               <div class="col-6">
+               <div class="col-2">
                   <div class="form-check">
                      <input class="form-check-input" type="checkbox"  name="years[]" id="year5" value="5" {{(in_array("5",$check_years))?'checked':''}}>
                      <label class="form-check-label" for="year5">
-                        นักศึกษาชั้นปีอื่นๆ
+                        ชั้นปีอื่นๆ
                      </label>
                   </div>
                </div>
@@ -244,7 +244,7 @@
             <br>
 
             <div class="form-group">
-               <label for="exampleFormControlFile1">Example file input</label>
+               <label for="exampleFormControlFile1">รูปภาพกิจกรรม</label>
                <input type="file" class="form-control-file" name="photo">
             </div>
             @if($image!='')

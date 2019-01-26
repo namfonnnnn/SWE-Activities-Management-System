@@ -23,7 +23,7 @@ test
             <th class="text-center">ชื่อกิจกรรม</th>
             <th class="text-center">วันที่เริ่ม - วันที่สิ้นสุด</th>
             <th class="text-center">สถานที่</th>
-            <th class="text-center">รายละเอียดเพิ่มเติม</th>
+            <th class="text-center">ปีการศึกษา</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
@@ -33,7 +33,7 @@ test
                <td class="text-center">{{ $activity->activity_name }}</td>
                <td class="text-center">{{ $activity->day_start }} ถึง {{ $activity->day_end }}</td>
                <td class="text-center">{{ $activity->location }}</td>
-               <td class="text-center ">{{ $activity->description }}</td>
+               <td class="text-center ">{{ $activity->sector }}</td>
                <td class="text-center">  
                   <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"> <i class="far fa-edit"></i></a>  
                   <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
