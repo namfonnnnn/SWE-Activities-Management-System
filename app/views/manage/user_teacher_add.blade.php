@@ -66,6 +66,7 @@
                         <option value="อาจารย์ ดร."  <?=($select_prefix=="อาจารย์ ดร.")?'selected':''?>>อาจารย์ ดร.</option>
                         <option value="ศาสตราจารย์"  <?=($select_prefix=="ศาสตราจารย์")?'selected':''?>>ศาสตราจารย์</option>
                         <option value="รองศาสตราจารย์"  <?=($select_prefix=="รองศาสตราจารย์")?'selected':''?>>รองศาสตราจารย์</option>
+                        <option value="ผู้ช่วยศาสตราจารย์"  <?=($select_prefix=="ผู้ช่วยศาสตราจารย์")?'selected':''?>>ผู้ช่วยศาสตราจารย์</option>
                         <option value="ผู้ช่วยศาสตราจารย์ ดร."  <?=($select_prefix=="ผู้ช่วยศาสตราจารย์ ดร.")?'selected':''?>>ผู้ช่วยศาสตราจารย์ ดร.</option>
                      </select>
                      <small class="form-text text-danger">{{$errors->first('prefix')}}</small>
