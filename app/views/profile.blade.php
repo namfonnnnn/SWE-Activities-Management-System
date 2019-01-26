@@ -92,20 +92,9 @@
                     </div>
                 </div>
 
-                @if($user->{$user->type}->type == 'student')
+                @if($user->type == 'student')
                     <div class="col-lg-6 col-md-12">
-                        <div class="wrap">
-                            <div class="search">
-                                <form class="" method="get">
-                                    <input type="hidden" name="userID" value="{{Request::get('userID')}}">
-                                    <input type="hidden" name="year" value="{{Request::get('year')}}">
-                                <input type="text" value="{{Request::get('s')}}" class="searchTerm" name="s" placeholder="Search">
-                                <button type="submit" class="searchButton btn">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                </form>
-                            </div>
-                        </div>
+                        
 
                         <br>
                         <div class="panel panel-primary">
@@ -135,7 +124,7 @@
 
             </div>
             <!-- /.row -->
-            @if($user->{$user->type}->type == 'student')
+            @if($user->type == 'student')
 
                 <div class="row">
 
