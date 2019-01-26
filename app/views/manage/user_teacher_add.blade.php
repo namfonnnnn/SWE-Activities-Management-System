@@ -58,16 +58,17 @@
                <div class="col">
                   <div class="form-group">
                      <label for="exampleFormControlSelect1">คำนำหน้า</label>
-                     <select class="form-control" id="prefix" name="prefix" >
+                     <select class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
                         <option value="">คำนำหน้า</option>
-                        <option value="นาย">นาย</option>
-                        <option value="นางสาว">นางสาว</option>
-                        <option value="อาจารย์">อาจารย์</option>
-                        <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
-                        <option value="ศาสตราจารย์">ศาสตราจารย์</option>
-                        <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
-                        <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
+                        <option value="นาย"  <?=($select_prefix=="นาย")?'selected':''?>>นาย</option>
+                        <option value="นางสาว"  <?=($select_prefix=="นางสาว")?'selected':''?>>นางสาว</option>
+                        <option value="อาจารย์"  <?=($select_prefix=="อาจารย์")?'selected':''?>>อาจารย์</option>
+                        <option value="อาจารย์ ดร."  <?=($select_prefix=="อาจารย์ ดร.")?'selected':''?>>อาจารย์ ดร.</option>
+                        <option value="ศาสตราจารย์"  <?=($select_prefix=="ศาสตราจารย์")?'selected':''?>>ศาสตราจารย์</option>
+                        <option value="รองศาสตราจารย์"  <?=($select_prefix=="รองศาสตราจารย์")?'selected':''?>>รองศาสตราจารย์</option>
+                        <option value="ผู้ช่วยศาสตราจารย์ ดร."  <?=($select_prefix=="ผู้ช่วยศาสตราจารย์ ดร.")?'selected':''?>>ผู้ช่วยศาสตราจารย์ ดร.</option>
                      </select>
+                     <small class="form-text text-danger">{{$errors->first('prefix')}}</small>
                   </div>
                </div>
                <div class="col">
@@ -90,7 +91,7 @@
                <div class="col">
                   <div class="form-group">
                      <label for="name">เบอร์โทรศัพท์</label>
-                     <input type="text" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder ="เบอร์โทรศัพท์" >
+                     <input type="tel" class="form-control {{$errors->has('tel') ? 'is-invalid' : ''}}" id="tel" name="tel" value="{{$text_tel}}" placeholder="0899999999" >
                      <small class="form-text text-danger">{{$errors->first('tel')}}</small>
                   </div>
                </div>

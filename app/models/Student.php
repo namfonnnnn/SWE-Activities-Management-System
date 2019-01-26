@@ -12,7 +12,7 @@ class Student extends Eloquent{
 
 	public function getFullName()
     {
-        return $this->firstname.' '.$this->lastname;
+        return $this->prefix.' '.$this->firstname.' '.$this->lastname;
     }
 
 	public function getAvatar() {

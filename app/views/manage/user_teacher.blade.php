@@ -38,8 +38,8 @@
       <tbody>
          @foreach ($teachers as $teacher)
             <tr>
-               
-               <td class="text-center">{{ $teacher->position->name }} {{ $teacher->getFullName() }}</td>
+                  
+               <td class="text-center">{{ $teacher->getFullName() }}</td>
                <td class="text-center">{{ $teacher->email }}</td>
                <td class="text-center">{{ $teacher->tel }}</td>
                <td class="text-center">{{ $teacher->room }}</td>

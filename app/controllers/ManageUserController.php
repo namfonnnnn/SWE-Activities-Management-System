@@ -70,7 +70,8 @@ class ManageUserController extends BaseController {
 		$text_password = $tool->validData(Input::old('password'), null,'');
 		$select_role = $tool->validData(Input::old('role'), null,'');
 		$select_position = $tool->validData(Input::old('position'), null,'');
-		
+		$select_prefix = $tool->validData(Input::old('prefix'), null,'');
+
 		$data = [
 			'text_firstname'=>$text_firstname,
 			'text_lastname'=>$text_lastname,
@@ -82,6 +83,7 @@ class ManageUserController extends BaseController {
 			'positions'=>$positions,
 			'select_role'=>$select_role,
 			'select_position'=>$select_position,
+			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_teacher_add',$data);
 	}
@@ -106,7 +108,8 @@ class ManageUserController extends BaseController {
 		$text_password = $tool->validData(Input::old('password'), null,'');
 		$select_role = $tool->validData(Input::old('role'), $teacher->role_id,'');
 		$select_position = $tool->validData(Input::old('position'), $teacher->position_id,'');
-		
+		$select_prefix = $tool->validData(Input::old('prefix'), $teacher->prefix,'');
+
 		$data = [
 			'teacher'=>$teacher,
 			'text_firstname'=>$text_firstname,
@@ -118,7 +121,8 @@ class ManageUserController extends BaseController {
 			'roles'=>$roles,
 			'positions'=>$positions,
 			'select_role'=>$select_role,
-			'select_position'=>$select_position
+			'select_position'=>$select_position,
+			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_teacher_add',$data);
 	}
@@ -131,12 +135,14 @@ class ManageUserController extends BaseController {
 		$text_firstname = $tool->validData(Input::old('firstname'), null,'');
 		$text_lastname = $tool->validData(Input::old('lastname'), null,'');
 		$text_password = $tool->validData(Input::old('password'), null,'');
+		$select_prefix = $tool->validData(Input::old('prefix'), null,'');
 		$data = [
 			'text_year'=>$text_year,
 			'text_id'=>$text_id,
 			'text_firstname'=>$text_firstname,
 			'text_lastname'=>$text_lastname,
-			'text_password'=>$text_password
+			'text_password'=>$text_password,
+			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_student_add',$data);
 	}
@@ -153,6 +159,7 @@ class ManageUserController extends BaseController {
 		$text_firstname = $tool->validData(Input::old('firstname'), $student->firstname,'');
 		$text_lastname = $tool->validData(Input::old('lastname'), $student->lastname,'');
 		$text_password = $tool->validData(Input::old('password'), null,'');
+		$select_prefix = $tool->validData(Input::old('prefix'), $student->prefix,'');
 		$data = [
 			'student'=>$student,
 			'id'=>$id,
@@ -160,7 +167,8 @@ class ManageUserController extends BaseController {
 			'text_id'=>$text_id,
 			'text_firstname'=>$text_firstname,
 			'text_lastname'=>$text_lastname,
-			'text_password'=>$text_password
+			'text_password'=>$text_password,
+			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_student_add',$data);
 	}
@@ -175,10 +183,11 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'role' => 'required',
 				'position' => 'required',
+				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required|numeric|size:10',
+				'tel' => 'required|digits:10',
 				'room' => 'required',
 				'password' => 'min:8'
 			);
@@ -190,10 +199,11 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'role' => 'required',
 				'position' => 'required',
+				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required|numeric|size:10',
+				'tel' => 'required|digits:10',
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
@@ -206,9 +216,7 @@ class ManageUserController extends BaseController {
 			Input::all(),
 			$rules,
 			[
-				'regex'=>'ภาษาไทยเท่านั้น',
-				'tel.numeric'=>'เบอร์โทรค้องเป็นตัวเลข',
-				'tel.size'=>'เบอร์โทรต้องมีความยาว :size',
+				'regex'=>'ภาษาไทยเท่านั้น'
 			]
 
 		);
@@ -244,6 +252,7 @@ class ManageUserController extends BaseController {
 		$teacher->user_id = $user->id;
 		$teacher->role_id = Input::get("role");
 		$teacher->position_id = Input::get("position");
+		$teacher->prefix = Input::get("prefix");
 		$teacher->firstname = Input::get("firstname");
 		$teacher->lastname = Input::get("lastname");
 		$teacher->tel = Input::get("tel");
@@ -271,6 +280,7 @@ class ManageUserController extends BaseController {
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
 				'year' => 'required|integer|min:2558',
+				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'password' => 'min:8'
@@ -282,7 +292,8 @@ class ManageUserController extends BaseController {
 			$success_message = 'บันทึกสำเร็จ';
 			$rules = array(
 				'year' => 'required|integer|min:2558',
-				'id' => 'required|min:8|max:8',
+				'id' => 'required|digits:8',
+				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
 				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
 				'password' => 'required|min:8'
@@ -328,6 +339,7 @@ class ManageUserController extends BaseController {
 
 
 		$student->user_id = $user->id;
+		$student->prefix = Input::get("prefix");
 		$student->firstname = Input::get("firstname");
 		$student->lastname = Input::get("lastname");
 		$student->year = Input::get("year");
@@ -339,8 +351,6 @@ class ManageUserController extends BaseController {
 		}
 
 		return Redirect::to($success_redirect_to)->withInput()->with('message',$success_message);
-
-		// return ($reuslt) ? 'true' : 'false';
 	}
 
 	public function actionUserStudentDelete($id)

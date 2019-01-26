@@ -54,6 +54,7 @@
          <tr class="table-success">
             <th class="text-center">รหัสนักศึกษา</th>
             <th class="text-center">ชื่อ-สกุล</th>
+            <th class="text-center">ปีการศึกษา</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
@@ -61,7 +62,8 @@
          @foreach ($students as $student)
             <tr>
                <td class="text-center">{{ $student->id }}</td>
-               <td class="text-center">{{ $student->getFullName() }}</td>
+               <td class="text-left">{{ $student->getFullName() }}</td>
+               <td class="text-left">{{ $student->year }}</td>
                <td class="text-center">  
                   <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
                   <a href="{{url('/manage/user/student/delete/'.$student->id)}}" class="btn btn-danger btn-sm delete-confirm" data-toggle="tooltip" title="ลบ"><i class="fas fa-trash-alt"></i></a>
