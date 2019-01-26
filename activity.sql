@@ -5,7 +5,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `activity`;
 CREATE DATABASE `activity` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `activity`;
 
@@ -182,8 +181,10 @@ CREATE TABLE `teachers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(3,	40,	2,	1,	'ศาสตราจารย์',	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'0882326243',	'ka@gmail.com',	'อาคารวิชาการ3',	'2019-01-24 21:46:44',	0,	'2019-01-26 19:15:55',	0),
-(5,	42,	2,	2,	'นางสาว',	'พุทธิพร',	'ธี',	NULL,	'0988898889',	'h@hotmail.com',	'c4',	'2019-01-24 21:49:00',	0,	'2019-01-27 02:00:12',	0);
+(3,	40,	3,	1,	'อาจารย์ ดร.',	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'9811121212',	'karanrat@gmail.com',	'อาคารวิชาการ3',	'2019-01-24 21:46:44',	0,	'2019-01-27 02:54:41',	0),
+(6,	53,	1,	1,	'นางสาว',	'admin',	'admin',	NULL,	'0925902070',	'admin@gmail.com',	'221039',	'2019-01-27 03:01:53',	0,	'2019-01-27 03:01:53',	0),
+(7,	54,	2,	2,	'อาจารย์ ดร.',	'พุทธิพร',	'ธี',	NULL,	'0258963145',	'puttiporn@gmail.com',	'3310',	'2019-01-27 03:04:46',	0,	'2019-01-27 03:04:46',	0),
+(8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ฐิมาพร',	'แก้ว',	NULL,	'0852963147',	'thimaporn@gmail.com',	'1234',	'2019-01-27 03:10:24',	0,	'2019-01-27 03:10:24',	0);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -210,12 +211,14 @@ INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at
 (33,	'58148602',	'$2y$10$aMjdrrG5.P.SDwnXLyBAT.TRTnexVrIxyL3MJ8t1py1jwJj7Ixbji',	NULL,	'2019-01-20 03:03:39',	'',	'2019-01-20 03:03:39',	NULL),
 (34,	'',	'$2y$10$ZczyhQGcf4tEeObppttkKO9FwnifNshwE0u1FFJvEltO33EpBqRyK',	NULL,	'2019-01-26 18:54:31',	'',	'2019-01-26 18:54:31',	NULL),
 (35,	'58142753',	'$2y$10$gv8/9kUY0bPziyuxp5Q18eC3dXCptrPGaNJURei0LuDOy.JDE1mMe',	NULL,	'2019-01-20 03:09:18',	'',	'2019-01-20 03:09:18',	NULL),
-(40,	'ka@gmail.com',	'$2y$10$9.NnZricA0FQ1O/MdPJe/.Vzkw6s4AJHE.irN7qPzv83LcQlEdRHK',	'vAVm8Pn1mb9vwZ9UYCcV2dYrmhmIu20VgGTVCp6JUakJp06CA7wFw3BoKcTZ',	'2019-01-26 16:43:44',	'',	'2019-01-26 16:43:44',	NULL),
-(42,	'h@hotmail.com',	'$2y$10$rxaTv8pNzIRQtXPhT61Z4OVqqRrZ1kOW5xDMtfIcBA.r.KP.trP1a',	'uNcD3mKmz0KguCF1jZugNwP8iDhWDwGvHokyZ2LpXSOqYJFzY09gSwRGT3fF',	'2019-01-26 16:10:39',	'',	'2019-01-26 16:10:39',	NULL),
+(40,	'karanrat@gmail.com',	'$2y$10$zmItCmEia5u5x5AD6JJgkOu.RgpPzADqMzyqPTRY5fvNzq0mAQy/C',	'g1rW3kjAEpb4veKjkIiFEifj3dcUOuUjdXe6HP76kcmzYCq8n893v25LkzKW',	'2019-01-27 02:51:34',	'',	'2019-01-27 02:51:34',	NULL),
 (49,	'58145231',	'$2y$10$9AsN7HLALLWwrNWXhhRCm.Djlp0/zmabyULoIhJMT9kK9DXzGo9ey',	NULL,	'2019-01-26 18:31:37',	'',	'2019-01-26 18:31:37',	NULL),
 (50,	'12345678',	'$2y$10$mMmPN3HD0EwNhCqZgfLdrOeDDC6ozhqRVUGQB6pWr7wbl04kfWbBi',	NULL,	'2019-01-26 23:52:08',	'',	'2019-01-26 23:52:08',	NULL),
 (51,	'58145230',	'$2y$10$xsi/JOxRK64sEz8POVVIaOMh4XpPiNcx9TEvLxNt/DuPjin7EnNGu',	NULL,	'2019-01-27 01:50:36',	'',	'2019-01-27 01:50:36',	NULL),
-(52,	'77777777',	'$2y$10$zds5OLUsAhiZhIj/2daxAOFOYKI0uvoYMGqjVXtvP9DJzbvj1D98W',	NULL,	'2019-01-27 01:52:24',	'',	'2019-01-27 01:52:24',	NULL);
+(52,	'77777777',	'$2y$10$zds5OLUsAhiZhIj/2daxAOFOYKI0uvoYMGqjVXtvP9DJzbvj1D98W',	NULL,	'2019-01-27 01:52:24',	'',	'2019-01-27 01:52:24',	NULL),
+(53,	'admin@gmail.com',	'$2y$10$ovIj56BNHRHIHP.ECtP6V.wC4Af/euYyMOdCOKMeYa7KjW1pyzNum',	NULL,	'2019-01-27 03:01:53',	'',	'2019-01-27 03:01:53',	NULL),
+(54,	'puttiporn@gmail.com',	'$2y$10$.PKpBk1CtKN702sIGHtWIO4wgj8GM3u1ikJj.OPUcUq6tBB0A5hEG',	NULL,	'2019-01-27 03:04:44',	'',	'2019-01-27 03:04:44',	NULL),
+(55,	'thimaporn@gmail.com',	'$2y$10$ouuYPr7Epyv/6UpIDLYoDO1r9J8gw0.P5Cnp72IDsCw5W0GDuJlSW',	NULL,	'2019-01-27 03:10:24',	'',	'2019-01-27 03:10:24',	NULL);
 
 DROP TABLE IF EXISTS `users_bkkkkk`;
 CREATE TABLE `users_bkkkkk` (
@@ -246,4 +249,4 @@ INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname
 (5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
 (6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
 
--- 2019-01-26 19:46:56
+-- 2019-01-26 20:22:45
