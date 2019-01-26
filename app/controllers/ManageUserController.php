@@ -184,8 +184,8 @@ class ManageUserController extends BaseController {
 				'role' => 'required',
 				'position' => 'required',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
-				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
 				'email' => 'required|email',
 				'tel' => 'required|digits:10',
 				'room' => 'required',
@@ -200,8 +200,8 @@ class ManageUserController extends BaseController {
 				'role' => 'required',
 				'position' => 'required',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
-				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
 				'email' => 'required|email',
 				'tel' => 'required|digits:10',
 				'room' => 'required',
@@ -281,8 +281,8 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'year' => 'required|integer|min:2558',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
-				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
 				'password' => 'min:8'
 			);
 		}
@@ -294,8 +294,8 @@ class ManageUserController extends BaseController {
 				'year' => 'required|integer|min:2558',
 				'id' => 'required|digits:8',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[ก-๙ ]+$/',
-				'lastname' => 'required|regex:/^[ก-๙ ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
 				'password' => 'required|min:8'
 			);
 		}
