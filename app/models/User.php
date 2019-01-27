@@ -34,7 +34,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function getAvatar() {
-			return asset($this->image);
+		return asset($this->image);
 	}
 
 	public function isTeacher()
@@ -64,7 +64,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		{
 			return true;
 		}
-
 		return false;
 	}
 

@@ -5,7 +5,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `activity`;
 CREATE DATABASE `activity` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `activity`;
 
@@ -32,7 +31,7 @@ CREATE TABLE `activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `activity` (`id`, `activity_name`, `description`, `teacher`, `day_start`, `day_end`, `time_start`, `time_end`, `term_year`, `sector`, `location`, `image`, `student`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(42,	'swe ติวน้องasdzxc',	'',	'[\"1\"]',	'2019-01-14',	'2019-01-22',	'08:30:00',	'15:00:00',	2,	2560,	'ห้องเรียน 3310',	NULL,	'[\"1\",\"2\",\"3\",\"4\",\"5\"]',	'2018-12-06 22:32:36',	'',	'2018-12-13 14:43:25',	''),
+(42,	'swe ติวน้องasdzxc',	'',	'[\"1\",\"3\",\"5\"]',	'2019-01-14',	'2019-01-22',	'08:30:00',	'15:00:00',	2,	2560,	'ห้องเรียน 3310',	NULL,	'[\"1\",\"3\",\"4\"]',	'2018-12-06 22:32:36',	'',	'2019-01-26 16:32:38',	''),
 (43,	'เก็บขยะ',	'ตามเก็บขยะในมหาวิทยาลัย',	'[\"1\",\"3\"]',	'2019-01-16',	'2019-01-23',	'08:00:00',	'10:30:00',	2,	2561,	'มหาวิทยาลัย',	NULL,	'[\"1\",\"3\"]',	'2018-12-06 22:39:19',	'',	'2018-12-06 22:39:56',	''),
 (44,	'swe ติวน้อง',	'',	'[\"2\",\"4\"]',	'1970-01-01',	'1970-01-01',	'12:12:00',	'12:20:00',	2,	2562,	'รวม5',	NULL,	'[\"1\",\"3\"]',	'2018-12-07 12:13:22',	'',	'2018-12-07 12:13:22',	''),
 (45,	'สอบโครงงาน',	'',	'[\"1\",\"2\",\"3\",\"4\",\"5\"]',	'1970-01-01',	'1970-01-01',	'13:00:00',	'17:00:00',	2,	2561,	'AD3501/SM Tower',	NULL,	'[\"1\"]',	'2018-12-11 11:04:02',	'',	'2018-12-11 11:05:33',	'');
@@ -139,18 +138,21 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `students` (`id`, `user_id`, `prefix`, `firstname`, `lastname`, `image`, `year`, `tel`, `email`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(58112418,	34,	'',	'ฉลองราช',	'ประสิทธิวงศ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:08:25',	NULL,	'2019-01-20 03:08:25',	NULL),
-(58112970,	22,	'',	'ชิดชนก',	' ยีสมัน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:47:47',	NULL,	'2019-01-20 02:47:47',	NULL),
+(12345678,	50,	'นาย',	'สุดหล่อ',	'มากๆ',	NULL,	'2558',	NULL,	NULL,	'2019-01-26 23:52:08',	NULL,	'2019-01-26 23:52:08',	NULL),
+(58112418,	34,	'นาย',	'ฉลองราช',	'ประสิทธิวงศ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:08:25',	NULL,	'2019-01-26 18:54:31',	NULL),
+(58112970,	22,	'นางสาว',	'ชิดชนก',	' ยีสมัน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:47:47',	NULL,	'2019-01-26 18:56:21',	NULL),
 (58113341,	23,	'',	'ฏอฮีเราะฮ์',	'ฮูซัยนี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:49:34',	NULL,	'2019-01-20 02:49:34',	NULL),
 (58120379,	27,	'',	'วุฒิชัย',	'เพ็ชร์ทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:54:22',	NULL,	'2019-01-20 02:54:22',	NULL),
 (58122516,	11,	'',	'หฤษฎ์',	'คงทอง',	NULL,	'2558',	NULL,	NULL,	'2019-01-19 23:08:31',	NULL,	'2019-01-19 23:08:31',	NULL),
-(58140500,	24,	'',	'กิตปกรณ์',	'ทองเงิน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:50:33',	NULL,	'2019-01-20 02:50:33',	NULL),
+(58140500,	24,	'',	'กิตปกรณ์',	'ทองเงิน',	NULL,	'2560',	NULL,	NULL,	'2019-01-20 02:50:33',	NULL,	'2019-01-20 02:50:33',	NULL),
 (58141623,	25,	'',	'ทัศวัฒน์',	'รัตนพันธ์',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 02:51:15',	NULL,	'2019-01-20 02:51:15',	NULL),
 (58142753,	35,	'',	'ประภาพร',	'มั่งมี',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:09:18',	NULL,	'2019-01-20 03:09:18',	NULL),
 (58143033,	32,	'',	'พงศธร',	'จันด้วง',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:02:54',	NULL,	'2019-01-20 03:02:54',	NULL),
+(58145230,	51,	'นางสาว',	'สุดสวย',	'มาก',	NULL,	'2558',	NULL,	NULL,	'2019-01-27 01:50:36',	NULL,	'2019-01-27 01:50:36',	NULL),
+(58145231,	49,	'',	'สุดสวย',	'ผิวอ่อน',	NULL,	'2558',	NULL,	NULL,	'2019-01-26 18:31:38',	NULL,	'2019-01-26 18:31:38',	NULL),
 (58145236,	31,	'',	'สุดารัตน์',	'ผิวอ่อน',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:01:20',	NULL,	'2019-01-20 03:01:20',	NULL),
-(58148602,	33,	'',	'สิริพร',	'พุทธวิริยะ',	NULL,	'2558',	NULL,	NULL,	'2019-01-20 03:03:39',	NULL,	'2019-01-20 03:03:39',	NULL),
-(58222516,	37,	'',	'58222516',	'58222516',	NULL,	'5822',	NULL,	NULL,	'2019-01-20 03:53:40',	NULL,	'2019-01-20 03:53:40',	NULL);
+(58148602,	33,	'',	'สิริพร',	'พุทธวิริยะ',	NULL,	'2559',	NULL,	NULL,	'2019-01-20 03:03:39',	NULL,	'2019-01-20 03:03:39',	NULL),
+(77777777,	52,	'นางสาว',	'ก',	'ด',	NULL,	'2559',	NULL,	NULL,	'2019-01-27 01:52:24',	NULL,	'2019-01-27 01:52:24',	NULL);
 
 DROP TABLE IF EXISTS `teachers`;
 CREATE TABLE `teachers` (
@@ -158,6 +160,7 @@ CREATE TABLE `teachers` (
   `user_id` int(11) NOT NULL,
   `position_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `prefix` text COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `image` text COLLATE utf8_unicode_ci,
@@ -177,10 +180,11 @@ CREATE TABLE `teachers` (
   CONSTRAINT `teachers_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(3,	40,	2,	1,	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'9811121212',	'ka@gmail.com',	'อาคารวิชาการ3',	'2019-01-24 21:46:44',	0,	'2019-01-24 21:46:44',	0),
-(5,	42,	2,	2,	'พุทธิพร',	'ธนธรรมเมธี',	NULL,	'0988898889',	'h@hotmail.com',	'c4',	'2019-01-24 21:49:00',	0,	'2019-01-24 22:10:30',	0),
-(7,	44,	1,	1,	'ฟ',	'asd',	NULL,	'ฟ',	's@s.com',	'ฟ',	'2019-01-24 22:16:16',	0,	'2019-01-24 22:16:16',	0);
+INSERT INTO `teachers` (`id`, `user_id`, `position_id`, `role_id`, `prefix`, `firstname`, `lastname`, `image`, `tel`, `email`, `room`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(3,	40,	3,	1,	'อาจารย์ ดร.',	'กรัณรัตน์',	'ธรรมรักษ์',	NULL,	'9811121212',	'karanrat@gmail.com',	'อาคารวิชาการ3',	'2019-01-24 21:46:44',	0,	'2019-01-27 02:54:41',	0),
+(6,	53,	1,	1,	'นางสาว',	'admin',	'admin',	NULL,	'0925902070',	'admin@gmail.com',	'221039',	'2019-01-27 03:01:53',	0,	'2019-01-27 03:01:53',	0),
+(7,	54,	2,	2,	'อาจารย์ ดร.',	'พุทธิพร',	'ธี',	NULL,	'0258963145',	'puttiporn@gmail.com',	'3310',	'2019-01-27 03:04:46',	0,	'2019-01-27 03:04:46',	0),
+(8,	55,	2,	2,	'ผู้ช่วยศาสตราจารย์ ดร.',	'ฐิมาพร',	'แก้ว',	NULL,	'0852963147',	'thimaporn@gmail.com',	'1234',	'2019-01-27 03:10:24',	0,	'2019-01-27 03:10:24',	0);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -197,20 +201,24 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
 (11,	'58122519',	'$2y$10$YS4BlqPJwGcxmGaJktXbket6kvqc87VLe/2hrZ692ApMtZmghH34a',	NULL,	'2019-01-20 02:16:11',	'',	'2019-01-20 02:08:44',	NULL),
-(22,	'58112970',	'$2y$10$z1jgJaJYCyASdYwYQwaTY.rE1WnAaKtgamrY5lGB13eZzKwHbh4Oq',	NULL,	'2019-01-20 02:56:14',	'',	'2019-01-20 02:56:14',	NULL),
+(22,	'',	'$2y$10$z1jgJaJYCyASdYwYQwaTY.rE1WnAaKtgamrY5lGB13eZzKwHbh4Oq',	NULL,	'2019-01-26 18:56:26',	'',	'2019-01-26 18:56:26',	NULL),
 (23,	'58113341',	'$2y$10$YQj0OYHm.KkkuskDVOdSfOAvU7YNCayQpDRw1n3brVozK01MsrezW',	NULL,	'2019-01-20 02:49:34',	'',	'2019-01-20 02:49:34',	NULL),
 (24,	'58140500',	'$2y$10$U9Qn.66XD4i2Q8bxejBrce/sCl2wvt3pSpLW5eUvwlpdl90M9Fdqa',	NULL,	'2019-01-20 02:50:33',	'',	'2019-01-20 02:50:33',	NULL),
 (25,	'58141623',	'$2y$10$hc2GQPUXjYR8E6eqzHbN6O7QEOoSizFtA2d8iEuzK7NhYYB.iZ8oi',	NULL,	'2019-01-20 02:51:15',	'',	'2019-01-20 02:51:15',	NULL),
 (27,	'58120379',	'$2y$10$7hCHW00i.fghuhEuHOz39efvHSKQWEIn3TBrZvyjDRU75dsjwvqXO',	NULL,	'2019-01-20 02:54:21',	'',	'2019-01-20 02:54:21',	NULL),
-(31,	'58145236',	'$2y$10$XoIwwT0UnvxWA5ssUf283eSgxWYz3VSMNBLZFwd9poaJZ5O.vg7Iy',	'B469ckF35nqoYjJgj5ClHMq0NBd4BNN9mlFfBHkoi09UIIu7PmfLHjzbkR6h',	'2019-01-25 00:40:15',	'',	'2019-01-25 00:40:15',	NULL),
+(31,	'58145236',	'$2y$10$XoIwwT0UnvxWA5ssUf283eSgxWYz3VSMNBLZFwd9poaJZ5O.vg7Iy',	'M3enaeI0n6TifYl8AqC9hg0JbisYLC6emirhukROM1qP9hwChliSs2Yh0fT9',	'2019-01-26 23:50:34',	'',	'2019-01-26 23:50:34',	NULL),
 (32,	'58143033',	'$2y$10$bAUoKVrgiN2nIr/6FZINOub7zFin7j1qWeXgFn7II0hA0RM1oyoWa',	NULL,	'2019-01-20 03:02:54',	'',	'2019-01-20 03:02:54',	NULL),
 (33,	'58148602',	'$2y$10$aMjdrrG5.P.SDwnXLyBAT.TRTnexVrIxyL3MJ8t1py1jwJj7Ixbji',	NULL,	'2019-01-20 03:03:39',	'',	'2019-01-20 03:03:39',	NULL),
-(34,	'58112418',	'$2y$10$ZczyhQGcf4tEeObppttkKO9FwnifNshwE0u1FFJvEltO33EpBqRyK',	NULL,	'2019-01-24 21:14:00',	'',	'2019-01-23 15:33:40',	NULL),
+(34,	'',	'$2y$10$ZczyhQGcf4tEeObppttkKO9FwnifNshwE0u1FFJvEltO33EpBqRyK',	NULL,	'2019-01-26 18:54:31',	'',	'2019-01-26 18:54:31',	NULL),
 (35,	'58142753',	'$2y$10$gv8/9kUY0bPziyuxp5Q18eC3dXCptrPGaNJURei0LuDOy.JDE1mMe',	NULL,	'2019-01-20 03:09:18',	'',	'2019-01-20 03:09:18',	NULL),
-(37,	'58222516',	'$2y$10$fyE6.77XnSMvr/aVcP/3zO1gD7eUZmeB56p7DZd4qf.U24bBT5Kbq',	NULL,	'2019-01-20 03:53:40',	'',	'2019-01-20 03:53:40',	NULL),
-(40,	'ka@gmail.com',	'$2y$10$9.NnZricA0FQ1O/MdPJe/.Vzkw6s4AJHE.irN7qPzv83LcQlEdRHK',	'XFxKJmx3lIsSlggPmFr7L0wOLA5v3aiRZejBg6M9AqeHL8mpGdEm1VomHsQD',	'2019-01-25 00:28:07',	'',	'2019-01-25 00:28:07',	NULL),
-(42,	'h@hotmail.com',	'$2y$10$rxaTv8pNzIRQtXPhT61Z4OVqqRrZ1kOW5xDMtfIcBA.r.KP.trP1a',	NULL,	'2019-01-24 21:49:00',	'',	'2019-01-24 21:49:00',	NULL),
-(44,	's@s.com',	'$2y$10$ccFC7oSo99MbJKVQEhlR1OWDQfnlL26n4pB5H7e3VdhJTy.CBbfWK',	NULL,	'2019-01-24 22:16:15',	'',	'2019-01-24 22:16:15',	NULL);
+(40,	'karanrat@gmail.com',	'$2y$10$zmItCmEia5u5x5AD6JJgkOu.RgpPzADqMzyqPTRY5fvNzq0mAQy/C',	'g1rW3kjAEpb4veKjkIiFEifj3dcUOuUjdXe6HP76kcmzYCq8n893v25LkzKW',	'2019-01-27 02:51:34',	'',	'2019-01-27 02:51:34',	NULL),
+(49,	'58145231',	'$2y$10$9AsN7HLALLWwrNWXhhRCm.Djlp0/zmabyULoIhJMT9kK9DXzGo9ey',	NULL,	'2019-01-26 18:31:37',	'',	'2019-01-26 18:31:37',	NULL),
+(50,	'12345678',	'$2y$10$mMmPN3HD0EwNhCqZgfLdrOeDDC6ozhqRVUGQB6pWr7wbl04kfWbBi',	NULL,	'2019-01-26 23:52:08',	'',	'2019-01-26 23:52:08',	NULL),
+(51,	'58145230',	'$2y$10$xsi/JOxRK64sEz8POVVIaOMh4XpPiNcx9TEvLxNt/DuPjin7EnNGu',	NULL,	'2019-01-27 01:50:36',	'',	'2019-01-27 01:50:36',	NULL),
+(52,	'77777777',	'$2y$10$zds5OLUsAhiZhIj/2daxAOFOYKI0uvoYMGqjVXtvP9DJzbvj1D98W',	NULL,	'2019-01-27 01:52:24',	'',	'2019-01-27 01:52:24',	NULL),
+(53,	'admin@gmail.com',	'$2y$10$ovIj56BNHRHIHP.ECtP6V.wC4Af/euYyMOdCOKMeYa7KjW1pyzNum',	NULL,	'2019-01-27 03:01:53',	'',	'2019-01-27 03:01:53',	NULL),
+(54,	'puttiporn@gmail.com',	'$2y$10$.PKpBk1CtKN702sIGHtWIO4wgj8GM3u1ikJj.OPUcUq6tBB0A5hEG',	NULL,	'2019-01-27 03:04:44',	'',	'2019-01-27 03:04:44',	NULL),
+(55,	'thimaporn@gmail.com',	'$2y$10$ouuYPr7Epyv/6UpIDLYoDO1r9J8gw0.P5Cnp72IDsCw5W0GDuJlSW',	NULL,	'2019-01-27 03:10:24',	'',	'2019-01-27 03:10:24',	NULL);
 
 DROP TABLE IF EXISTS `users_bkkkkk`;
 CREATE TABLE `users_bkkkkk` (
@@ -241,4 +249,4 @@ INSERT INTO `users_bkkkkk` (`id`, `username`, `password`, `firstname`, `lastname
 (5,	'teach2',	'$2y$10$K.E/n7LHn//tNAuOYYgV6..hkFbt7h8lsG2pVmvmfQH9BiL7LhZ46',	'ๅ/-ๅ',	'/-ๅ/-',	'0996717562',	'hawkandeagle5@gmail.com',	NULL,	'2019-01-13 11:56:03',	'2019-01-13 11:56:03',	'student',	NULL,	'541102109103',	NULL,	NULL,	NULL,	'2561'),
 (6,	'58122516',	'$2y$10$YULtTcPT5tEby1CQYFHWWuUr1zR1xVrsqgvrfeVqwgC1rMJc/qX02',	NULL,	NULL,	NULL,	NULL,	NULL,	'2019-01-19 15:58:08',	'2019-01-19 15:58:08',	'student',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
 
--- 2019-01-24 18:12:40
+-- 2019-01-26 20:22:45
