@@ -218,7 +218,7 @@
 
 
                         <div class="form-group ">
-                            <button type="submit" class="btn btn-primary btn-block login-button">แก้ไขข้อมูล</button>
+                            <button type="submit" class="btn btn-primary btn-block login-button">บันทึก</button>
                         </div>
 
                 </div>
