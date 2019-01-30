@@ -28,7 +28,7 @@ class TeachController extends BaseController {
 			$s = Request::get('s');
 			$items = $items->where(function($q) use($s) {
 				$q = $q->where(\DB::raw('CONCAT(firstname, " ", lastname)'), 'LIKE', "%{$s}%");
-				$q = $q->orWhere('room_num', 'LIKE', "%{$s}%");
+				$q = $q->orWhere('room', 'LIKE', "%{$s}%");
 			});
 		}
 
@@ -51,8 +51,8 @@ class TeachController extends BaseController {
         'lastname' => 'required|min:3',
 		'username' => 'required|min:3',
         'email' => 'required|email|min:5',
-        'room_num' => 'required',
-        'tel' => 'required',
+        'room' => 'required',
+        'tel' => 'required|min:9|max:10',
 		'image' => 'mimes:jpeg,bmp,png|max:4068',
 		'password' => 'required'
       ),
@@ -67,7 +67,7 @@ class TeachController extends BaseController {
         'firstname' => 'ชื่อ',
         'lastname' => 'นามสกุล',
         'email' => 'Email',
-        'room_num' => 'เลขห้อง',
+        'room' => 'เลขห้อง',
         'tel' => 'เบอร์ติดต่อ',
 		'image' => 'รูปภาพ',
         'password' => 'Password',
@@ -87,7 +87,7 @@ class TeachController extends BaseController {
 
 		$user->email = Input::get('email');
 
-		$user->room_num = Input::get('room_num');
+		$user->room = Input::get('room');
 		$user->type = 'teach';
 		$user->roleID = 1;
 		$user->positionID = 1;
@@ -136,9 +136,9 @@ class TeachController extends BaseController {
 				'firstname' => 'required|min:3',
 				'lastname' => 'required|min:3',
 				'email' => 'required|email|min:5',
-				'room_num' => 'required',
+				'room' => 'required',
 				'image' => 'mimes:jpeg,bmp,png|max:4068',
-				'tel' => 'required',
+				'tel' => 'required|min:9|max:10',
 				// 'password' => 'required'
 			),
 			array(
@@ -152,7 +152,7 @@ class TeachController extends BaseController {
 				'firstname' => 'ชื่อ',
 				'lastname' => 'นามสกุล',
 				'email' => 'Email',
-				'room_num' => 'รหัสนักศึกษา',
+				'room' => 'รหัสนักศึกษา',
 				'tel' => 'เบอร์ติดต่อ',
 				'image' => 'รูปภาพ'
 				// 'password' => 'Password',
@@ -173,7 +173,7 @@ class TeachController extends BaseController {
 
 		$user->email = Input::get('email');
 
-		$user->room_num = Input::get('room_num');
+		$user->room = Input::get('room');
 		$user->type = 'teach';
 
 		$user->roleID = 1;

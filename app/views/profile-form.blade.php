@@ -172,11 +172,11 @@
                                 <div class="cols-sm-10">
                                     <div class="input-group">
 
-                                        <input  type="text" class="form-control" name="room_num" id="room_num"  placeholder="ห้อง" value="{{Request::old('room_num', $user->{$user->type}->room_num)}}" />
+                                        <input  type="text" class="form-control" name="room" id="room"  placeholder="ห้อง" value="{{Request::old('room', $user->{$user->type}->room)}}" />
                                     </div>
-                                    @if($errors->has('room_num'))
+                                    @if($errors->has('room'))
                                         <div class="alert-danger" role="alert">
-                                            {{$errors->first('room_num')}}
+                                            {{$errors->first('room')}}
                                         </div>
                                     @endif
                                 </div>

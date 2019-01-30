@@ -136,7 +136,8 @@ public function checkStudentActivity($uid, $aid)
         'firstname' => 'required|min:3',
         'lastname' => 'required|min:3',
         'email' => 'required|email|min:5',
-        'tel' => 'required',
+        'tel' => 'required|max:10',
+        'image' => 'mimes:jpeg,bmp,png|max:4068',
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
@@ -147,6 +148,7 @@ public function checkStudentActivity($uid, $aid)
         'email' => 'Email',
         'code' => 'รหัสนักศึกษา',
         'tel' => 'เบอร์ติดต่อ',
+        'image' => 'mimes:jpeg,bmp,png|max:4068',
       )
     );
 
@@ -157,7 +159,7 @@ public function checkStudentActivity($uid, $aid)
 
     if ( Teacher::where('user_id', Auth::user()->id)->first() != null) {
         $user = Teacher::where('user_id', Auth::user()->id)->first();
-        $user->room = Input::get('room_num');
+        $user->room = Input::get('room');
     } else {
         $user = Student::where('user_id', Auth::user()->id)->first();
     }
