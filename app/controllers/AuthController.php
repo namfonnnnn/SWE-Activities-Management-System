@@ -22,7 +22,7 @@ class AuthController extends BaseController {
 			// } else {
 			// 	return Redirect::to('profile');
 			// }
-			return Redirect::to('manage');
+			return Redirect::to('profile');
 		}else{
 			return Redirect::to('login')->with('error','username หรือ password ไม่ถูกต้อง');
 		}
