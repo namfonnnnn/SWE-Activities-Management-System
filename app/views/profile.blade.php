@@ -3,9 +3,10 @@
     โปรไฟล์นักศึกษา
 @stop
 @section('cdn')
-
+    
 
     <style media="screen">
+           
     .img-thumbnail {
         padding: .25rem;
         background-color: #fff;
@@ -16,6 +17,7 @@
         height: 196px;
         object-fit: contain;
     }
+    
 </style>
 
 
@@ -105,10 +107,20 @@
 
                                     <div class="col-md-12 text-right">
 
-                                        <div style="    padding-left: 15px;"> กิจกรรมที่ต้องเข้าร่วม</div>
+                                        <div class="wrap">
+                                            <div class="search">
+                                               <input type="text" class="searchTerm" placeholder="Search?">
+                                               <button type="submit" class="searchButton">
+                                                 <i class="fa fa-search"></i>
+                                              </button>
+                                            </div>
+                                            
+                                        </div>
+                                        
+
                                     </div>
+                                    
                                 </div>
-                            </div>
                             <a href="#">
                                 <div class="panel-footer">
 
@@ -128,25 +140,8 @@
                 <div class="row">
 
                     <div class="col-lg-4">
-                        <?php
-
-                        $dataPoints1 = array(
-                            array("label"=> "2010", "y"=> 3),
-                            array("label"=> "2011", "y"=> 3),
-                            array("label"=> "2012", "y"=> 4),
-                            array("label"=> "2013", "y"=> 3)
-
-                        );
-                        $dataPoints2 = array(
-                            array("label"=> "2010", "y"=> 6),
-                            array("label"=> "2011", "y"=> 7),
-                            array("label"=> "2012", "y"=> 7),
-                            array("label"=> "2013", "y"=> 8)
-
-                        );
-
-                        ?>
-                        <!DOCTYPE HTML>
+                       
+                        
                         <html>
                         <head>
                             <script>
@@ -155,7 +150,7 @@
                                     animationEnabled: true,
                                     theme: "light2",
                                     title:{
-                                        text: "กราฟการเข้าร่วมกิจกรรมของนักศึกษา"
+                                        text: ""
                                     },
                                     legend:{
                                         cursor: "pointer",
@@ -164,7 +159,7 @@
                                         itemclick: toggleDataSeries
                                     },
                                     data: [
-                                        @if(!empty($setActivityReg))
+                                      
                                         {
                                         type: "column",
                                         name: "กิจกรรมที่เข้าร่วมแล้ว",
@@ -173,7 +168,7 @@
                                         showInLegend: true,
                                         dataPoints: <?php echo json_encode($setActivityReg, JSON_NUMERIC_CHECK); ?>
                                     },
-                                    @endif
+                                   
                                     {
                                         type: "column",
                                         name: "กิจกรรมที่ต้องเข้าร่วม",
