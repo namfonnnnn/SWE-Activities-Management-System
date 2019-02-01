@@ -71,26 +71,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped" style="margin-top:20px">
-                       <thead>
+                        <thead>
                           <tr class="table-success">
                            
                           </tr>
-                       </thead>
-                       <tbody>
-                          @foreach ($activities as $activity)
-                             <tr>
-                                <td class="text-center">{{ $activity->activity_name }}</td>
-                                <td class="text-center">{{ Carbon\Carbon::parse($activity->day_start)->addYears('543')->format('d/m/Y') }}</td>
-                                <td class="text-center">{{ Carbon\Carbon::parse($activity->day_end)->addYears('543')->format('d/m/Y') }}</td>
-                                <td class="text-center">{{ $activity->getTeacherName() }}</td>
-                                <td class="text-center">
-                                   {{-- <a href="{{url('/manage/activity/edit/'.$activity->id)}}" class="btn btn-info btn-sm">แก้ไข</a>
-                                   <a href="{{url('/manage/activity/delete/'.$activity->id)}}" class="btn btn-danger btn-sm">ลบ</a> --}}
-                                   <a href="{{url('/manage/activity/check/status')}}/{{$activity->id}}" class="btn btn-warning btn-sm">เช็คสถานะ</a>
-                                </td>
-                             </tr>
-                          @endforeach
-                       </tbody>
+                        </thead>
+                    
                     </table>
                 </div>
             </div>
