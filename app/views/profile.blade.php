@@ -19,6 +19,58 @@
     }
     
 </style>
+<script>
+    $(function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: ""
+            },
+            legend:{
+                cursor: "pointer",
+                verticalAlign: "center",
+                horizontalAlign: "right",
+                itemclick: toggleDataSeries
+            },
+            data: [
+              
+                {
+                type: "column",
+                name: "กิจกรรมที่เข้าร่วมแล้ว",
+                indexLabel: "{y}",
+                yValueFormatString: "#0.##กิจกรรม",
+                showInLegend: true,
+                dataPoints: <?php echo json_encode($setActivityReg, JSON_NUMERIC_CHECK); ?>
+            },
+           
+            {
+                type: "column",
+                name: "กิจกรรมที่ต้องเข้าร่วม",
+                indexLabel: "{y}",
+                yValueFormatString: "#0.##กิจกรรม",
+                showInLegend: true,
+                dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chart.render();
+
+        function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else{
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+    })
+    window.onload = function () {
+
+
+
+    }
+    </script>
 
 
 
@@ -48,7 +100,7 @@
     <!-- /.row -->
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-4 col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
@@ -63,9 +115,9 @@
 
                                 <div><h2>
                                     @if($user->type == 'student')
-                                        โปรไฟล์นักศึกษา
+                                        <h3>โปรไฟล์นักศึกษา</h3>
                                     @else
-                                        ข้อมูลส่วนตัว
+                                        <h3>ข้อมูลส่วนตัว</h3>
 
                                     @endif
                                     {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
@@ -81,8 +133,9 @@
                                     <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
                                     <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
 
-
+                                    
                                     <div class="col-xs-3">
+                                        
 
                                     </div>
                                 </div>
@@ -91,183 +144,100 @@
                         </div>
 
                     </div>
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 </div>
 
                 @if($user->type == 'student')
-                    <div class="col-lg-6 col-md-12 text-right">
-
-
-                        <br>
-                        <div class="panel panel-primary">
-
-                            <div class="panel-heading">
-
-                                <div class="row">
-
-
-                                    <div class="col-md-12 text-right">
-
-                                        <div class="wrap">
-                                            <div class="search">
-                                               <input type="text" class="searchTerm" placeholder="Search?">
-                                               <button type="submit" class="searchButton">
-                                                 <i class="fa fa-search"></i>
-                                              </button>
+                <!-- /.col-lg-4 -->
+                
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12 text-right">
+                                                    <div class="wrap">
+                                                        <div class="search">
+                                                            <input type="text" class="searchTerm" placeholder="Search?">
+                                                                <button type="submit" class="searchButton">
+                                                                    <i class="fa fa-search"></i>
+                                                                </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h3>กิจกรรมที่ต้องเข้าร่วม</h3>
                                             </div>
-                                            
+                                            @if(empty($activity->count()))
+                                                ไม่พบข้อมูล
+                                            @endif
+                                            @foreach ($activity as $key => $value)
+                                            <div class="col-md-4">
+                                                <div class="img-activity">
+                                                    <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                                                    <div class="">
+                                                            {{ $value->activity_name }}
+                                                            <br>
+                                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                                                    </div>
+                                                    <div class="text-right">
+                
+                                                        <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            @endforeach
+                                            <div class="col-md-12">
+                                                <h3>ประวัติกิจกรรมที่เข้าร่วม</h3>
+                                            </div>
+                                            @if(empty($history->count()))
+                                                ไม่พบข้อมูล
+                                            @endif
+                                            @foreach ($history as $key => $value)
+                                            <div class="col-md-4">
+                                                <div class="img-activity">
+                                                    <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                                                    <div class="">
+                                                            {{ $value->activity_name }}
+                                                            <br>
+                                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                                                    </div>
+                                                    <div class="text-right">
+                
+                                                        <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            @endforeach
+                                            <div class="col-md-12 text-center" style="padding-top:35px">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&userID={{Request::get('userID')}}">1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&userID={{Request::get('userID')}}">2</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&userID={{Request::get('userID')}}">3</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&userID={{Request::get('userID')}}">4</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=5&s={{Request::get('s')}}&userID={{Request::get('userID')}}"></a></li>
+                                                      <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&userID={{Request::get('userID')}}">ทั้งหมด</a></li>
+                                                    </ul>
+                                                  </nav>
+                                            </div>
                                         </div>
-                                        
-
                                     </div>
-                                    
-                                </div>
-                            <a href="#">
-                                <div class="panel-footer">
-
-                                    <span class="pull-left"> กิจกรรมที่ต้องเข้าร่วมทั้งหมด</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 @endif
 
             </div>
             <!-- /.row -->
             @if($user->type == 'student')
 
+               
+            <div class="col-lg-8">
                 <div class="row">
-
-                    <div class="col-lg-4">
-                       
+                    <div class="col-md-6">
                         
-                        <html>
-                        <head>
-                            <script>
-                            $(function() {
-                                var chart = new CanvasJS.Chart("chartContainer", {
-                                    animationEnabled: true,
-                                    theme: "light2",
-                                    title:{
-                                        text: ""
-                                    },
-                                    legend:{
-                                        cursor: "pointer",
-                                        verticalAlign: "center",
-                                        horizontalAlign: "right",
-                                        itemclick: toggleDataSeries
-                                    },
-                                    data: [
-                                      
-                                        {
-                                        type: "column",
-                                        name: "กิจกรรมที่เข้าร่วมแล้ว",
-                                        indexLabel: "{y}",
-                                        yValueFormatString: "#0.##กิจกรรม",
-                                        showInLegend: true,
-                                        dataPoints: <?php echo json_encode($setActivityReg, JSON_NUMERIC_CHECK); ?>
-                                    },
-                                   
-                                    {
-                                        type: "column",
-                                        name: "กิจกรรมที่ต้องเข้าร่วม",
-                                        indexLabel: "{y}",
-                                        yValueFormatString: "#0.##กิจกรรม",
-                                        showInLegend: true,
-                                        dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
-                                    }]
-                                });
-                                chart.render();
-
-                                function toggleDataSeries(e){
-                                    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                                        e.dataSeries.visible = false;
-                                    }
-                                    else{
-                                        e.dataSeries.visible = true;
-                                    }
-                                    chart.render();
-                                }
-                            })
-                            window.onload = function () {
-
-
-
-                            }
-                            </script>
-                        </head>
-                        <body>
-                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                        </body>
-                        </html>
-                    </div>
-
-                    <!-- /.col-lg-4 -->
-
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>กิจกรรมที่ต้องเข้าร่วม</h3>
-                            </div>
-                            @if(empty($activity->count()))
-                                ไม่พบข้อมูล
-                            @endif
-                            @foreach ($activity as $key => $value)
-                            <div class="col-md-4">
-                                <div class="img-activity">
-                                    <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                                    <div class="">
-                                            {{ $value->activity_name }}
-                                            <br>
-                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                                    </div>
-                                    <div class="text-right">
-
-                                        <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @endforeach
-                            <div class="col-md-12">
-                                <h3>ประวัติกิจกรรมที่เข้าร่วม</h3>
-                            </div>
-                            @if(empty($history->count()))
-                                ไม่พบข้อมูล
-                            @endif
-                            @foreach ($history as $key => $value)
-                            <div class="col-md-4">
-                                <div class="img-activity">
-                                    <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
-                                    <div class="">
-                                            {{ $value->activity_name }}
-                                            <br>
-                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
-                                    </div>
-                                    <div class="text-right">
-
-                                        <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @endforeach
-                            <div class="col-md-12 text-center" style="padding-top:35px">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&userID={{Request::get('userID')}}">1</a></li>
-                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&userID={{Request::get('userID')}}">2</a></li>
-                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&userID={{Request::get('userID')}}">3</a></li>
-                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&userID={{Request::get('userID')}}">4</a></li>
-                                      <li class="page-item"><a class="page-link" href="?year=5&s={{Request::get('s')}}&userID={{Request::get('userID')}}"></a></li>
-                                      <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&userID={{Request::get('userID')}}">ทั้งหมด</a></li>
-                                    </ul>
-                                  </nav>
-                            </div>
-                        </div>
-                    </div>
+                    </div>  
+                </div>
+            </div>   
+                    
                     <!-- /.col-lg-8 -->
                 @else
 
