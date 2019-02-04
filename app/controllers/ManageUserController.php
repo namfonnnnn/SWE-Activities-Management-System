@@ -184,10 +184,10 @@ class ManageUserController extends BaseController {
 				'role' => 'required',
 				'position' => 'required',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
-				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required|digits:10',
+				'tel' => 'digits:10',
 				'room' => 'required',
 				'password' => 'min:8'
 			);
@@ -200,10 +200,10 @@ class ManageUserController extends BaseController {
 				'role' => 'required',
 				'position' => 'required',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
-				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'email' => 'required|email',
-				'tel' => 'required|digits:10',
+				'tel' => 'digits:10',
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
@@ -273,6 +273,7 @@ class ManageUserController extends BaseController {
 
 	public function actionUserStudentAdd($id = null)
 	{
+		// dd(Input::get("firstname"));
 		$isID = isset($id);
 		if($isID){
 			$redirect_to = 'manage/user/student/edit/'.$id;
@@ -281,8 +282,8 @@ class ManageUserController extends BaseController {
 			$rules = array(
 				'year' => 'required|integer|min:2558',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
-				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'password' => 'min:8'
 			);
 		}
@@ -294,8 +295,8 @@ class ManageUserController extends BaseController {
 				'year' => 'required|integer|min:2558',
 				'id' => 'required|digits:8',
 				'prefix' => 'required',
-				'firstname' => 'required|regex:/^[A-Za-zก-๙]+$/',
-				'lastname' => 'required|regex:/^[A-Za-zก-๙]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'password' => 'required|min:8'
 			);
 		}
@@ -319,14 +320,16 @@ class ManageUserController extends BaseController {
 		if($isID){
 			$student = Student::find($id);
 			$user = User::find($student->user_id);
+			$user->username = $student->id;
 			
 		}else{
 			$user = new User;
 			$student = new Student;
 			$student->id = Input::get("id");
+			$user->username = Input::get("id");
 		}
 
-		$user->username = Input::get("id");
+		
 		if(Input::get("password") != ''){
 			$user->password = Hash::make(Input::get("password"));
 		}
