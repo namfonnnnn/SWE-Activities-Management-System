@@ -128,7 +128,7 @@ class ManageActivityController extends BaseController {
 			$fail_redirect_to = 'manage/activity/add/';
 			$success_redirect_to = 'manage/activity/summary/useradd';
 			$success_message ='บันทึกสำเร็จ';
-			$rules['daystart'] = 'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end';
+			$rules['daystart'] = 'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end';7
 			$rules['dayend'] =  'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end';
 		}
 		$message = [
