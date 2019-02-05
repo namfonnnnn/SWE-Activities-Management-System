@@ -131,7 +131,8 @@ class ManageActivityController extends BaseController {
 			'years' => 'required_without_all'
 		);
 		$message = [
-			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม'
+			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม',
+			
 		];
 		$validator = Validator::make(Input::all(),$rules,$message);
 
