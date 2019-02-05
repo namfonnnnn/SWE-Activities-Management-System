@@ -12,7 +12,6 @@ return array(
 	| as the size rules. Feel free to tweak each of these messages here.
 	|
 	*/
-
 	"accepted"             => "The :attribute must be accepted.",
 	"active_url"           => "The :attribute is not a valid URL.",
 	"after"                => "The :attribute must be a date after :date.",
@@ -37,7 +36,7 @@ return array(
 	"exists"               => "The selected :attribute is invalid.",
 	"image"                => "The :attribute must be an image.",
 	"in"                   => "The selected :attribute is invalid.",
-	"integer"              => "The :attribute must be an integer.",
+	"integer"              => "ข้อมูลเป็นตัวเลขเท่านั้น",
 	"ip"                   => "The :attribute must be a valid IP address.",
 	"max"                  => array(
 		"numeric" => "The :attribute may not be greater than :max.",
@@ -47,9 +46,9 @@ return array(
 	),
 	"mimes"                => "The :attribute must be a file of type: :values.",
 	"min"                  => array(
-		"numeric" => "The :attribute must be at least :min.",
+		"numeric" => "ข้อมูลต้องเป็นตัวเลขไม่ต่ำกว่า :min",
 		"file"    => "The :attribute must be at least :min kilobytes.",
-		"string"  => "The :attribute must be at least :min characters.",
+		"string"  => "กรุณากรอกข้อมูลไม่ต่ำกว่า :min ตัว.",
 		"array"   => "The :attribute must have at least :min items.",
 	),
 	"not_in"               => "The selected :attribute is invalid.",

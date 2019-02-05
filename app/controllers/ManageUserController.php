@@ -216,7 +216,7 @@ class ManageUserController extends BaseController {
 			Input::all(),
 			$rules,
 			[
-				'regex'=>'ภาษาไทยเท่านั้น'
+				'regex'=>'ข้อมูลต้องเป็นตัวอักษรเท่านั้น'
 			]
 
 		);
@@ -280,7 +280,7 @@ class ManageUserController extends BaseController {
 			$success_redirect_to = 'manage/user/student';
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
-				'year' => 'required|integer|min:2558',
+				'year' => 'required|integer|min:2555',
 				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
@@ -292,7 +292,7 @@ class ManageUserController extends BaseController {
 			$success_redirect_to = 'manage/user/student';
 			$success_message = 'บันทึกสำเร็จ';
 			$rules = array(
-				'year' => 'required|integer|min:2558',
+				'year' => 'required|integer|min:2555',
 				'id' => 'required|digits:8',
 				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
@@ -302,7 +302,7 @@ class ManageUserController extends BaseController {
 		}
 			
 		
-		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
+		$validator = Validator::make(Input::all(),$rules,['regex'=>'ข้อมูลเป็นตัวอักษรเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}

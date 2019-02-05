@@ -87,20 +87,14 @@ Validator::extend('before_or_equal', function($attribute, $value, $parameters) {
 	$day_start = strtotime(strtr(Input::get($parameters[0]), '/', '-'));
     return $day_end >= $day_start;
 });
-Validator::extend('exist_less_than_db', function($attribute, $value, $parameters)
+Validator::extend('exist_bettewn_in_db', function($attribute, $value, $parameters)
 {
-	// 0=table , 1=field , 2=id
-	return DB::table($parameters[0])
-		->where('id','!=',$parameters[2])
-        ->where($parameters[1], '<', $value)
-        ->count() < 1;
-});
-
-Validator::extend('exist_more_than_db', function($attribute, $value, $parameters)
-{
-    // 0=table , 1=field , 2=id
-	return DB::table($parameters[0])
-		->where('id','!=',$parameters[2])
-		->where($parameters[1], '>', $value)
-		->count() < 1;
+	$value = Tool::formatDateToDatepicker($value);
+	// 0=table , 1=field1 , 2=field2
+	$db = DB::table($parameters[0])
+	->where($parameters[1], '<=', $value)
+	->where($parameters[2], '>=', $value);
+	if(isset($parameters[3]))
+		$db = $db->where('id', '!=', $parameters[3]);
+	return $db->count() < 1;
 });

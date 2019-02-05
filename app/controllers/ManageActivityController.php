@@ -107,31 +107,34 @@ class ManageActivityController extends BaseController {
 	}
 	public function actionActivityAdd($id = null)
 	{
-		if(isset($id)){
-			$fail_redirect_to = 'manage/activity/edit/'.$id;
-			$success_redirect_to = 'manage/activity/summary/useradd';
-			$success_message ='แก้ไขสำเร็จ';
-		}
-		else{
-			$fail_redirect_to = 'manage/activity/add/';
-			$success_redirect_to = 'manage/activity/summary/useradd';
-			$success_message ='บันทึกสำเร็จ';
-		}
-
 		$rules = array(
 			'activityname' => 'required',
-			'daystart' => 'required|date_format:d/m/Y',
-			'dayend' => 'required|date_format:d/m/Y|before_or_equal:daystart',
 			'timestart' => 'required|date_format:H:m',
-			'timeend' => 'required|date_format:H:m',
+			'timeend' => 'required|date_format:H:m|after:timestart',
 			'sector' => 'required',
 			'location' => 'required',
 			'term' => 'required',
 			'teacher' => 'required_without_all',
 			'years' => 'required_without_all'
 		);
+		if(isset($id)){
+			$fail_redirect_to = 'manage/activity/edit/'.$id;
+			$success_redirect_to = 'manage/activity/summary/useradd';
+			$success_message ='แก้ไขสำเร็จ';
+			$rules['daystart'] = 'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end,'.$id;
+			$rules['dayend'] =  'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end,'.$id;
+		}
+		else{
+			$fail_redirect_to = 'manage/activity/add/';
+			$success_redirect_to = 'manage/activity/summary/useradd';
+			$success_message ='บันทึกสำเร็จ';
+			$rules['daystart'] = 'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end';
+			$rules['dayend'] =  'required|date_format:d/m/Y|before_or_equal:daystart|exist_bettewn_in_db:activity,day_start,day_end';
+		}
 		$message = [
 			'before_or_equal'=>'วันที่ก่อน วันที่เริ่มกิจกรรม',
+			'timeend.after'=> 'ไม่สามารถกรอกเวลาสิ้นสุดก่อนเวลาเริ่มต้นได้',
+			'exist_bettewn_in_db' => 'วันที่นี้ถูกจัดกิจรรมไปเเล้ว'
 			
 		];
 		$validator = Validator::make(Input::all(),$rules,$message);
