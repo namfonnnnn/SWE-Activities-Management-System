@@ -35,6 +35,8 @@ class ManageActivityController extends BaseController {
 		$isPastDayStart = false;
 		$isPastDayEnd = false;
 
+		$teachers = Teacher::whereNotAdmin()->get();
+
 		$data = [
 			'text_activityname'=>$text_activityname,
 			'text_activitydetail'=>$text_activitydetail,
@@ -49,7 +51,8 @@ class ManageActivityController extends BaseController {
 			'check_years'=>$check_years,
 			'image'=>'',
 			'isPastDayStart'=>$isPastDayStart,
-			'isPastDayEnd'=>$isPastDayEnd
+			'isPastDayEnd'=>$isPastDayEnd,
+			'teachers'=>$teachers,
 		];
 		return View::make('manage.activity_add',$data);
 	}
@@ -80,6 +83,8 @@ class ManageActivityController extends BaseController {
 		$isPastDayStart = Tool::isPastDay($text_daystart);
 		$isPastDayEnd = Tool::isPastDay($text_dayend);
 
+		$teachers = Teacher::whereNotAdmin()->get();
+
 		$data = [
 			'activity'=>$activity,
 			'text_activityname'=>$text_activityname,
@@ -95,7 +100,8 @@ class ManageActivityController extends BaseController {
 			'check_years'=>$check_years,
 			'image'=>$image,
 			'isPastDayStart'=>$isPastDayStart,
-			'isPastDayEnd'=>$isPastDayEnd
+			'isPastDayEnd'=>$isPastDayEnd,
+			'teachers'=>$teachers,
 		];
 		return View::make('manage.activity_add',$data);
 	}

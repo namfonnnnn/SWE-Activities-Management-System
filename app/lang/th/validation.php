@@ -31,7 +31,7 @@ return array(
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
 	"different"            => "The :attribute and :other must be different.",
-	"digits"               => "The :attribute must be :digits digits.",
+	"digits"               => "ข้อมูลต้องเป็นตัวเลข :digits ตัวเท่านั้น.",
 	"digits_between"       => "The :attribute must be between :min and :max digits.",
 	"email"                => "The :attribute must be a valid email address.",
 	"exists"               => "The selected :attribute is invalid.",
@@ -86,6 +86,9 @@ return array(
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
 		),
+		'prefix' => [
+			'required' => 'กรุณาเลือกข้อมูล',
+		]
 	),
 
 	/*

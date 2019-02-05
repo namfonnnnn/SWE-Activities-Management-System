@@ -139,46 +139,16 @@
 
             <label for="name">อาจารย์ที่รับผิดชอบ</label>
             <div class="row">
-               <div class="col-6">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"  name="teacher[]" id="teacher1" value="1" {{(in_array("1",$check_teacher))?'checked':''}}>
-                     <label class="form-check-label" for="teacher1">                                                                            
-                        ผศ. ดร. ฐิมาพร  เพชรแก้ว
-                     </label>
+               @foreach($teachers as $teacher)
+                  <div class="col-6">
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox"  name="teacher[]" id="teacher1" value="{{$teacher->id}}" {{(in_array($teacher->id,$check_teacher))?'checked':''}}>
+                        <label class="form-check-label" for="teacher1">                                                                            
+                           {{$teacher->getFullName()}}
+                        </label>
+                     </div>
                   </div>
-               </div>
-               <div class="col-6">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher2" value="2" {{(in_array("2",$check_teacher))?'checked':''}}>
-                     <label class="form-check-label" for="teacher2">
-                         ดร. กรัณรัตน์   ธรรมรักษ์ 
-                     </label>
-                  </div>
-               </div>
-               <div class="col-6">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher3" value="3" {{(in_array("3",$check_teacher))?'checked':''}}>
-                     <label class="form-check-label" for="teacher3">
-                        ผศ. อุหมาด  หมัดอาด้ำ 
-                     </label>
-                  </div>
-               </div>
-               <div class="col-6">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher4" value="4" {{(in_array("4",$check_teacher))?'checked':''}}>
-                     <label class="form-check-label" for="teacher4">
-                       ดร. พุทธิพร  ธนธรรมเมธี
-                     </label>
-                  </div>
-               </div>
-               <div class="col-6">
-                  <div class="form-check">
-                     <input class="form-check-input" type="checkbox"   name="teacher[]" id="teacher5" value="5" {{(in_array("5",$check_teacher))?'checked':''}}>
-                     <label class="form-check-label" for="teacher5">
-                        ผศ. เยาวเรศ  ศิริสถิตย์กุล 
-                     </label>
-                  </div>
-               </div>
+               @endforeach
             </div>
             <small class="form-text text-danger">{{$errors->first('teacher')}}</small>
 
