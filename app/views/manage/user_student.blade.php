@@ -17,7 +17,7 @@
 
    <form>
       <div class="input-group">
-         <input type="text" id="q" name="q" class="form-control"placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ" value="{{$q}}">
+         <input type="text" id="q" name="q" class="form-control"placeholder="ค้นหาจาก รหัสนักศึกษา ชื่อ นามสกุล" value="{{$q}}">
          <div class="input-group-append">
             <select class="custom-select" name="year">
                <option value="">- เลือกชั้นปี -</option>
@@ -53,8 +53,8 @@
       <thead>
          <tr class="table-success">
             <th class="text-center">รหัสนักศึกษา</th>
-            <th class="text-center table-tr-max-80">ชื่อ-สกุล</th>
-            <th class="text-center">ปีการศึกษา</th>
+            <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
+            <th class="text-center">ปีการศึกษาที่เข้าศึกษา</th>
             <th class="text-center">จัดการ</th>
          </tr>
       </thead>
@@ -62,7 +62,7 @@
          @foreach ($students as $student)
             <tr>
                <td class="text-center">{{ $student->id }}</td>
-               <td class="text-left table-tr-max-80">{{ $student->getFullName() }}</td>
+               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
                <td class="text-center">{{ $student->year }}</td>
                <td class="text-center">  
                   <a href="{{url('/manage/user/student/edit/'.$student->id)}}" class="btn btn-info btn-sm" data-toggle="tooltip" title="แก้ไข"><i class="far fa-edit"></i></a>  
@@ -83,8 +83,8 @@
       .table-tr-max-40{
          max-width:40px
       }
-      .table-tr-max-80{
-         max-width:80px
+      .table-tr-max-100{
+         max-width:100px
       }
    </style>
 @stop

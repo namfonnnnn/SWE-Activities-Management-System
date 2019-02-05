@@ -18,7 +18,7 @@
 
    <form>
       <div class="input-group">
-         <input type="text" id="q" name="q" class="form-control" placeholder="ค้นหาด้วยชื่อ-นามสกุล" value="{{$q}}">  
+         <input type="text" id="q" name="q" class="form-control" placeholder="ค้นหาด้วย ชื่อ นามสกุล" value="{{$q}}">  
          <div class="input-group-append">
             <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
          </div>
@@ -28,7 +28,7 @@
    <table class="table table-striped" style="margin-top:20px">
       <thead>
          <tr class="table-success">
-            <th class="text-center">ชื่อ-สกุล</th>
+            <th class="text-center table-tr-max-260">ชื่อ-สกุล</th>
             <th class="text-center">อีเมล</th>
             <th class="text-center">เบอร์โทรศัพท์</th>
             <th class="text-center">ห้องทำงาน</th>
@@ -38,9 +38,8 @@
       <tbody>
          @foreach ($teachers as $teacher)
             <tr>
-                  
-               <td class="text-center">{{ $teacher->getFullName() }}</td>
-               <td class="text-center">{{ $teacher->email }}</td>
+               <td class="text-left table-tr-max-260">{{ $teacher->getFullName() }}</td>
+               <td class="text-left">{{ $teacher->email }}</td>
                <td class="text-center">{{ $teacher->tel }}</td>
                <td class="text-center">{{ $teacher->room }}</td>
                <td class="text-center">  
@@ -57,4 +56,12 @@
          $('[data-toggle="tooltip"]').tooltip()
       });
    </script>
+    <style>
+      .table-tr-max-40{
+         max-width:40px
+      }
+      .table-tr-max-260{
+         max-width:260px
+      }
+   </style>
 @stop
