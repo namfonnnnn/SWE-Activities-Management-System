@@ -31,20 +31,20 @@
       <a class="navbar-brand mb-0 h1" href="{{url('/manage')}}"><img id="" src="{{asset('assets/image/logo.png')}}" width="120" height="60" /></a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-top:30px">
         <ul class="navbar-nav my-lg-0">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{{url('/manage')}}">หน้าหลัก <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <ul class="navbar-nav my-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{url('/manage')}}">ข้อมูลอาจารย์ <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('/manage')}}">ข้อมูลนักศึกษา<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         
       
 
 
-        <ul class="navbar-nav my-lg-0">
+        <!-- <ul class="navbar-nav my-lg-0">
           <li class="nav-item dropdown {{ Request::is('profile/*') ? 'active' : ''}}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
@@ -56,7 +56,7 @@
               <a class="dropdown-item" href="{{url('/profile/upload-avatar')}}"></a>
             </div>
           </li>
-        </ul>
+        </ul> -->
 
         @if(Auth::user()->isTeacher())
           <ul class="navbar-nav my-lg-0">

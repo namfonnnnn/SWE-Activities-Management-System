@@ -43,7 +43,7 @@
             <div class="col-3">
                <div class="form-group">
                   <label for="exampleFormControlSelect1">คำนำหน้า</label>
-                  <select class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
+                  <select class="form-control {{$errors->has('prefix') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
                      <option value="">- คำนำหน้า -</option>
                      <option value="นาย" <?=($select_prefix=="นาย")?'selected':''?>>นาย</option>
                      <option value="นางสาว" <?=($select_prefix=="นางสาว")?'selected':''?>>นางสาว</option>
