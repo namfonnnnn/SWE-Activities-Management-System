@@ -35,11 +35,22 @@
             <a class="nav-link" href="{{url('/manage')}}">หน้าหลัก <span class="sr-only">(current)</span></a>
           </li>
         </ul>
+
         <ul class="navbar-nav my-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/manage')}}">ข้อมูลนักศึกษา<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{url('/teacher')}}">ข้อมูลอจารย์ <span class="sr-only">(current)</span></a>
+            
           </li>
         </ul>
+        
+        @if(Auth::user()->isTeacher())
+        <ul class="navbar-nav my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('/studentprofile')}}">ข้อมูลนักศึกษา <span class="sr-only">(current)</span></a>
+            
+          </li>
+        </ul>
+        @endif
         
       
 
@@ -97,6 +108,7 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$login_name}}</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{{url('/profile/edit')}}">แก้ไขโปรไฟล์</a>
+              <a class="dropdown-item" href="{{url('/profile/edit')}}">เปลี่ยนรหัสผ่าน</a>
               <a class="dropdown-item" href="{{url('/logout')}}">ออกจากระบบ</a>
               <div>
           </li>
