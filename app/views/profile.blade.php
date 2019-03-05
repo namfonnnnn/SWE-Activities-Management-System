@@ -5,8 +5,7 @@
 @section('cdn')
     
 
-    <style media="screen">
-           
+<style media="screen">    
     .img-thumbnail {
         padding: .25rem;
         background-color: #fff;
@@ -17,8 +16,8 @@
         height: 196px;
         object-fit: contain;
     }
-    
 </style>
+
 <script>
     $(function() {
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -39,7 +38,7 @@
                 type: "column",
                 name: "กิจกรรมที่เข้าร่วมแล้ว",
                 indexLabel: "{y}",
-                yValueFormatString: "#0.##กิจกรรม",
+                yValueFormatString: "#0.##",
                 showInLegend: true,
                 dataPoints: <?php echo json_encode($setActivityReg, JSON_NUMERIC_CHECK); ?>
             },
@@ -48,7 +47,7 @@
                 type: "column",
                 name: "กิจกรรมที่ต้องเข้าร่วม",
                 indexLabel: "{y}",
-                yValueFormatString: "#0.##กิจกรรม",
+                yValueFormatString: "#0.##",
                 showInLegend: true,
                 dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
             }]
@@ -71,9 +70,6 @@
 
     }
     </script>
-
-
-
 @stop
 @section('content')
     <br>
@@ -118,11 +114,10 @@
                                         <h3>โปรไฟล์นักศึกษา</h3>
                                     @else
                                         <h3>ข้อมูลส่วนตัว</h3>
-
                                     @endif
                                     {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
                                 </h2></div>
-                                    <div>ชื่อ-นามสกุล : {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</div>
+                                    <div>ชื่อ :{{ $user->{$user->type}->prefix }} {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</div>
                                     @if($user->type == 'student')
                                         <div>รหัสนักศึกษา : {{ $user->{$user->type}->id }}</div>
                                     @else
@@ -154,16 +149,14 @@
                                     <div class="col-lg-8">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="col-md-12 text-right">
-                                                    <div class="wrap">
-                                                        <div class="search">
-                                                            <input type="text" class="searchTerm" placeholder="Search?">
-                                                                <button type="submit" class="searchButton">
-                                                                    <i class="fa fa-search"></i>
-                                                                </button>
-                                                        </div>
+                                                <form>
+                                                    <div class="input-group">
+                                                       <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="">  
+                                                       <div class="input-group-append">
+                                                          <input type="submit" value="ค้นหากิจกรรม" class="btn btn-outline-secondary btn-secondary">  
+                                                       </div>
                                                     </div>
-                                                </div>
+                                                 </form>
                                                 <h3>กิจกรรมที่ต้องเข้าร่วม</h3>
                                             </div>
                                             @if(empty($activity->count()))
@@ -222,6 +215,11 @@
                                                   </nav>
                                             </div>
                                         </div>
+                                        <p>
+                                            <a href="{{url('/profile/upload-avatar')}}">
+                                                <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
+                                            </a>
+                                        </p>
                                     </div>
                 @endif
 

@@ -95,7 +95,7 @@ class UserController extends Controller {
 
 public function checkStudentActivity($uid, $aid)
 {
-    $a = \DB::table('checking')->where('userID', $uid)->where('activityID', $aid)->update(array('status'=> 1));
+    $a = \DB::table('checking')->where('UserID', $uid)->where('activityID', $aid)->update(array('status'=> 1));
     return Redirect::back();
 }
   public function getProfileUpdate() {
@@ -109,7 +109,6 @@ public function checkStudentActivity($uid, $aid)
     } else {
         $userID = Auth::user()->id;
         $user = Auth::user();
-
     }
 
     if (Teacher::where('user_id', $user->id)->first() != null) {
@@ -133,22 +132,22 @@ public function checkStudentActivity($uid, $aid)
     $validator = Validator::make(
       Input::all(),
       array(
-        'firstname' => 'required|min:3',
-        'lastname' => 'required|min:3',
+        'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
+        'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
         'email' => 'required|email|min:5',
-        'tel' => 'required|min:9|max:10',
+        'tel' => 'required|digits:10',
         'image' =>  'mimes:jpeg,jpg,png|max:3072',
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
       ),
       array(
-        'firstname' => 'ชื่อ',
-        'lastname' => 'นามสกุล',
-        'email' => 'Email',
-        'code' => 'รหัสนักศึกษา',
-        'tel' => 'เบอร์ติดต่อ',
-        'image' => 'รูปภาพต้องมีขนาดไม่เกิน 3 MB และเป็นไฟล์รูปภาพ jpg,jpeg,png',
+        'firstname' => 'ให้ครบถ้วน',
+        'lastname' => 'ให้ครบถ้วน',
+        'email' => 'ให้ครบถ้วน',
+        'code' => 'ให้ครบถ้วน',
+        'tel' => 'ให้ครบถ้วน',
+        'image' => 'ให้ครบถ้วน',
       )
     );
 

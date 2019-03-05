@@ -120,13 +120,49 @@
                 <div class="main-login main-center">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            @if($user->type == 'student') 
+                                <div class="col-md-4">
+                                    <div class="form-group {{$errors->has('prefix') ? 'has-error' : ''}}">
+                                        <label for="name" class="cols-sm-1 control-label">คำนำหน้าชื่อ</label>
+                                        <div class="cols-sm-5">
+                                            <div class="input-group">
+                                                <input readonly type="text" class="form-control" name="prefix" id="prefix"  placeholder="คำนำหน้า" value="{{Request::old('prefix', $user->{$user->type}->prefix)}}" />
+                                            </div>
+                                            @if($errors->has('prefix'))
+                                                <div class="alert-danger" role="alert">
+                                                    {{$errors->first('prefix')}}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div> 
+                            @else
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                       <label for="exampleFormControlSelect1">คำนำหน้า</label>
+                                       <select class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
+                                          <option value="">คำนำหน้า</option>
+                                          <option value="{{Request::old('prefix', $user->{$user->type}->prefix)}}">นาย</option>
+                                          <option value="นางสาว">นางสาว</option>
+                                          <option value="อาจารย์">อาจารย์</option>
+                                          <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
+                                          <option value="ศาสตราจารย์">ศาสตราจารย์</option>
+                                          <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
+                                          <option value="ผู้ช่วยศาสตราจารย์">ผู้ช่วยศาสตราจารย์</option>
+                                          <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
+                                       </select>
+                                       <small class="form-text text-danger">{{$errors->first('prefix')}}</small>
+                                    </div>
+                                </div>
+                            @endif
+                        
+                            <div class="col-md-4">
                                 <div class="form-group {{$errors->has('firstname') ? 'has-error' : ''}}">
                                     <label for="name" class="cols-sm-1 control-label">ชื่อ</label>
                                     <div class="cols-sm-5">
                                         <div class="input-group">
 
-                                            <input type="text" class="form-control" name="firstname" id="firstname"  placeholder="ชื่อ" value="{{Request::old('firstname', $user->{$user->type}->firstname)}}" />
+                                            <input readonly type="text" class="form-control" name="firstname" id="firstname"  placeholder="ชื่อ" value="{{Request::old('firstname', $user->{$user->type}->firstname)}}" />
                                         </div>
                                         @if($errors->has('firstname'))
                                             <div class="alert-danger" role="alert">
@@ -136,13 +172,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group  {{$errors->has('lastname') ? 'has-error' : ''}}">
                                     <label for="name" class="cols-sm-1 control-label">นามสกุล</label>
                                     <div class="cols-sm-5">
                                         <div class="input-group">
 
-                                            <input type="text" class="form-control" name="lastname" id="lastname"  placeholder="นามสกุล" value="{{Request::old('lastname', $user->{$user->type}->lastname)}}" />
+                                            <input readonly type="text" class="form-control" name="lastname" id="lastname"  placeholder="นามสกุล" value="{{Request::old('lastname', $user->{$user->type}->lastname)}}" />
                                         </div>
                                         @if($errors->has('lastname'))
                                             <div class="alert-danger" role="alert">
@@ -188,7 +224,7 @@
 
                         <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
                             <label for="email" class="cols-sm-2 control-label">Email</label>
-                            <div class="cols-sm-10">
+                            <div class="cols-sm-5">
                                 <div class="input-group">
 
                                     <input type="text" class="form-control" name="email" id="email"  placeholder="Email"  value="{{Request::old('email',$user->{$user->type}->email)}}" />
@@ -204,7 +240,7 @@
 
                         <div class="form-group  {{$errors->has('tel') ? 'has-error' : ''}}">
                             <label for="username" class="cols-sm-2 control-label">เบอร์ติดต่อ</label>
-                            <div class="cols-sm-10">
+                            <div class="cols-sm-5">
                                 <div class="input-group">
 
                                     <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"/>

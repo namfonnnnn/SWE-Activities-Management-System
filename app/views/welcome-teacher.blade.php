@@ -48,14 +48,14 @@
                                     <br>
 
                                     @if(Auth::user()->teacher != NULL)
-                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->firstname}} {{ Auth::user()->teacher->lastname}}</a></b></span>
+                                    <span class="welcome">ยินดีต้อนรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->prefix}} {{ Auth::user()->teacher->firstname}} {{ Auth::user()->teacher->lastname}}</a></b></span>
                                 @else
-                                    <span class="welcome">ยินดีต้องรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->student->firstname}} {{ Auth::user()->student->lastname}}</a></b></span>
+                                    <span class="welcome">ยินดีต้อนรับ <b><a href="{{url('profile/edit')}}">{{ Auth::user()->teacher->prefix}} {{ Auth::user()->student->firstname}} {{ Auth::user()->student->lastname}}</a></b></span>
                                 @endif
                                     <br>
 <br><br><br>
                                     <div class="box-system">
-                                        <h1>ระบบกิจกรรมหลังสูตร SWE</h1>
+                                        <h1>ระบบกิจกรรมหลักสูตร SWE</h1>
                                         <span>หลักสูตร วิศวกรรมซอฟต์แวร์ มหาวิทยาลัยวลัยลักษณ์</span>
                                     </div>
                                 </div>

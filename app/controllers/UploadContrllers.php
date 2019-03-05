@@ -14,6 +14,5 @@ class UploadController extends Controller {
 			$file->move('uploads', $file->getClientOriginalName());
 			echo '';
 		}
-
 	}
 }

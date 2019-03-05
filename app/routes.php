@@ -96,6 +96,11 @@ Route::get('/profile/edit', 'UserController@getProfileUpdate');
 Route::post('/profile/edit', 'UserController@postProfileUpdate');
 Route::get('/profile/upload-avatar', 'UserController@getUploadAvatar');
 Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
+
+Route::get('/teacher', 'UsersController@showUsersTeacher');
+Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
+Route::get('/resetpassword', 'ManageController@actionUserTeacherAdd');
+
 // Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');
