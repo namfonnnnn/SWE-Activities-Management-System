@@ -111,9 +111,9 @@
 
                                 <div><h2>
                                     @if($user->type == 'student')
-                                        <h3>โปรไฟล์นักศึกษา</h3>
+                                        
                                     @else
-                                        <h3>ข้อมูลส่วนตัว</h3>
+                                        
                                     @endif
                                     {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
                                 </h2></div>
