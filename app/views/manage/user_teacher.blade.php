@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-    อาจารย์
+    
 @stop
 
    @section('content')
@@ -24,10 +24,10 @@
          </div>
       </div>
    </form>
-      
-   <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
+<div class="card-body p-0 text-center">
+    <table class="table mb-0 ">
+      <thead class="bg-light">
+         <tr>
             <th class="text-center">ชื่อ-สกุล</th>
             <th class="text-center">อีเมล</th>
             <th class="text-center">เบอร์โทรศัพท์</th>
@@ -51,6 +51,7 @@
          @endforeach
       </tbody>
    </table>
+</div>
    <?php echo $teachers->links('partials.pagination'); ?>
    <script type="text/javascript">
       $(function () {

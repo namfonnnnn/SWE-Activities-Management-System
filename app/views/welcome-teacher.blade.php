@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-   โปรไฟล์นักศึกษา
+   โปรไฟล์
 @stop
 @section('cdn')
 

@@ -1,17 +1,15 @@
 @extends('manage.layout')
+
 @section('title')
-      ข้อมูลนักศึกษา
+     
 @stop
 
 @section('content')
    @include('error')
 
-   <h2>
-      ข้อมูลนักศึกษา
+   <h2>ข้อมูลนักศึกษา</h2>
    
-   </h2>
    <hr>
-
    <form>
       <div class="input-group">
          <input type="text" id="q" name="q" class="form-control"placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ" value="{{$q}}">
@@ -46,29 +44,29 @@
       <span class="input-group-btn">      
          <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">  
       </span> -->
-   <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
+    <div class="card-body p-0 text-center">
+      <table class="table mb-0 ">
+        <thead class="bg-light">
+          <tr>
             <th class="text-center">รหัสนักศึกษา</th>
-            <th class="text-center table-tr-max-80">ชื่อ-สกุล</th>
-            <th class="text-center">ปีการศึกษา</th>
+            <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
             <th class="text-center">จัดการ</th>
-         </tr>
-      </thead>
-      <tbody>
-         @foreach ($students as $student)
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($students as $student)
             <tr>
-               <td class="text-center">{{ $student->id }}</td>
-               <td class="text-left table-tr-max-80">{{ $student->getFullName() }}</td>
-               <td class="text-center">{{ $student->year }}</td>
-               <td class="text-center">  
-                  <a class="btn btn-sm btn-default" href="{{url('profile')}}?userID={{$student->id}}">ดูโปรไฟล์</a>
-               </td>
-            
+              <td class="text-center">{{ $student->id }}</td>
+              <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
+              <td class="text-center">  
+                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">ดูโปรไฟล์</a>
+              </td>
             </tr>
-         @endforeach
-      </tbody>
-   </table>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+
    
    <?php echo $students->links('partials.pagination'); ?>
 

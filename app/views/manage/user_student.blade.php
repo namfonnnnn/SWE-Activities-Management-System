@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-    นักศึกษา
+    
 @stop
 
 @section('content')
@@ -49,15 +49,16 @@
       <span class="input-group-btn">      
          <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">  
       </span> -->
-   <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
+<div class="card-body p-0 text-center">
+    <table class="table mb-0 ">
+        <thead class="bg-light"
+         <tr>
             <th class="text-center">รหัสนักศึกษา</th>
             <th class="text-center table-tr-max-80">ชื่อ-สกุล</th>
             <th class="text-center">ปีการศึกษา</th>
             <th class="text-center">จัดการ</th>
          </tr>
-      </thead>
+        </thead>
       <tbody>
          @foreach ($students as $student)
             <tr>
@@ -72,6 +73,7 @@
          @endforeach
       </tbody>
    </table>
+</div>
    <?php echo $students->links('partials.pagination'); ?>
 
    <script type="text/javascript">

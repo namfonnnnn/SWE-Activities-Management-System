@@ -61,27 +61,28 @@ if(!is_null(Auth::user()->getFullName())){
                </a>
              </li>
              
-             <li class="nav-item">
-               <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('profile')}}">
-                 <i class="material-icons">person</i>
-                 <span>ข้อมูลนักศึกษา</span>
-               </a>
-             </li>
-            
+           
+             @if(Auth::user()->isTeacher())
+
+             @else
              <li class="nav-item">
                <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('/teacher')}}">
                   <i class="material-icons">person</i>
                   <span >ข้อมูลอาจารย์</span>
               </a>
              </li>
-
+             @endif
+             @if(Auth::user()->isTeacher())
              <li class="nav-item">
               <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('/studentprofile')}}">
                  <i class="material-icons">person</i>
-                 <span >ดูโปรไฟล์</span>
+                 <span >ข้อมูลนักศึกษา</span>
              </a>
-            </li>
+             </li>
+             @endif
 
+         
+             @if(Auth::user()->isTeacher())
              <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                  <i class="material-icons">local_activity</i>
@@ -106,6 +107,7 @@ if(!is_null(Auth::user()->getFullName())){
                  <a class="dropdown-item " href="{{url('manage/user/teacher')}}">อาจารย์</a>
                </div>
              </li>
+            @endif
              <!-- <li class="nav-item">
                <a class="nav-link " href="index.html">
                  <i class="material-icons">edit</i>
@@ -202,17 +204,17 @@ if(!is_null(Auth::user()->getFullName())){
                  </div>
                </li>
                <li class="nav-item dropdown">
-                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="{{url('/profile/upload-avatar')}}" role="button" aria-haspopup="true" aria-expanded="false">
                    <img class="user-avatar rounded-circle mr-2" src="{{asset('assets/shards-dashboard/images/avatars/0.jpg')}}" alt="User Avatar">
                    <span class="d-none d-md-inline-block">{{$login_name}}</span>
                  </a>
                  <div class="dropdown-menu dropdown-menu-small">
-                   <a class="dropdown-item" href="user-profile-lite.html">
+                   <a class="dropdown-item" href="{{url('profile')}}">
                      <i class="material-icons">&#xE7FD;</i> Profile</a>
-                   <a class="dropdown-item" href="components-blog-posts.html">
-                     <i class="material-icons">vertical_split</i> Blog Posts</a>
-                   <a class="dropdown-item" href="add-new-post.html">
-                     <i class="material-icons">note_add</i> Add New Post</a>
+                   <a class="dropdown-item" href="{{url('profile/edit')}}">
+                     <i class="material-icons">vertical_split</i>แก้ไขข้อมูลส่วนตัว</a>
+                   <a class="dropdown-item" href="{{url('resetpassword')}}">
+                     <i class="material-icons">note_add</i> เปลี่ยนรหัสผ่าน</a>
                    <div class="dropdown-divider"></div>
                    <a class="dropdown-item text-danger" href="{{url('logout')}}">
                      <i class="material-icons text-danger">&#xE879;</i> Logout </a>

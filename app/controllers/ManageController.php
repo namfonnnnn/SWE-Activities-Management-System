@@ -1,6 +1,6 @@
 <?php
 
-class ManageUserController extends BaseController {
+class ManageController extends BaseController {
 
 	
 	public function showUserStudent()
@@ -52,7 +52,7 @@ class ManageUserController extends BaseController {
 		}
 		$teachers = $teachers->paginate(10);
 		$teachers->appends(['q'=>$q]);
-		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q]);
+		return View::make('resetpassword',['teachers' => $teachers,'q'=>$q]);
     }
 	
 	public function showUserTeacherAdd()
@@ -85,7 +85,7 @@ class ManageUserController extends BaseController {
 			'select_position'=>$select_position,
 			'select_prefix'=>$select_prefix
 		];
-		return View::make('manage.user_teacher_add',$data);
+		return View::make('resetpassword',$data);
 	}
 
 	public function showUserTeacherEdit($id)
@@ -97,7 +97,7 @@ class ManageUserController extends BaseController {
 
 		$teacher = Teacher::find($id);
 		if(is_null($teacher)){
-			return Redirect::to('manage/user/teacher')->with('error', 'ไม่พบข้อมูลอาจารย์');
+			return Redirect::to('resetpassword')->with('error', 'ไม่พบข้อมูลอาจารย์');
 		}
 
 		$text_firstname = $tool->validData(Input::old('firstname'), $teacher->firstname,'');
@@ -124,7 +124,7 @@ class ManageUserController extends BaseController {
 			'select_position'=>$select_position,
 			'select_prefix'=>$select_prefix
 		];
-		return View::make('manage.user_teacher_add',$data);
+		return View::make('resetpassword',$data);
 	}
 
     public function showUserStudentAdd()
@@ -144,13 +144,13 @@ class ManageUserController extends BaseController {
 			'text_password'=>$text_password,
 			'select_prefix'=>$select_prefix
 		];
-		return View::make('manage.user_student_add',$data);
+		return View::make('resetpassword',$data);
 	}
 	public function showUserStudentEdit($id)
 	{
 		$student = Student::find($id);
 		if(is_null($student)){
-			return Redirect::to('manage/user/student')->with('error', 'ไม่พบข้อมูลนักศึกษา');
+			return Redirect::to('resetpassword')->with('error', 'ไม่พบข้อมูลนักศึกษา');
 		}
 
 		$tool = new Tool;
@@ -170,15 +170,15 @@ class ManageUserController extends BaseController {
 			'text_password'=>$text_password,
 			'select_prefix'=>$select_prefix
 		];
-		return View::make('manage.user_student_add',$data);
+		return View::make('resetpassword',$data);
 	}
 	
 	public function actionUserTeacherAdd($id = null)
 	{
 		$isID = isset($id);
 		if($isID){
-			$redirect_to = 'manage/user/teacher/edit/'.$id;
-			$success_redirect_to = 'manage/user/teacher';
+			$redirect_to = 'resetpassword'.$id;
+			$success_redirect_to = 'resetpassword';
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
 				'role' => 'required',
@@ -193,8 +193,8 @@ class ManageUserController extends BaseController {
 			);
 		}
 		else{
-			$redirect_to = 'manage/user/teacher/add';
-			$success_redirect_to = 'manage/user/teacher';
+			$redirect_to = 'resetpassword';
+			$success_redirect_to = 'resetpassword';
 			$success_message = 'บันทึกสำเร็จ';
 			$rules = array(
 				'role' => 'required',
@@ -295,7 +295,7 @@ class ManageUserController extends BaseController {
 				'year' => 'required|integer|min:2558',
 				'id' => 'required|digits:8',
 				'prefix' => 'required',
-				'firstname' =>'required|regex:/^[A-Za-zก-เ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'password' => 'required|min:8'
 			);

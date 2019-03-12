@@ -14,7 +14,7 @@
 Route::get('/show-activity/{id}', 'HomeController@showActivity');
 Route::get('/activity-register/{id}', 'HomeController@registerActivity');
 Route::get('/activity-un-register/{id}', 'HomeController@unRegisterActivity');
-Route::get('/welcome-teacher', 'HomeController@welcomeTeach');
+Route::get('/welcome-teacher','HomeController@welcomeTeach');
 
 
 
@@ -99,9 +99,12 @@ Route::post('/profile/upload-avatar', 'UserController@postUploadAvatar');
 
 Route::get('/teacher', 'UsersController@showUsersTeacher');
 Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
-Route::get('/resetpassword', 'ManageController@actionUserTeacherAdd');
 
-// Route::get('manage/activity/check/status-student/{userid}/{acid}', 'UserController@checkStudentActivity');
+Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
+
+
+
+// Route::get('manage/activity/check/status-student/{userid}/{acid}','UserController@checkStudentActivity');
 // Route::group(array('prefix'=>'students'), function () {
 // 	Route::get('/index', 'StudentController@index');
 // });

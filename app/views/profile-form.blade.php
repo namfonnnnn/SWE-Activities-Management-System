@@ -1,8 +1,11 @@
 @extends('manage.layout')
 @section('title')
-    โปรไฟล์นักศึกษา
+    
 @stop
 @section('cdn')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
     <style>
     .avatar-upload {
         position: relative;
@@ -65,7 +68,6 @@
         background-repeat: no-repeat;
         background-position: center;
     }
-
     </style>
 
 
@@ -77,9 +79,10 @@
     <br>
 
 
-
-    <!-- /.row -->
-    <div class="col-sm-12">
+<form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" method="post">
+<!-- /.row -->
+<div class="card card-small mb-4 pt-3">
+    <div class="col-sm-10">
         <div class="row">
 
 
@@ -106,7 +109,8 @@
                     <h6>รูปภาพต้องมีขนาดไม่เกิน 3 MB และเป็นไฟล์รูปภาพ jpg,jpeg,png</h6>
 
 
-                </div>
+                    </div>
+                 </form>
             </div>
             <div class="col-md-6">
                 <h3>
@@ -137,23 +141,22 @@
                                     </div>
                                 </div> 
                             @else
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                       <label for="exampleFormControlSelect1">คำนำหน้า</label>
-                                       <select class="form-control {{$errors->has('firstname') ? 'is-invalid' : ''}}" id="prefix" name="prefix" >
-                                          <option value="">คำนำหน้า</option>
-                                          <option value="{{Request::old('prefix', $user->{$user->type}->prefix)}}">นาย</option>
-                                          <option value="นางสาว">นางสาว</option>
-                                          <option value="อาจารย์">อาจารย์</option>
-                                          <option value="อาจารย์ ดร.">อาจารย์ ดร.</option>
-                                          <option value="ศาสตราจารย์">ศาสตราจารย์</option>
-                                          <option value="รองศาสตราจารย์">รองศาสตราจารย์</option>
-                                          <option value="ผู้ช่วยศาสตราจารย์">ผู้ช่วยศาสตราจารย์</option>
-                                          <option value="ผู้ช่วยศาสตราจารย์ ดร.">ผู้ช่วยศาสตราจารย์ ดร.</option>
-                                       </select>
-                                       <small class="form-text text-danger">{{$errors->first('prefix')}}</small>
+                            <div class="col-md-4">
+                                <div class="form-group {{$errors->has('prefix') ? 'has-error' : ''}}">
+                                    <label for="name" class="cols-sm-1 control-label">คำนำหน้าชื่อ</label>
+                                    <div class="cols-sm-5">
+                                        <div class="input-group">
+
+                                            <input readonly type="text" class="form-control" name="prefix" id="prefix"  placeholder="คำนำหน้า" value="{{Request::old('prefix', $user->{$user->type}->prefix)}}" />
+                                        </div>
+                                        @if($errors->has('prefix'))
+                                            <div class="alert-danger" role="alert">
+                                                {{$errors->first('prefix')}}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
+                            </div>
                             @endif
                         
                             <div class="col-md-4">
@@ -177,7 +180,6 @@
                                     <label for="name" class="cols-sm-1 control-label">นามสกุล</label>
                                     <div class="cols-sm-5">
                                         <div class="input-group">
-
                                             <input readonly type="text" class="form-control" name="lastname" id="lastname"  placeholder="นามสกุล" value="{{Request::old('lastname', $user->{$user->type}->lastname)}}" />
                                         </div>
                                         @if($errors->has('lastname'))
@@ -209,7 +211,6 @@
                                 <label for="name" class="cols-sm-2 control-label">ห้อง</label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
-
                                         <input  type="text" class="form-control" name="room" id="room"  placeholder="ห้อง" value="{{Request::old('room', $user->{$user->type}->room)}}" />
                                     </div>
                                     @if($errors->has('room'))
@@ -226,9 +227,7 @@
                             <label for="email" class="cols-sm-2 control-label">Email</label>
                             <div class="cols-sm-5">
                                 <div class="input-group">
-
                                     <input type="text" class="form-control" name="email" id="email"  placeholder="Email"  value="{{Request::old('email',$user->{$user->type}->email)}}" />
-
                                 </div>
                                 @if($errors->has('email'))
                                     <div class="alert-danger" role="alert">
@@ -242,7 +241,6 @@
                             <label for="username" class="cols-sm-2 control-label">เบอร์ติดต่อ</label>
                             <div class="cols-sm-5">
                                 <div class="input-group">
-
                                     <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"/>
                                 </div>
                                 @if($errors->has('tel'))
@@ -252,18 +250,15 @@
                                 @endif
                             </div>
                         </div>
-
-
-
-                        <div class="form-group ">
-                            <button type="submit" class="btn btn-primary btn-block login-button">บันทึก</button>
-                        </div>
-
-                </div>
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary btn-block login-button">บันทึก</button>
             </div>
-
-            </form>
         </div>
+    </div>
+</div>
+</div>
+</form>
+</div>
 
         <script>
         $(function() {

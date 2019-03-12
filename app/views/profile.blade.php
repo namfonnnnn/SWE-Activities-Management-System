@@ -1,6 +1,6 @@
 @extends('manage.layout')
 @section('title')
-    โปรไฟล์นักศึกษา
+    
 @stop
 @section('cdn')
     
@@ -96,17 +96,15 @@
     <!-- /.row -->
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-small mb-4 pt-3">
+                    <div class="card-header border-bottom text-center">
+                        <div class="mb-3 mx-auto">
                             <p>
                                 <a href="{{url('/profile/upload-avatar')}}">
-                                    <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
-
+                                    <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
                                 </a>
                             </p>
-
                             <div class="col-xs-9 text-left" style="padding-left:20px">
 
                                 <div><h2>
@@ -139,8 +137,10 @@
                         </div>
 
                     </div>
+                    <div class="card card-small mb-4 pt-3">
                     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
                 </div>
 
                 @if($user->type == 'student')
@@ -157,7 +157,13 @@
                                                        </div>
                                                     </div>
                                                  </form>
-                                                <h3>กิจกรรมที่ต้องเข้าร่วม</h3>
+                                                 <div class="card card-small mb-4 pt-3">
+                                                    <div class="text-center">
+                                                        <div class="mb-3 mx-auto">
+                                                           <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                                                        </div>
+                                                    </div>
+                                                 </div>
                                             </div>
                                             @if(empty($activity->count()))
                                                 ไม่พบข้อมูล
@@ -180,7 +186,11 @@
                 
                                             @endforeach
                                             <div class="col-md-12">
-                                                <h3>ประวัติกิจกรรมที่เข้าร่วม</h3>
+                                                <div class="card card-small mb-4 pt-3">
+                                                    <div class="text-center">
+                                                        <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                             @if(empty($history->count()))
                                                 ไม่พบข้อมูล
@@ -215,11 +225,7 @@
                                                   </nav>
                                             </div>
                                         </div>
-                                        <p>
-                                            <a href="{{url('/profile/upload-avatar')}}">
-                                                <input type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
-                                            </a>
-                                        </p>
+                                       
                                     </div>
                 @endif
 

@@ -1,9 +1,9 @@
 @extends('manage.layout')
 @section('title')
 @if(isset($activity))
-   แก้ไขรหัสผ่าน
+  
 @else
-   แก้ไขข้อมูลอาจารย์
+
 @endif
 @stop
 @section('cdn')
@@ -16,22 +16,25 @@
 <form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" method="post">
    <div class="container">
       @if(isset($teacher))
-         <h2 style="margin-top:30px">แก้ไขข้อมูลอาจารย์</h2>
+         <h2 style="margin-top:30px">แก้ไขรหัสผ่าน</h2>
       @else
-         <h2 style="margin-top:30px">เพิ่มข้อมูลอาจารย์</h2>
+         <h2 style="margin-top:30px">แก้ไขรหัสผ่าน</h2>
       @endif
       
       <hr>
       @include('error')
-      
+<div class="card card-small mb-4 pt-3">
       <div class="row justify-content-md-center">
          <div class="col-sm-6">
 
-            
+                <div class="form-group">
+                        <label for="name">รหัสผ่านเดิม</label>
+                        <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+                        <small class="form-text text-danger">{{$errors->first('password')}}</small>
+                </div>
 
-           
             <div class="form-group">
-               <label for="name">รหัสผ่าน</label>
+               <label for="name">รหัสผ่านใหม่</label>
                <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
                <small class="form-text text-danger">{{$errors->first('password')}}</small>
             </div>
@@ -40,6 +43,7 @@
          </div>
       </div>
    </div>
+</div>
 </form>
 @stop
 
