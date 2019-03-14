@@ -26,14 +26,13 @@ class UserController extends Controller {
   }
 
   public function getProfile () {
-    if(!empty(Request::get('userID')))
+    if(!empty(Request::get('id')))
     {
-        $userID = Request::get('userID');
-        $user = User::find(Request::get('userID'));
+        $userID = Request::get('id');
+        $user = User::where("username", Request::get('id'))->first();
     } else {
         $userID = Auth::user()->id;
         $user = Auth::user();
-
     }
     if ( Teacher::where('user_id', $user->id)->first() != null) {
         $user->type = 'teacher';
@@ -53,11 +52,13 @@ class UserController extends Controller {
         $activity = $activity->where('student', 'LIKE', "%{$year}%");
     }
 
-    $grapYearActivityReg = \DB::table('checking')->select('activityID')->where('UserID', $userID)->get();
+    $grapYearActivityReg = \DB::table('checking')->select('activityID')->where('UserID', $user->id)->get();
+
     $setIdReg = [];
     foreach ($grapYearActivityReg as $key => $value) {
         $setIdReg[] = $value->activityID;
     }
+
     $grapYearActivityReg = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->whereIn('id', $setIdReg)->get()->toArray();
     $grapYearActivityRec = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->get()->toArray();
 
@@ -74,7 +75,7 @@ class UserController extends Controller {
     }
 
     $history = Activity::whereIn('id', $setIdReg);
-    
+
     // if(!empty(Request::get('year'))) {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
@@ -83,7 +84,7 @@ class UserController extends Controller {
 
 
     if (empty(Request::get('userID'))) {
-        if (Auth::user()->teacher !=  null) {
+        if (Auth::user()->teacher !=  null && empty($_GET['id'])) {
             $activities = Activity::where('day_end', '>', Carbon\Carbon::now()->format('Y-m-d'))->orderBy('day_start')->get();
             return View::make('welcome-teacher', ['activities' => $activities]);
         }

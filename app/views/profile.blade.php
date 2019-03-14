@@ -1,11 +1,11 @@
 @extends('manage.layout')
 @section('title')
-    
+
 @stop
 @section('cdn')
-    
 
-<style media="screen">    
+
+<style media="screen">
     .img-thumbnail {
         padding: .25rem;
         background-color: #fff;
@@ -33,7 +33,7 @@
                 itemclick: toggleDataSeries
             },
             data: [
-              
+
                 {
                 type: "column",
                 name: "กิจกรรมที่เข้าร่วมแล้ว",
@@ -42,7 +42,7 @@
                 showInLegend: true,
                 dataPoints: <?php echo json_encode($setActivityReg, JSON_NUMERIC_CHECK); ?>
             },
-           
+
             {
                 type: "column",
                 name: "กิจกรรมที่ต้องเข้าร่วม",
@@ -109,9 +109,9 @@
 
                                 <div><h2>
                                     @if($user->type == 'student')
-                                        
+
                                     @else
-                                        
+
                                     @endif
                                     {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
                                 </h2></div>
@@ -126,9 +126,9 @@
                                     <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
                                     <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
 
-                                    
+
                                     <div class="col-xs-3">
-                                        
+
 
                                     </div>
                                 </div>
@@ -145,15 +145,15 @@
 
                 @if($user->type == 'student')
                 <!-- /.col-lg-4 -->
-                
+
                                     <div class="col-lg-8">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <form>
                                                     <div class="input-group">
-                                                       <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="">  
+                                                       <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="">
                                                        <div class="input-group-append">
-                                                          <input type="submit" value="ค้นหากิจกรรม" class="btn btn-outline-secondary btn-secondary">  
+                                                          <input type="submit" value="ค้นหากิจกรรม" class="btn btn-outline-secondary btn-secondary">
                                                        </div>
                                                     </div>
                                                  </form>
@@ -178,12 +178,12 @@
                                                             <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
                                                     </div>
                                                     <div class="text-right">
-                
+
                                                         <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
                                                     </div>
                                                 </div>
                                             </div>
-                
+
                                             @endforeach
                                             <div class="col-md-12">
                                                 <div class="card card-small mb-4 pt-3">
@@ -205,27 +205,27 @@
                                                             <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
                                                     </div>
                                                     <div class="text-right">
-                
+
                                                         <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
                                                     </div>
                                                 </div>
                                             </div>
-                
+
                                             @endforeach
                                             <div class="col-md-12 text-center" style="padding-top:35px">
                                                 <nav aria-label="Page navigation example">
                                                     <ul class="pagination">
-                                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&userID={{Request::get('userID')}}">1</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&userID={{Request::get('userID')}}">2</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&userID={{Request::get('userID')}}">3</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&userID={{Request::get('userID')}}">4</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=5&s={{Request::get('s')}}&userID={{Request::get('userID')}}"></a></li>
-                                                      <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&userID={{Request::get('userID')}}">ทั้งหมด</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&id={{Request::get('id')}}">1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&id={{Request::get('id')}}">2</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&id={{Request::get('id')}}">3</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&id={{Request::get('id')}}">4</a></li>
+
+                                                      <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&id={{Request::get('id')}}">ทั้งหมด</a></li>
                                                     </ul>
                                                   </nav>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                 @endif
 
@@ -233,15 +233,15 @@
             <!-- /.row -->
             @if($user->type == 'student')
 
-               
+
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-md-6">
-                        
-                    </div>  
+
+                    </div>
                 </div>
-            </div>   
-                    
+            </div>
+
                     <!-- /.col-lg-8 -->
                 @else
 
