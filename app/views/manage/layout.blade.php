@@ -210,14 +210,14 @@ if(!is_null(Auth::user()->getFullName())){
                  </a>
                  <div class="dropdown-menu dropdown-menu-small">
                    <a class="dropdown-item" href="{{url('profile')}}">
-                     <i class="material-icons">&#xE7FD;</i> Profile</a>
+                     <i class="material-icons">&#xE7FD;</i> โปรไฟล์</a>
                    <a class="dropdown-item" href="{{url('profile/edit')}}">
                      <i class="material-icons">vertical_split</i>แก้ไขข้อมูลส่วนตัว</a>
                    <a class="dropdown-item" href="{{url('resetpassword')}}">
-                     <i class="material-icons">note_add</i> เปลี่ยนรหัสผ่าน</a>
+                     <i class="material-icons">note_add</i> แก้ไขรหัสผ่าน</a>
                    <div class="dropdown-divider"></div>
                    <a class="dropdown-item text-danger" href="{{url('logout')}}">
-                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                     <i class="material-icons text-danger">&#xE879;</i> ออกจากระบบ </a>
                  </div>
                </li>
              </ul>

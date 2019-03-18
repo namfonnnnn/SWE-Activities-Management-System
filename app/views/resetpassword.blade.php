@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                         <label for="name">รหัสผ่านเดิม</label>
-                        <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+                        <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่านเดิม" >
                         <small class="form-text text-danger">{{$errors->first('password')}}</small>
                 </div>
 
@@ -40,6 +40,9 @@
             </div>
             <br>
             <button type="submit" class="btn btn-success">บันทึก</button>
+            <h6></h6>
+            <label for="name"></label>
+            
          </div>
       </div>
    </div>
