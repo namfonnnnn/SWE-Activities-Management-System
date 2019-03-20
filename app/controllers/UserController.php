@@ -79,8 +79,13 @@ class UserController extends Controller {
     // if(!empty(Request::get('year'))) {
     //     $activity = $activity->where('student', 'LIKE', "%{$year}%");
     // }
-    $history = $history->get();
-    $activity = $activity->get();
+    if (@$_GET['type'] === "2") {
+        $history = $history->where('activity_name', 'LIKE', "%{$_GET['activity']}%");
+    } elseif (@$_GET['type'] == '1') {
+        $activity = $activity->where('activity_name', 'LIKE', "%{$_GET['activity']}%");
+    }
+    $history = $history->orderBy("day_end",'asc')->get();
+    $activity = $activity->orderBy("day_end",'asc')->get();
 
 
     if (empty(Request::get('userID'))) {

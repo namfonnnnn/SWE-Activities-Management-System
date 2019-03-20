@@ -2,7 +2,36 @@
 
 class ManageController extends BaseController {
 
-	
+	public function postUserTeacherAdd () {
+		$request = Input::all();
+		$validator = Validator::make(
+	      $request,
+	      array(
+	        'new_password' => 'required|min:8',
+	      ),
+	      array(
+	        'required' => 'กรุณากรอกข้อมูล :attribute',
+  	        'min' => 'กรุณากรอกข้อมูล :attribute ให้มากกว่า :min',
+	      ),
+	      array(
+	        'new_password' => 'รหัสผ่านใหม่',
+	      )
+	    );
+		if ($validator->fails())
+	    {
+	      return Redirect::back()->withInput()->withErrors($validator);
+	    }
+		$old_password = Auth::user()->password;
+
+		if (Hash::check($request['password'], $old_password)) {
+			Auth::user()->password = Hash::make($request['new_password']);
+			Auth::user()->save();
+			return Redirect::back();
+		} else {
+			return Redirect::back()->withErrors(['password'=>'ไม่ถูกต้อง']);
+		}
+
+	}
 	public function showUserStudent()
 	{
 		$q = '';
@@ -25,8 +54,8 @@ class ManageController extends BaseController {
 				->orWhere('lastname','like','%'.$q.'%');
 			});
 		}
-		
-			
+
+
 		$students = $students->paginate(10);
 
 		if($isQ){
@@ -38,7 +67,7 @@ class ManageController extends BaseController {
 
 		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year]);
 	}
-	
+
 	public function showUserTeacher()
 	{
 		if(Input::get('q') != NULL && Input::get('q') != ""){
@@ -54,9 +83,9 @@ class ManageController extends BaseController {
 		$teachers->appends(['q'=>$q]);
 		return View::make('resetpassword',['teachers' => $teachers,'q'=>$q]);
     }
-	
+
 	public function showUserTeacherAdd()
-	{	
+	{
 		$tool = new Tool;
 
 		$roles = Role::get();
@@ -172,7 +201,7 @@ class ManageController extends BaseController {
 		];
 		return View::make('resetpassword',$data);
 	}
-	
+
 	public function actionUserTeacherAdd($id = null)
 	{
 		$isID = isset($id);
@@ -207,10 +236,10 @@ class ManageController extends BaseController {
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
-			
+
 		}
 
-		
+
 
 		$validator = Validator::make(
 			Input::all(),
@@ -232,7 +261,7 @@ class ManageController extends BaseController {
 		if($isID){
 			$teacher = Teacher::find($id);
 			$user = User::find($teacher->user_id);
-			
+
 		}else{
 			$user = new User;
 			$teacher = new teacher;
@@ -300,13 +329,13 @@ class ManageController extends BaseController {
 				'password' => 'required|min:8'
 			);
 		}
-			
-		
+
+
 		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
-		
+
 		$isExistsStudent = Student::find(Input::get("id")) != NULL;
 		if(!$isID && $isExistsStudent){
 			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถสร้างนักศึกได้เนื่องจากมีรหัสนักศึกษาอยู่เเล้ว");
@@ -321,7 +350,7 @@ class ManageController extends BaseController {
 			$student = Student::find($id);
 			$user = User::find($student->user_id);
 			$user->username = $student->id;
-			
+
 		}else{
 			$user = new User;
 			$student = new Student;
@@ -329,7 +358,7 @@ class ManageController extends BaseController {
 			$user->username = Input::get("id");
 		}
 
-		
+
 		if(Input::get("password") != ''){
 			$user->password = Hash::make(Input::get("password"));
 		}
@@ -393,5 +422,5 @@ class ManageController extends BaseController {
 		return Redirect::to('manage/user/teacher')->withInput()->with('message','ลบข้อมูลอาจารย์สำเร็จ');
 	}
 
-	
+
 }

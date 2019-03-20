@@ -151,8 +151,15 @@
                                             <div class="col-md-12">
                                                 <form>
                                                     <div class="input-group">
-                                                       <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="">
+                                                       <input type="text" id="activity" name="activity" class="form-control" placeholder="ค้นหา" value="{{@$_GET['activity']}}">
                                                        <div class="input-group-append">
+                                                           <select class="form-control" name="type">
+                                                               <option value="1" {{ @$_GET['type'] == 1 ? "selected" : '' }}>กิจกรรมที่ต้องเข้าร่วม</option>
+                                                               <option value="2" {{ @$_GET['type'] == 2 ? "selected" : '' }}>ประวัติกิจกรรมที่เข้าร่วม</option>
+                                                           </select>
+                                                       </div>
+                                                       <div class="input-group-append">
+
                                                           <input type="submit" value="ค้นหากิจกรรม" class="btn btn-outline-secondary btn-secondary">
                                                        </div>
                                                     </div>
@@ -203,6 +210,7 @@
                                                             {{ $value->activity_name }}
                                                             <br>
                                                             <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                                                            <small>วันที่สิ่นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                                                     </div>
                                                     <div class="text-right">
 

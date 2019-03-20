@@ -1,7 +1,7 @@
 @extends('manage.layout')
 @section('title')
 @if(isset($activity))
-  
+
 @else
 
 @endif
@@ -20,7 +20,7 @@
       @else
          <h2 style="margin-top:30px">แก้ไขรหัสผ่าน</h2>
       @endif
-      
+
       <hr>
       @include('error')
 <div class="card card-small mb-4 pt-3">
@@ -35,18 +35,17 @@
 
             <div class="form-group">
                <label for="name">รหัสผ่านใหม่</label>
-               <input type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="password" name="password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
-               <small class="form-text text-danger">{{$errors->first('password')}}</small>
+               <input type="password" class="form-control {{$errors->has('new_password') ? 'is-invalid' : ''}}" id="password" name="new_password" value="{{$text_password}}" placeholder ="รหัสผ่าน" >
+               <small class="form-text text-danger">{{$errors->first('new_password')}}</small>
             </div>
             <br>
             <button type="submit" class="btn btn-success">บันทึก</button>
             <h6></h6>
             <label for="name"></label>
-            
+
          </div>
       </div>
    </div>
 </div>
 </form>
 @stop
-

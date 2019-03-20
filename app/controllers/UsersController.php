@@ -36,6 +36,10 @@ class UsersController extends BaseController {
 			$students->appends(['year'=>Input::get('year')]);
 		}
 
+		if( empty($_GET['year']) ) {
+			return  View::make('studentprofile-find');
+		}
+
 		return View::make('studentprofile',['students'=>$students,'q'=>$q,'year'=>$year]);
 	}
 

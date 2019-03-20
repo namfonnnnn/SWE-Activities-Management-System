@@ -101,6 +101,7 @@ Route::get('/teacher', 'UsersController@showUsersTeacher');
 Route::get('/studentprofile', 'UsersController@showUserStudentprofile');
 
 Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
+Route::post('/resetpassword', 'ManageController@postUserTeacherAdd');
 
 
 
@@ -123,5 +124,3 @@ Route::get('/resetpassword', 'ManageController@showUserTeacherAdd');
 // 	});
 
 // });
-
-
