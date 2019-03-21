@@ -70,6 +70,10 @@
 
     }
     </script>
+  
+
+ 
+   
 @stop
 @section('content')
     <br>
@@ -209,11 +213,10 @@
                                                     <div class="">
                                                             {{ $value->activity_name }}
                                                             <br>
-                                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                                                            <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small><br>
                                                             <small>วันที่สิ่นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
                                                     </div>
                                                     <div class="text-right">
-
                                                         <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
                                                     </div>
                                                 </div>
@@ -254,5 +257,42 @@
                 @else
 
                 @endif
-
+              
+              
+                   
+                <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+                    <div class="card card-small">
+                      <div class="card-header border-bottom">
+                        <h6 class="m-0">Users</h6>
+                      </div>
+                      <div class="card-body pt-0">
+                        <div class="row border-bottom py-2 bg-light">
+                          <div class="col-12 col-sm-6">
+                            <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
+                              <input type="text" class="input-sm form-control" name="start" placeholder="Start Date" id="blog-overview-date-range-1">
+                              <input type="text" class="input-sm form-control" name="end" placeholder="End Date" id="blog-overview-date-range-2">
+                              <span class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="material-icons"></i>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0">
+                            <button type="button" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
+                          </div>
+                        </div>
+                        <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
+                      </div>
+                    </div>
+                  </div>  
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="scripts/extras.1.1.0.min.js"></script>
+    <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
+    <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
             @stop
