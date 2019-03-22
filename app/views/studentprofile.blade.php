@@ -10,22 +10,34 @@
    <h2>ข้อมูลนักศึกษา</h2>
    
    <hr>
-   <form>
-      <div class="input-group">
-         <input type="text" id="q" name="q" class="form-control"placeholder="ค้นหาจากรหัสนักศึกษา ชื่อ" value="{{$q}}">
-         <div class="input-group-append">
-            <select class="custom-select" name="year">
-               <option value="">- เลือกชั้นปี -</option>
-               <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
-               <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
-               <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>
-               <option value="4" <?=($year == '4')?'selected':''?>>ชั้นปีที่ 4</option>
-               <option value="5" <?=($year == '5')?'selected':''?>>ชั้นปีที่อื่นๆ</option>
-            </select>
-            <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
-         </div>
+     <div class="card card-small mb-4">
+      <div class="card-header border-bottom">
+
+        <a class="btn btn-success btn-lg" href="{{url('/manage/user/student/add')}}">
+          <i class="fa fa-plus"></i> เพิ่มนักศึกษา
+        </a>
+        <a class="btn btn-outline-success btn-lg" href="{{url('/manage/user/student/add')}}">
+          <i class="fa fa-plus"></i> เพิ่มไฟล์
+        </a>
+
+        <form class="input-group input-group-lg col-md-5 float-right">
+            <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
+            <span class="input-group-append">
+              <select class="custom-select" name="year">
+                <option value="">ชั้นปีทั้งหมด</option>
+                <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
+                <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
+                <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>
+                <option value="4" <?=($year == '4')?'selected':''?>>ชั้นปีที่ 4</option>
+                <option value="5" <?=($year == '5')?'selected':''?>>ชั้นปีที่อื่นๆ</option>
+              </select>
+              <button class="btn btn-outline-secondary" type="submit">
+                  <i class="fa fa-search"></i>
+              </button>
+            </span>
+        </form>
       </div>
-   </form>
+
 
    <!-- <span class="input-group">
       <select id="years" name="years"  placeholder ="ภาคการศึกษา" class="form-control {{$errors->has('term') ? 'is-invalid' : ''}}">
@@ -50,6 +62,7 @@
           <tr>
             <th class="text-center">รหัสนักศึกษา</th>
             <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
+            <th class="text-center table-tr-max-100">ปีการศึกษาที่เข้าศึกษา</th>
             <th class="text-center">จัดการ</th>
           </tr>
         </thead>
@@ -58,6 +71,7 @@
             <tr>
               <td class="text-center">{{ $student->id }}</td>
               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
+              <td class="text-center">{{ $student->year}}</td>
               <td class="text-center">  
                 <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">ดูโปรไฟล์</a>
               </td>
@@ -66,6 +80,7 @@
         </tbody>
       </table>
     </div>
+  </div>
 
    
    <?php echo $students->links('partials.pagination'); ?>

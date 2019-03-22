@@ -93,19 +93,27 @@
                 <h3>เปลี่ยนรูปโปรไฟล์</h3>
                 <div>
 
-                        <div class="container">
-                            <div class="avatar-upload">
-                                <div class="avatar-edit" style="font-family:'Font Awesome 5 Free'">
-                                    <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                    <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
-                                </div>
-                                <div class="avatar-preview">
-                                    <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('image/x3.jpg')}});">
-                                    </div>
+                       
+                   
+                    <div class="text-center">
+                        <a href="{{url('/profile/upload-avatar')}}">
+                            <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
+                        </a>
+                    </div>
+                    <div class="container">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit" style="font-family:'Font Awesome 5 Free'">
+                                <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('image/x3.jpg')}});">
                                 </div>
                             </div>
                         </div>
-                    </br>
+                    </div>
+                </br>
+                   
                     <h6>รูปภาพต้องมีขนาดไม่เกิน 3 MB และเป็นไฟล์รูปภาพ jpg,jpeg,png</h6>
 
 

@@ -18,6 +18,8 @@
     }
 </style>
 
+
+
 <script>
     $(function() {
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -70,6 +72,8 @@
 
     }
     </script>
+
+    
   
 
  
@@ -168,6 +172,7 @@
                                                        </div>
                                                     </div>
                                                  </form>
+                                                 
                                                  <div class="card card-small mb-4 pt-3">
                                                     <div class="text-center">
                                                         <div class="mb-3 mx-auto">
@@ -194,8 +199,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             @endforeach
+
                                             <div class="col-md-12">
                                                 <div class="card card-small mb-4 pt-3">
                                                     <div class="text-center">
@@ -288,8 +293,5 @@
                   </div>  
     
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-    <script src="scripts/extras.1.1.0.min.js"></script>
-    <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
     <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
             @stop

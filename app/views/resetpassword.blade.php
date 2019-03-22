@@ -39,7 +39,7 @@
                <small class="form-text text-danger">{{$errors->first('new_password')}}</small>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">บันทึก</button>
+            <button type="submit" class="btn btn-primary btn-block login-button ">บันทึก</button>
             <h6></h6>
             <label for="name"></label>
 
