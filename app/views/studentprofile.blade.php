@@ -20,7 +20,7 @@
         </a>
 
         <form class="input-group input-group-lg col-md-5 float-right">
-            <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
+            <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อนักศึกษา" name="q">
             <span class="input-group-append">
               <select style="height:48px !important" class="custom-select" name="year">
                 <option value="all">ชั้นปีทั้งหมด</option>
