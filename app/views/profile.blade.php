@@ -179,6 +179,8 @@ foreach($setActivityRec as $s) {
                                                     </div>
                                                  </form>
 
+                                                 @if(@$_GET['type'] == 1)
+                           
                                                  <div class="card card-small mb-4 pt-3">
                                                     <div class="text-center">
                                                         <div class="mb-3 mx-auto">
@@ -207,6 +209,8 @@ foreach($setActivityRec as $s) {
                                             </div>
                                             @endforeach
 
+                                            @elseif(@$_GET['type'] == 2)
+
                                             <div class="col-md-12">
                                                 <div class="card card-small mb-4 pt-3">
                                                     <div class="text-center">
@@ -234,6 +238,66 @@ foreach($setActivityRec as $s) {
                                             </div>
 
                                             @endforeach
+                                            @else
+                                            <div class="card card-small mb-4 pt-3">
+                                                <div class="text-center">
+                                                    <div class="mb-3 mx-auto">
+                                                       <h5>กิจกรรมที่ต้องเข้าร่วม</h5>
+                                                    </div>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        @if(empty($activity->count()))
+                                            ไม่พบข้อมูล
+                                        @endif
+                                        @foreach ($activity as $key => $value)
+                                        <div class="col-md-4">
+                                            <div class="img-activity">
+                                                <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                                                <div class="">
+                                                        {{ $value->activity_name }}
+                                                        <br>
+                                                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small>
+                                                </div>
+                                                <div class="text-right">
+
+                                                    <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+                                      
+
+                                        <div class="col-md-12">
+                                            <div class="card card-small mb-4 pt-3">
+                                                <div class="text-center">
+                                                    <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if(empty($history->count()))
+                                            ไม่พบข้อมูล
+                                        @endif
+                                        @foreach ($history as $key => $value)
+                                        <div class="col-md-4">
+                                            <div class="img-activity">
+                                                <a href="{{url('show-activity/'.$value->id)}}"><img title="{{ $value->activity_name }}" class="img-thumbnail" src="{{asset($value->image)}}" onerror="this.src='https://i0.wp.com/www.ginorthwest.org/wp-content/uploads/2016/03/activities-2.png?fit=558%2C336&ssl=1'" alt=""></a>
+                                                <div class="">
+                                                        {{ $value->activity_name }}
+                                                        <br>
+                                                        <small>วันที่เริ่มกิจกรรม : {{ Carbon\Carbon::parse($value->day_start)->addYears('543')->format('d/m/Y') }}</small><br>
+                                                        <small>วันที่สิ่นสุดกิจกรรม : {{ Carbon\Carbon::parse($value->day_end)->addYears('543')->format('d/m/Y') }}</small>
+                                                </div>
+                                                <div class="text-right">
+                                                    <a style="font-size: 12px;" href="{{url('show-activity/'.$value->id)}}">อ่านเพิ่มเติม</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @endforeach
+
+                                            @endif
                                             <div class="col-md-12 text-center" style="padding-top:35px">
                                                 <nav aria-label="Page navigation example">
                                                     <ul class="pagination">
