@@ -71,9 +71,8 @@
               <td class="text-center">{{ $student->id }}</td>
               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
               <td class="text-center">{{ $student->year}}</td>
-              <td class="text-center">
-                <a class="btn btn-accent" href="{{url('profile')}}?id={{$student->id}}"><i class="far fa-edit"></i></a>
-                <a class="btn btn-danger" href="{{url('/manage/user/student/delete/')}}/{{$student->id}}"><i class="fas fa-trash-alt"></i></a>
+              <td class="text-center">  	             
+                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">ดูโปรไฟล์</a>
               </td>
             </tr>
           @endforeach
