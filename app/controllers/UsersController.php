@@ -20,7 +20,7 @@ class UsersController extends BaseController {
 			$q = Input::get('q');
 			$students = $students->where(function ($query) use ($q)
 			{
-				$query->orWhere('id','like','%'.$q.'%')
+				$query
 				->orWhere('firstname','like','%'.$q.'%')
 				->orWhere('lastname','like','%'.$q.'%');
 			});
@@ -37,7 +37,7 @@ class UsersController extends BaseController {
 		}
 
 		if( empty($_GET['year']) ) {
-			return  View::make('studentprofile-find');
+			// return  View::make('studentprofile-find');
 		}
 
 		return View::make('studentprofile',['students'=>$students,'q'=>$q,'year'=>$year]);

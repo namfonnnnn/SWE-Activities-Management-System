@@ -2,7 +2,7 @@
 
 class ManageUserController extends BaseController {
 
-	
+
 	public function showUserStudent()
 	{
 		$q = '';
@@ -25,8 +25,8 @@ class ManageUserController extends BaseController {
 				->orWhere('lastname','like','%'.$q.'%');
 			});
 		}
-		
-			
+
+
 		$students = $students->paginate(10);
 
 		if($isQ){
@@ -38,7 +38,7 @@ class ManageUserController extends BaseController {
 
 		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year]);
 	}
-	
+
 	public function showUserTeacher()
 	{
 		if(Input::get('q') != NULL && Input::get('q') != ""){
@@ -54,9 +54,9 @@ class ManageUserController extends BaseController {
 		$teachers->appends(['q'=>$q]);
 		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q]);
     }
-	
+
 	public function showUserTeacherAdd()
-	{	
+	{
 		$tool = new Tool;
 
 		$roles = Role::get();
@@ -172,7 +172,7 @@ class ManageUserController extends BaseController {
 		];
 		return View::make('manage.user_student_add',$data);
 	}
-	
+
 	public function actionUserTeacherAdd($id = null)
 	{
 		$isID = isset($id);
@@ -207,10 +207,10 @@ class ManageUserController extends BaseController {
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
-			
+
 		}
 
-		
+
 
 		$validator = Validator::make(
 			Input::all(),
@@ -232,7 +232,7 @@ class ManageUserController extends BaseController {
 		if($isID){
 			$teacher = Teacher::find($id);
 			$user = User::find($teacher->user_id);
-			
+
 		}else{
 			$user = new User;
 			$teacher = new teacher;
@@ -300,13 +300,13 @@ class ManageUserController extends BaseController {
 				'password' => 'required|min:8'
 			);
 		}
-			
-		
+
+
 		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
-		
+
 		$isExistsStudent = Student::find(Input::get("id")) != NULL;
 		if(!$isID && $isExistsStudent){
 			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถสร้างนักศึกได้เนื่องจากมีรหัสนักศึกษาอยู่เเล้ว");
@@ -321,7 +321,7 @@ class ManageUserController extends BaseController {
 			$student = Student::find($id);
 			$user = User::find($student->user_id);
 			$user->username = $student->id;
-			
+
 		}else{
 			$user = new User;
 			$student = new Student;
@@ -329,7 +329,7 @@ class ManageUserController extends BaseController {
 			$user->username = Input::get("id");
 		}
 
-		
+
 		if(Input::get("password") != ''){
 			$user->password = Hash::make(Input::get("password"));
 		}
@@ -368,9 +368,11 @@ class ManageUserController extends BaseController {
 			$user->delete();
 		}
 		catch ( \Exception $e ) {
-			return Redirect::to('manage/user/student')->withInput()->with('error', $e->getMessage());
+			return Redirect::back()->withInput()->with('error', $e->getMessage());
+			// return Redirect::to('manage/user/student')->withInput()->with('error', $e->getMessage());
 		}
 
+		return Redirect::back()->withInput()->with('message','ลบข้อมูลนักศึกษาสำเร็จ');
 		return Redirect::to('manage/user/student')->withInput()->with('message','ลบข้อมูลนักศึกษาสำเร็จ');
 
 	}
@@ -393,5 +395,5 @@ class ManageUserController extends BaseController {
 		return Redirect::to('manage/user/teacher')->withInput()->with('message','ลบข้อมูลอาจารย์สำเร็จ');
 	}
 
-	
+
 }

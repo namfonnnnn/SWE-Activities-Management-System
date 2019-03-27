@@ -18,7 +18,13 @@
     }
 </style>
 
+<?php
+$newSetRec = array();
+foreach($setActivityRec as $s) {
+    $newSetRec[] = array('lable'=> $s['y'], 'y' => $s['label']);
+}
 
+?>
 
 <script>
     $(function() {
@@ -37,7 +43,7 @@
             data: [
 
                 {
-                type: "column",
+                type: "line",
                 name: "กิจกรรมที่เข้าร่วมแล้ว",
                 indexLabel: "{y}",
                 yValueFormatString: "#0.##",
@@ -46,7 +52,7 @@
             },
 
             {
-                type: "column",
+                type: "line",
                 name: "กิจกรรมที่ต้องเข้าร่วม",
                 indexLabel: "{y}",
                 yValueFormatString: "#0.##",
@@ -73,11 +79,11 @@
     }
     </script>
 
-    
-  
 
- 
-   
+
+
+
+
 @stop
 @section('content')
     <br>
@@ -172,7 +178,7 @@
                                                        </div>
                                                     </div>
                                                  </form>
-                                                 
+
                                                  <div class="card card-small mb-4 pt-3">
                                                     <div class="text-center">
                                                         <div class="mb-3 mx-auto">
@@ -262,9 +268,9 @@
                 @else
 
                 @endif
-              
-              
-                   
+
+
+
                 <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
                     <div class="card card-small">
                       <div class="card-header border-bottom">
@@ -290,8 +296,8 @@
                         <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
                       </div>
                     </div>
-                  </div>  
-    
+                  </div>
+
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
             @stop

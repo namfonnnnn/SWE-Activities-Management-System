@@ -1,14 +1,13 @@
 @extends('manage.layout')
 
 @section('title')
-     
+
 @stop
 
 @section('content')
-   @include('error')
 
    <h2>ข้อมูลนักศึกษา</h2>
-   
+
    <hr>
      <div class="card card-small mb-4">
       <div class="card-header border-bottom">
@@ -23,8 +22,8 @@
         <form class="input-group input-group-lg col-md-5 float-right">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อกิจกรรม" name="q">
             <span class="input-group-append">
-              <select class="custom-select" name="year">
-                <option value="">ชั้นปีทั้งหมด</option>
+              <select style="height:48px !important" class="custom-select" name="year">
+                <option value="all">ชั้นปีทั้งหมด</option>
                 <option value="1" <?=($year == '1')?'selected':''?>>ชั้นปีที่ 1</option>
                 <option value="2" <?=($year == '2')?'selected':''?>>ชั้นปีที่ 2</option>
                 <option value="3" <?=($year == '3')?'selected':''?>>ชั้นปีที่ 3</option>
@@ -50,11 +49,11 @@
       </select>
    </span>
 
-      <span class="input-group-btn">      
+      <span class="input-group-btn">
       <a href="{{url('/manage/user/student/add')}}"style="right"class="btn btn-outline-secondary btn-secondary" >เพิ่มนักศึกษา</a>
       </span>
-      <span class="input-group-btn">      
-         <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">  
+      <span class="input-group-btn">
+         <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">
       </span> -->
     <div class="card-body p-0 text-center">
       <table class="table mb-0 ">
@@ -72,8 +71,9 @@
               <td class="text-center">{{ $student->id }}</td>
               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
               <td class="text-center">{{ $student->year}}</td>
-              <td class="text-center">  
-                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">ดูโปรไฟล์</a>
+              <td class="text-center">
+                <a class="btn btn-accent" href="{{url('profile')}}?id={{$student->id}}"><i class="far fa-edit"></i></a>
+                <a class="btn btn-danger" href="{{url('/manage/user/student/delete/')}}/{{$student->id}}"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           @endforeach
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-   
+
    <?php echo $students->links('partials.pagination'); ?>
 
    <script type="text/javascript">
