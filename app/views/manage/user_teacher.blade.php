@@ -8,23 +8,43 @@
 
    <h2>
       อาจารย์
-      <div class="float-right">
-         <a href="{{url('/manage/user/teacher/add')}}" class="btn btn-outline-success btn-success" >เพิ่มอาจารย์</a>
-         <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-info btn-info">  
-      </div>
    </h2>
    <hr>
+   <div class="card card-small mb-4">
+    <div class="card-header border-bottom">
+
+    
+
+      <form class="input-group input-group-lg col-md-5 float-right">
+          <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่ออาจารย์" name="q">
+          <span class="input-group-append">
+            
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+          </span>
+      </form>
+    </div>
 
 
-   <form>
-      <div class="input-group">
-         <input type="text" id="q" name="q" class="form-control" placeholder="ค้นหาด้วยชื่อ-นามสกุล" value="{{$q}}">  
-         <div class="input-group-append">
-            <input type="submit" value="ค้นหา" class="btn btn-outline-secondary btn-secondary">  
-         </div>
-      </div>
-   </form>
-<div class="card-body p-0 text-center">
+ <!-- <span class="input-group">
+    <select id="years" name="years"  placeholder ="ภาคการศึกษา" class="form-control {{$errors->has('term') ? 'is-invalid' : ''}}">
+       <option value="">- เลือกชั้นปี -</option>
+       <option value="1">ชั้นปีที่ 1</option>
+       <option value="2">ชั้นปีที่ 2</option>
+       <option value="3">ชั้นปีที่ 3</option>
+       <option value="4">ชั้นปีที่ 4</option>
+       <option value="5">ชั้นปีที่อื่นๆ</option>
+    </select>
+ </span>
+
+    <span class="input-group-btn">
+    <a href="{{url('/manage/user/student/add')}}"style="right"class="btn btn-outline-secondary btn-secondary" >เพิ่มนักศึกษา</a>
+    </span>
+    <span class="input-group-btn">
+       <input type="submit" value="เพิ่มไฟล์" class="btn btn-outline-secondary btn-secondary">
+    </span> -->
+  <div class="card-body p-0 text-center">
     <table class="table mb-0 ">
       <thead class="bg-light">
          <tr>

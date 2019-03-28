@@ -297,7 +297,8 @@ foreach($setActivityRec as $s) {
 
                                         @endforeach
 
-                                            @endif
+                                        @endif
+                                        
                                             <div class="col-md-12 text-center" style="padding-top:35px">
                                                 <nav aria-label="Page navigation example">
                                                     <ul class="pagination">

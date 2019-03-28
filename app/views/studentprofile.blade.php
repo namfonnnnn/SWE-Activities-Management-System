@@ -81,7 +81,7 @@
     </div>
   </div>
 
-
+  <div class="card-body p-0 text-center">
    <?php echo $students->links('partials.pagination'); ?>
 
    <script type="text/javascript">
@@ -97,4 +97,5 @@
          max-width:80px
       }
    </style>
+  </div>
 @stop
