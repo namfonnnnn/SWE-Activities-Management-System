@@ -91,13 +91,7 @@ foreach($setActivityRec as $s) {
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/home')}}">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                @if($user->type == 'student')
-                    โปรไฟล์นักศึกษา
-                @else
-                    ข้อมูลส่วนตัว
-
-                @endif
-
+          
             </li>
         </ol>
     </nav> --}}

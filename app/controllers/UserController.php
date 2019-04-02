@@ -59,18 +59,18 @@ class UserController extends Controller {
         $setIdReg[] = $value->activityID;
     }
 
-    $grapYearActivityReg = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->whereIn('id', $setIdReg)->get()->toArray();
-    $grapYearActivityRec = Activity::select('sector', \DB::raw('count(sector) as count'))->groupBy('sector')->get()->toArray();
+    $grapYearActivityReg = Activity::select('sector', \DB::raw('count(sector) as count'), 'term_year')->groupBy('sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
+    $grapYearActivityRec = Activity::select('sector', \DB::raw('count(sector) as count'), 'term_year')->groupBy('sector', 'term_year')->get()->toArray();
 
 
     $setActivityRec = [];
     foreach ($grapYearActivityRec as $key => $value) {
-        $setActivityRec[] = ['label'=> $value['sector'], 'y'=>$value['count']];
+        $setActivityRec[] = ['label'=> $value['sector'].'/'. $value['term_year'], 'y'=>$value['count']];
 
     }
     $setActivityReg = [];
     foreach ($grapYearActivityReg as $key => $value) {
-        $setActivityReg[] = ['label'=> $value['sector'], 'y'=>$value['count']];
+        $setActivityReg[] = ['label'=> $value['sector'].'/'. $value['term_year'], 'y'=>$value['count']];
 
     }
 
