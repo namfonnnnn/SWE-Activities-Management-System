@@ -8,7 +8,8 @@ class ManageController extends BaseController {
 	      $request,
 	      array(
 			'password' => 'required',
-	        'new_password' => 'required|min:8',
+			'new_password' => 'required|min:8',
+			'new_password2' => 'required|min:8',
 	      ),
 	      array(
 	        'required' => 'กรุณากรอก :attribute',
@@ -16,7 +17,8 @@ class ManageController extends BaseController {
 	      ),
 	      array(
 			'password' => 'รหัสผ่านเดิม',
-	        'new_password' => 'รหัสผ่านใหม่',
+			'new_password' => 'รหัสผ่านใหม่',
+			'new_password2' => 'รหัสผ่านใหม่',
 	      )
 	    );
 		if ($validator->fails())
@@ -24,9 +26,12 @@ class ManageController extends BaseController {
 	      return Redirect::back()->withErrors($validator);
 	    }
 		$old_password = Auth::user()->password;
-
+        
 		if (Hash::check($request['password'], $old_password)) {
-		    if (Hash::check($request['new_password2'],$old_password)) {
+			Auth::user()->password = Hash::make($request['new_password']);
+			Auth::user()->save();
+			$new_password = Auth::user()->password;
+		    if (Hash::check($request['new_password2'],$new_password)) {
 			Auth::user()->password = Hash::make($request['new_password']);
 			Auth::user()->save();
 			return Redirect::to('/resetpassword')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');

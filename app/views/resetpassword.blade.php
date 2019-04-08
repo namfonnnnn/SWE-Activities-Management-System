@@ -43,8 +43,8 @@
 
             <div class="form-group">
                   <label for="name">กรอกรหัสผ่านใหม่อีกครั้ง</label>
-                  <input type="password" class="form-control {{$errors->has('new_password') ? 'is-invalid' : ''}}" id="password" name="new_password2" value="{{$text_password}}" placeholder ="ยืนยันรหัสผ่านใหม่" >
-                  <small class="form-text text-danger">{{$errors->first('new_password')}}</small>
+                  <input type="password" class="form-control {{$errors->has('new_password2') ? 'is-invalid' : ''}}" id="password" name="new_password2" value="{{$text_password}}" placeholder ="ยืนยันรหัสผ่านใหม่" >
+                  <small class="form-text text-danger">{{$errors->first('new_password2')}}</small>
             </div>
 
             <br>
