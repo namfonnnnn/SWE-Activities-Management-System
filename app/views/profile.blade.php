@@ -36,15 +36,15 @@ foreach($setActivityRec as $s) {
             },
             legend:{
                 cursor: "pointer",
-                verticalAlign: "center",
-                horizontalAlign: "right",
+                verticalAlign: "bottom",
+                horizontalAlign: "bottom",
                 itemclick: toggleDataSeries
             },
             data: [
 
                 {
                 type: "line",
-                name: "กิจกรรมที่เข้าร่วมแล้ว",
+                name: "ประวัติการเข้าร่วมกิจกรรม",
                 indexLabel: "{y}",
                 yValueFormatString: "#0.##",
                 showInLegend: true,
@@ -58,7 +58,16 @@ foreach($setActivityRec as $s) {
                 yValueFormatString: "#0.##",
                 showInLegend: true,
                 dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
-            }]
+            },
+            
+            {
+                            type: "",
+                            name: "หมายเหตุ : แกน x : ปีการศึกษา/ภาคการศึกษา ,                                     หมายเหตุ : แกน y : จำนวนกิจกรรม",
+                            indexLabel: "",
+                            yValueFormatString: "",
+                            showInLegend: true,
+                            dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
+                        }]
         });
         chart.render();
 
@@ -266,7 +275,7 @@ foreach($setActivityRec as $s) {
                                         <div class="col-md-12">
                                             <div class="card card-small mb-4 pt-3">
                                                 <div class="text-center">
-                                                    <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
+                                                    <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
                                                 </div>
                                             </div>
                                         </div>

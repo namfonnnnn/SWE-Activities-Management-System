@@ -4,8 +4,8 @@
 @stop
 
 @section('content')
-<div class="container">
-  <div class="page-header" style="margin-top:40px">
+<div class="card card-small mb-4">
+    <div class="card-header border-bottom">
     <h2 class="mb-4 mr-sm-4 mb-sm-0">ประวัติกิจกรรมทั้งหมด</h2>
   </div>
   <br>
@@ -17,9 +17,10 @@
         </span> 
     </div>
   </form>
-  <table class="table table-striped" style="margin-top:20px">
-      <thead>
-         <tr class="table-success">
+  <div class="card-body p-0 text-center">
+      <table class="table mb-0 ">
+          <thead class="bg-light">
+              <tr>
             <th class="text-center">ชื่อกิจกรรม</th>
             <th class="text-center">วันที่จัดกิจกรรม</th>
             <th class="text-center">ผู้ร่วมโครงการ</th>
@@ -42,6 +43,7 @@
          <tr>     
       </tbody>
    </table>
+  </div>
 </div>
 
 @stop

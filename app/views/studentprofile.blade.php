@@ -12,12 +12,7 @@
      <div class="card card-small mb-4">
       <div class="card-header border-bottom">
 
-        <a class="btn btn-success btn-lg" href="{{url('/manage/user/student/add')}}">
-          <i class="fa fa-plus"></i> เพิ่มนักศึกษา
-        </a>
-        <a class="btn btn-outline-success btn-lg" href="{{url('/manage/user/student/add')}}">
-          <i class="fa fa-plus"></i> เพิ่มไฟล์
-        </a>
+        
 
         <form class="input-group input-group-lg col-md-5 float-right">
             <input class="form-control py-2" type="search" value="{{$q}}" placeholder="ค้นหาจากชื่อนักศึกษา" name="q">
@@ -61,8 +56,8 @@
           <tr>
             <th class="text-center">รหัสนักศึกษา</th>
             <th class="text-center table-tr-max-100">ชื่อ-สกุล</th>
-            <th class="text-center table-tr-max-100">ปีการศึกษาที่เข้าศึกษา</th>
-            <th class="text-center">จัดการ</th>
+       
+            <th class="text-center">ข้อมูลโปรไฟล์</th>
           </tr>
         </thead>
         <tbody>
@@ -70,9 +65,9 @@
             <tr>
               <td class="text-center">{{ $student->id }}</td>
               <td class="text-left table-tr-max-100">{{ $student->getFullName() }}</td>
-              <td class="text-center">{{ $student->year}}</td>
+         
               <td class="text-center">  	             
-                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">ดูโปรไฟล์</a>
+                <a class="btn btn-sm btn-default" href="{{url('profile')}}?id={{$student->id}}">โปรไฟล์</a>
               </td>
             </tr>
           @endforeach
