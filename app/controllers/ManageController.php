@@ -26,12 +26,12 @@ class ManageController extends BaseController {
 		$old_password = Auth::user()->password;
 
 		if (Hash::check($request['password'], $old_password)) {
-		    if (Hash::check($request['password'], $old_password)) {
+		    if (Hash::check($request['new_password'], $request['new_password2'])) {
 			Auth::user()->password = Hash::make($request['new_password']);
 			Auth::user()->save();
 			return Redirect::to('/resetpassword')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');
 		    } else {
-			return Redirect::back()->withErrors(['password'=>'รหัสผ่านไม่ถูกต้อง']);
+			return Redirect::back()->withErrors(['new_password'=>'รหัสผ่านไม่ถูกต้อง']);
 		    }
 		} else {
 			return Redirect::back()->withErrors(['password'=>'รหัสผ่านไม่ถูกต้อง']);
