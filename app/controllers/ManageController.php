@@ -29,14 +29,13 @@ class ManageController extends BaseController {
         
 		if (Hash::check($request['password'], $old_password)) {
 			Auth::user()->password = Hash::make($request['new_password']);
-			Auth::user()->save();
 			$new_password = Auth::user()->password;
 		    if (Hash::check($request['new_password2'],$new_password)) {
 			Auth::user()->password = Hash::make($request['new_password']);
 			Auth::user()->save();
 			return Redirect::to('/resetpassword')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');
 		    } else {
-			return Redirect::back()->withErrors(['new_password'=>'รหัสผ่านใหม่ไม่เหมือนกัน']);
+			return Redirect::back()->withErrors(['new_password2'=>'รหัสผ่านใหม่ไม่เหมือนกัน']);
 		    }
 		} else {
 			return Redirect::back()->withErrors(['password'=>'รหัสผ่านไม่ถูกต้อง']);
