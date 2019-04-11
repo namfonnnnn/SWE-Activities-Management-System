@@ -305,11 +305,11 @@ foreach($setActivityRec as $s) {
                                             <div class="col-md-12 text-center" style="padding-top:35px">
                                                 <nav aria-label="Page navigation example">
                                                     <ul class="pagination">
-                                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&id={{Request::get('id')}}">1</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&id={{Request::get('id')}}">2</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&id={{Request::get('id')}}">3</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&id={{Request::get('id')}}">4</a></li>
-
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/2</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/3</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2562/1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2562/2</a></li>
                                                       <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&id={{Request::get('id')}}">ทั้งหมด</a></li>
                                                     </ul>
                                                   </nav>
@@ -339,33 +339,7 @@ foreach($setActivityRec as $s) {
 
 
 
-                <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
-                    <div class="card card-small">
-                      <div class="card-header border-bottom">
-                        <h6 class="m-0">Users</h6>
-                      </div>
-                      <div class="card-body pt-0">
-                        <div class="row border-bottom py-2 bg-light">
-                          <div class="col-12 col-sm-6">
-                            <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
-                              <input type="text" class="input-sm form-control" name="start" placeholder="Start Date" id="blog-overview-date-range-1">
-                              <input type="text" class="input-sm form-control" name="end" placeholder="End Date" id="blog-overview-date-range-2">
-                              <span class="input-group-append">
-                                <span class="input-group-text">
-                                  <i class="material-icons"></i>
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0">
-                            <button type="button" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
-                          </div>
-                        </div>
-                        <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
-                      </div>
-                    </div>
-                  </div>
-
+                
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
             @stop
