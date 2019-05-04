@@ -7,28 +7,38 @@ class ManageController extends BaseController {
 		$validator = Validator::make(
 	      $request,
 	      array(
-	        'new_password' => 'required|min:8',
+			'password' => 'required',
+			'new_password' => 'required|min:8',
+			'new_password2' => 'required|min:8',
 	      ),
 	      array(
-	        'required' => 'กรุณากรอกข้อมูล :attribute',
-  	        'min' => 'กรุณากรอกข้อมูล :attribute ให้มากกว่า :min',
+	        'required' => 'กรุณากรอก :attribute',
+  	        'min' => 'กรุณากรอกรหัสผ่าน :attribute ให้มากกว่า :min ตัว',
 	      ),
 	      array(
-	        'new_password' => 'รหัสผ่านใหม่',
+			'password' => 'รหัสผ่านเดิม',
+			'new_password' => 'รหัสผ่านใหม่',
+			'new_password2' => 'รหัสผ่านใหม่',
 	      )
 	    );
 		if ($validator->fails())
 	    {
-	      return Redirect::back()->withInput()->withErrors($validator);
+	      return Redirect::back()->withErrors($validator);
 	    }
 		$old_password = Auth::user()->password;
-
+        
 		if (Hash::check($request['password'], $old_password)) {
 			Auth::user()->password = Hash::make($request['new_password']);
+			$new_password = Auth::user()->password;
+		    if (Hash::check($request['new_password2'],$new_password)) {
+			Auth::user()->password = Hash::make($request['new_password']);
 			Auth::user()->save();
-			return Redirect::back();
+			return Redirect::to('/resetpassword')->with('message', 'แก้ไขรหัสผ่านสำเร็จ');
+		    } else {
+			return Redirect::back()->withErrors(['new_password2'=>'รหัสผ่านใหม่ไม่เหมือนกัน']);
+		    }
 		} else {
-			return Redirect::back()->withErrors(['password'=>'ไม่ถูกต้อง']);
+			return Redirect::back()->withErrors(['password'=>'รหัสผ่านไม่ถูกต้อง']);
 		}
 
 	}

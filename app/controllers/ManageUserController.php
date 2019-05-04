@@ -2,12 +2,11 @@
 
 class ManageUserController extends BaseController {
 
-
-	public function showUserStudent()
-	{
+	public function showStudentSuspended()
+  {
 		$q = '';
 		$year = '';
-		$students = new Student;
+		$students = Student::onlyTrashed();
 		$isQ = Input::get('q') != NULL && Input::get('q') != "";
 		$isYear = Input::get('year') != NULL && Input::get('year') != "";
 
@@ -25,8 +24,95 @@ class ManageUserController extends BaseController {
 				->orWhere('lastname','like','%'.$q.'%');
 			});
 		}
+		
+			
+		$students = $students->paginate(10);
 
+		if($isQ){
+			$students->appends(['q'=>$q]);
+		}
+		if($isYear){
+			$students->appends(['year'=>Input::get('year')]);
+		}
 
+    return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year,'onlyTrashed'=>true]);
+  }
+  
+  public function actionStudentUnsuspended($id)
+	{
+		$student = Student::onlyTrashed()->find($id);
+		if(is_null($student)){
+			return Redirect::back()->with('error', 'ไม่พบข้อมูลนักศึกษา');
+		}
+		$user = User::find($student->user_id);
+		try {
+			$student->restore();
+		}
+		catch ( \Exception $e ) {
+			return Redirect::back()->with('error', $e->getMessage());
+		}
+
+		return Redirect::back()->with('message','กู้คืนนักศึกษาสำเร็จ');
+
+  }
+  
+  public function showTeacherSuspended()
+  {
+		$q = '';
+		$year = '';
+		$teachers = Teacher::onlyTrashed();
+    
+    if(Input::get('q') != NULL && Input::get('q') != ""){
+			$q = Input::get('q');
+			$teachers = $teachers->Where('firstname','like','%'.$q.'%')
+			->orWhere('lastname','like','%'.$q.'%');
+		}
+		$teachers = $teachers->paginate(10);
+		$teachers->appends(['q'=>$q]);
+		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q,'onlyTrashed'=>true]);
+  }
+  
+  public function actionTeacherUnsuspended($id)
+	{
+		$teacher = Teacher::onlyTrashed()->find($id);
+		if(is_null($teacher)){
+			return Redirect::back()->with('error', 'ไม่พบข้อมูลอาจารย์');
+		}
+		try {
+			$teacher->restore();
+		}
+		catch ( \Exception $e ) {
+			return Redirect::back()->with('error', $e->getMessage());
+		}
+
+		return Redirect::back()->with('message','กู้คืนอาจารย์สำเร็จ');
+
+	}
+
+	public function showUserStudent()
+	{
+		$q = '';
+		$year = '';
+		$students = Student::orderBy('id','desc');
+		$isQ = Input::get('q') != NULL && Input::get('q') != "";
+		$isYear = Input::get('year') != NULL && Input::get('year') != "";
+
+		if($isYear){
+			$year = Input::get('year');
+			$students = $students->searchYear(Input::get('year'));
+		}
+
+		if($isQ){
+			$q = Input::get('q');
+			$students = $students->where(function ($query) use ($q)
+			{
+				$query->orWhere('id','like','%'.$q.'%')
+				->orWhere('firstname','like','%'.$q.'%')
+				->orWhere('lastname','like','%'.$q.'%');
+			});
+		}
+		
+			
 		$students = $students->paginate(10);
 
 		if($isQ){
@@ -38,7 +124,7 @@ class ManageUserController extends BaseController {
 
 		return View::make('manage.user_student',['students'=>$students,'q'=>$q,'year'=>$year]);
 	}
-
+	
 	public function showUserTeacher()
 	{
 		if(Input::get('q') != NULL && Input::get('q') != ""){
@@ -53,10 +139,10 @@ class ManageUserController extends BaseController {
 		$teachers = $teachers->paginate(10);
 		$teachers->appends(['q'=>$q]);
 		return View::make('manage.user_teacher',['teachers' => $teachers,'q'=>$q]);
-    }
-
+  }
+	
 	public function showUserTeacherAdd()
-	{
+	{	
 		$tool = new Tool;
 
 		$roles = Role::get();
@@ -125,9 +211,9 @@ class ManageUserController extends BaseController {
 			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_teacher_add',$data);
-	}
-
-    public function showUserStudentAdd()
+  }
+  
+  public function showUserStudentAdd()
 	{
 		$tool = new Tool;
 		$text_year = $tool->validData(Input::old('year'), null,'');
@@ -145,7 +231,8 @@ class ManageUserController extends BaseController {
 			'select_prefix'=>$select_prefix
 		];
 		return View::make('manage.user_student_add',$data);
-	}
+  }
+  
 	public function showUserStudentEdit($id)
 	{
 		$student = Student::find($id);
@@ -172,7 +259,7 @@ class ManageUserController extends BaseController {
 		];
 		return View::make('manage.user_student_add',$data);
 	}
-
+	
 	public function actionUserTeacherAdd($id = null)
 	{
 		$isID = isset($id);
@@ -207,16 +294,16 @@ class ManageUserController extends BaseController {
 				'room' => 'required',
 				'password' => 'required|min:8'
 			);
-
+			
 		}
 
-
+		
 
 		$validator = Validator::make(
 			Input::all(),
 			$rules,
 			[
-				'regex'=>'ภาษาไทยเท่านั้น'
+				'regex'=>'ข้อมูลต้องเป็นตัวอักษรเท่านั้น'
 			]
 
 		);
@@ -232,7 +319,7 @@ class ManageUserController extends BaseController {
 		if($isID){
 			$teacher = Teacher::find($id);
 			$user = User::find($teacher->user_id);
-
+			
 		}else{
 			$user = new User;
 			$teacher = new teacher;
@@ -280,7 +367,6 @@ class ManageUserController extends BaseController {
 			$success_redirect_to = 'manage/user/student';
 			$success_message = 'แก้ไขสำเร็จ';
 			$rules = array(
-				'year' => 'required|integer|min:2558',
 				'prefix' => 'required',
 				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
@@ -292,21 +378,20 @@ class ManageUserController extends BaseController {
 			$success_redirect_to = 'manage/user/student';
 			$success_message = 'บันทึกสำเร็จ';
 			$rules = array(
-				'year' => 'required|integer|min:2558',
 				'id' => 'required|digits:8',
 				'prefix' => 'required',
-				'firstname' =>'required|regex:/^[A-Za-zก-เ]+$/',
+				'firstname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'lastname' => 'required|regex:/^[A-Za-zก-เ]+$/',
 				'password' => 'required|min:8'
 			);
 		}
-
-
-		$validator = Validator::make(Input::all(),$rules,['regex'=>'ภาษาไทยเท่านั้น']);
+			
+		
+		$validator = Validator::make(Input::all(),$rules,['regex'=>'ข้อมูลเป็นตัวอักษรเท่านั้น']);
 		if($validator->fails()){
 			return Redirect::to($redirect_to)->withInput()->withErrors($validator);
 		}
-
+		
 		$isExistsStudent = Student::find(Input::get("id")) != NULL;
 		if(!$isID && $isExistsStudent){
 			return Redirect::to($redirect_to)->withInput()->with('error',"ไม่สามารถสร้างนักศึกได้เนื่องจากมีรหัสนักศึกษาอยู่เเล้ว");
@@ -321,7 +406,7 @@ class ManageUserController extends BaseController {
 			$student = Student::find($id);
 			$user = User::find($student->user_id);
 			$user->username = $student->id;
-
+			
 		}else{
 			$user = new User;
 			$student = new Student;
@@ -329,7 +414,7 @@ class ManageUserController extends BaseController {
 			$user->username = Input::get("id");
 		}
 
-
+		
 		if(Input::get("password") != ''){
 			$user->password = Hash::make(Input::get("password"));
 		}
@@ -345,7 +430,7 @@ class ManageUserController extends BaseController {
 		$student->prefix = Input::get("prefix");
 		$student->firstname = Input::get("firstname");
 		$student->lastname = Input::get("lastname");
-		$student->year = Input::get("year");
+    $student->year = Student::convertYear($student->id);
 		try {
 			$reuslt = $student->save();
 		}
@@ -365,20 +450,20 @@ class ManageUserController extends BaseController {
 		$user = User::find($student->user_id);
 		try {
 			$student->delete();
-			$user->delete();
 		}
 		catch ( \Exception $e ) {
-			return Redirect::back()->withInput()->with('error', $e->getMessage());
-			// return Redirect::to('manage/user/student')->withInput()->with('error', $e->getMessage());
+			return Redirect::to('manage/user/student')->withInput()->with('error', $e->getMessage());
 		}
 
-		return Redirect::back()->withInput()->with('message','ลบข้อมูลนักศึกษาสำเร็จ');
 		return Redirect::to('manage/user/student')->withInput()->with('message','ลบข้อมูลนักศึกษาสำเร็จ');
 
 	}
 
 	public function actionUserTeacherDelete($id)
 	{
+    if($id == Auth::user()->teacher->id){
+      return Redirect::back()->with('error', 'ไม่สามารถลบได้เนื่องจากอยู่ในระบบ');
+    }
 		$teacher = Teacher::find($id);
 		if(is_null($teacher)){
 			return Redirect::to('manage/user/teacher')->with('error', 'ไม่พบข้อมูลอาจารย์');
@@ -386,7 +471,6 @@ class ManageUserController extends BaseController {
 		$user = User::find($teacher->user_id);
 		try {
 			$teacher->delete();
-			$user->delete();
 		}
 		catch ( \Exception $e ) {
 			return Redirect::to('manage/user/teacher')->withInput()->with('error', $e->getMessage());
@@ -395,5 +479,5 @@ class ManageUserController extends BaseController {
 		return Redirect::to('manage/user/teacher')->withInput()->with('message','ลบข้อมูลอาจารย์สำเร็จ');
 	}
 
-
+	
 }

@@ -15,7 +15,6 @@ class UserController extends Controller {
       return Redirect::to('/login')->with('status', false)->with('message', 'ไม่พบข้อมูลผู้ใช้งานระบบ')->withInput();
     }
 
-
     if (!Hash::check(Input::get('password'), $students->password)) {
       return Redirect::to('/login')->with('status', false)->with('message', 'รหัสผ่านผู้ใช้งานระบบไม่ถูกต้อง')->withInput();
     }
@@ -26,21 +25,26 @@ class UserController extends Controller {
   }
 
   public function getProfile () {
-    if(!empty(Request::get('id')))
-    {
-        $userID = Request::get('id');
-        $user = User::where("username", Request::get('id'))->first();
-    } else {
-        $userID = Auth::user()->id;
-        $user = Auth::user();
+    try {
+      if(!empty(Request::get('id')))
+      {
+          $userID = Request::get('id');
+          $user = User::where("username", Request::get('id'))->first();
+      } else {
+          $userID = Auth::user()->id;
+          $user = Auth::user();
+      }
+      if ( Teacher::where('user_id', $user->id)->first() != null) {
+          $user->type = 'teacher';
+          $user->teacher = Teacher::where('user_id', $user->id)->first();
+      } else {
+          $user->type = 'student';
+          $user->student = Student::where('user_id', $user->id)->first();
+      }
+    } catch (\Exception $e) {
+        return Redirect::to('login');
     }
-    if ( Teacher::where('user_id', $user->id)->first() != null) {
-        $user->type = 'teacher';
-        $user->teacher = Teacher::where('user_id', $user->id)->first();
-    } else {
-        $user->type = 'student';
-        $user->student = Student::where('user_id', $user->id)->first();
-    }
+    
 
     if (!Auth::check()) {
       return Redirect::to('/login')->with('status', false)->with('message', 'ท่านยังไม่ได้เข้าสู่ระบบ')->withInput();
@@ -52,25 +56,25 @@ class UserController extends Controller {
         $activity = $activity->where('student', 'LIKE', "%{$year}%");
     }
 
-    $grapYearActivityReg = \DB::table('checking')->select('activityID')->where('UserID', $user->id)->get();
+    $grapYearActivityReg = \DB::table('rank_checks')->select('id')->where('id', $user->id)->get();
 
     $setIdReg = [];
     foreach ($grapYearActivityReg as $key => $value) {
         $setIdReg[] = $value->activityID;
     }
 
-    $grapYearActivityReg = Activity::select('sector', \DB::raw('count(sector) as count'), 'term_year')->groupBy('sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
-    $grapYearActivityRec = Activity::select('sector', \DB::raw('count(sector) as count'), 'term_year')->groupBy('sector', 'term_year')->get()->toArray();
+    $grapYearActivityReg = Activity::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->whereIn('id', $setIdReg)->get()->toArray();
+    $grapYearActivityRec = Activity::select('term_sector', \DB::raw('count(term_sector) as count'), 'term_year')->groupBy('term_sector', 'term_year')->get()->toArray();
 
 
     $setActivityRec = [];
     foreach ($grapYearActivityRec as $key => $value) {
-        $setActivityRec[] = ['label'=> $value['sector'].'/'. $value['term_year'], 'y'=>$value['count']];
+        $setActivityRec[] = ['label'=> $value['term_sector'].'/'. $value['term_year'], 'y'=>$value['count']];
 
     }
     $setActivityReg = [];
     foreach ($grapYearActivityReg as $key => $value) {
-        $setActivityReg[] = ['label'=> $value['sector'].'/'. $value['term_year'], 'y'=>$value['count']];
+        $setActivityReg[] = ['label'=> $value['term_sector'].'/'. $value['term_year'], 'y'=>$value['count']];
 
     }
 
@@ -95,13 +99,13 @@ class UserController extends Controller {
         }
     }
 
-    return View::make('profile', array('user'=>$user,'activity'=>$activity, 'setActivityRec'=>$setActivityRec, 'setActivityReg'=>$setActivityReg, 'history'=>$history));
+    return View::make('profile', array('users'=>$user,'activity'=>$activity, 'setActivityRec'=>$setActivityRec, 'setActivityReg'=>$setActivityReg, 'history'=>$history));
 
 }
 
 public function checkStudentActivity($uid, $aid)
 {
-    $a = \DB::table('checking')->where('UserID', $uid)->where('activityID', $aid)->update(array('status'=> 1));
+    $a = \DB::table('checking')->where('UserID', $uid)->where('activityID', $aid)->update(array('status'=> 0));
     return Redirect::back();
 }
   public function getProfileUpdate() {
@@ -146,6 +150,7 @@ public function checkStudentActivity($uid, $aid)
       ),
       array(
         'required' => 'กรุณากรอกข้อมูล :attribute',
+        'digits' => 'กรุณากรอกเบอร์โทร 10 ตัว'
       ),
       array(
         'firstname' => 'ให้ครบถ้วน',
@@ -155,6 +160,7 @@ public function checkStudentActivity($uid, $aid)
         'tel' => 'ให้ครบถ้วน',
         'image' => 'ให้ครบถ้วน',
       )
+
     );
 
     if ($validator->fails())

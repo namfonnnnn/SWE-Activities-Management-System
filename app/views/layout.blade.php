@@ -73,7 +73,7 @@ if(!is_null(Auth::user()->getFullName())){
              </li>
              
              <li class="nav-item">
-               <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}" href="{{url('profile')}}">
+               <a class="nav-link {{ Request::is('studentprofile') ? 'active' : '' }}" href="{{url('studentprofile')}}">
                  <i class="material-icons">person</i>
                  <span>ข้อมูลนักศึกษา</span>
                </a>

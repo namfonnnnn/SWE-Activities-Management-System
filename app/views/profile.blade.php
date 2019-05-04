@@ -36,15 +36,15 @@ foreach($setActivityRec as $s) {
             },
             legend:{
                 cursor: "pointer",
-                verticalAlign: "center",
-                horizontalAlign: "right",
+                verticalAlign: "bottom",
+                horizontalAlign: "bottom",
                 itemclick: toggleDataSeries
             },
             data: [
 
                 {
                 type: "line",
-                name: "กิจกรรมที่เข้าร่วมแล้ว",
+                name: "ประวัติการเข้าร่วมกิจกรรม",
                 indexLabel: "{y}",
                 yValueFormatString: "#0.##",
                 showInLegend: true,
@@ -58,7 +58,16 @@ foreach($setActivityRec as $s) {
                 yValueFormatString: "#0.##",
                 showInLegend: true,
                 dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
-            }]
+            },
+            
+            {
+                            type: "",
+                            name: "หมายเหตุ : แกน x : ปีการศึกษา/ภาคการศึกษา ,                                     หมายเหตุ : แกน y : จำนวนกิจกรรม",
+                            indexLabel: "",
+                            yValueFormatString: "",
+                            showInLegend: true,
+                            dataPoints: <?php echo json_encode($setActivityRec, JSON_NUMERIC_CHECK); ?>
+                        }]
         });
         chart.render();
 
@@ -96,7 +105,7 @@ foreach($setActivityRec as $s) {
         </ol>
     </nav> --}}
 
-    @include('layouts.alert')
+   
     @section('page_heading','Dashboard')
 
 
@@ -110,29 +119,29 @@ foreach($setActivityRec as $s) {
                         <div class="mb-3 mx-auto">
                             <p>
                                 <a href="{{url('/profile/upload-avatar')}}">
-                                    <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="130" height="130" >
+                                    <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$users->{$users->type}->getAvatar()}}" alt="x3" width="130" height="130" >
                                 </a>
                             </p>
                             <div class="col-xs-9 text-left" style="padding-left:20px">
 
                                 <div><h2>
-                                    @if($user->type == 'student')
+                                    @if($users->type == 'student')
 
                                     @else
 
                                     @endif
                                     {{-- <small><a class="btn" href="{{url('profile/edit')}}">แก้ไข</a></small> --}}
                                 </h2></div>
-                                    <div>ชื่อ :{{ $user->{$user->type}->prefix }} {{ $user->{$user->type}->firstname }} {{ $user->{$user->type}->lastname }}</div>
-                                    @if($user->type == 'student')
-                                        <div>รหัสนักศึกษา : {{ $user->{$user->type}->id }}</div>
+                                    <div>ชื่อ :{{ $users->{$users->type}->prefix }} {{ $users->{$users->type}->firstname }} {{ $users->{$users->type}->lastname }}</div>
+                                    @if($users->type == 'student')
+                                        <div>รหัสนักศึกษา : {{ $users->{$users->type}->id }}</div>
                                     @else
-                                        <div>ห้อง : {{ $user->{$user->type}->room_num }}</div>
+                                        <div>ห้อง : {{ $users->{$users->type}->room_num }}</div>
 
                                     @endif
 
-                                    <div>เบอร์โทร    : {{ $user->{$user->type}->tel }}</div>
-                                    <div>อีเมล       : {{ $user->{$user->type}->email }}</div>
+                                    <div>เบอร์โทร    : {{ $users->{$users->type}->tel }}</div>
+                                    <div>อีเมล       : {{ $users->{$users->type}->email }}</div>
 
 
                                     <div class="col-xs-3">
@@ -151,7 +160,7 @@ foreach($setActivityRec as $s) {
                     </div>
                 </div>
 
-                @if($user->type == 'student')
+                @if($users->type == 'student')
                 <!-- /.col-lg-4 -->
 
                                     <div class="col-lg-8">
@@ -266,7 +275,7 @@ foreach($setActivityRec as $s) {
                                         <div class="col-md-12">
                                             <div class="card card-small mb-4 pt-3">
                                                 <div class="text-center">
-                                                    <h5>ประวัติกิจกรรมที่เข้าร่วม</h5>
+                                                    <h5>ประวัติการเข้าร่วมกิจกรรม</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -296,11 +305,11 @@ foreach($setActivityRec as $s) {
                                             <div class="col-md-12 text-center" style="padding-top:35px">
                                                 <nav aria-label="Page navigation example">
                                                     <ul class="pagination">
-                                                      <li class="page-item"><a class="page-link" href="?year=1&s={{Request::get('s')}}&id={{Request::get('id')}}">1</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=2&s={{Request::get('s')}}&id={{Request::get('id')}}">2</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=3&s={{Request::get('s')}}&id={{Request::get('id')}}">3</a></li>
-                                                      <li class="page-item"><a class="page-link" href="?year=4&s={{Request::get('s')}}&id={{Request::get('id')}}">4</a></li>
-
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/2</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2561/3</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2562/1</a></li>
+                                                      <li class="page-item"><a class="page-link" href="?s={{Request::get('s')}}&id={{Request::get('id')}}">2562/2</a></li>
                                                       <li class="page-item"><a class="page-link" href="{{url('/profile')}}?s={{Request::get('s')}}&id={{Request::get('id')}}">ทั้งหมด</a></li>
                                                     </ul>
                                                   </nav>
@@ -312,7 +321,7 @@ foreach($setActivityRec as $s) {
 
             </div>
             <!-- /.row -->
-            @if($user->type == 'student')
+            @if($users->type == 'student')
 
 
             <div class="col-lg-8">
@@ -330,33 +339,7 @@ foreach($setActivityRec as $s) {
 
 
 
-                <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
-                    <div class="card card-small">
-                      <div class="card-header border-bottom">
-                        <h6 class="m-0">Users</h6>
-                      </div>
-                      <div class="card-body pt-0">
-                        <div class="row border-bottom py-2 bg-light">
-                          <div class="col-12 col-sm-6">
-                            <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
-                              <input type="text" class="input-sm form-control" name="start" placeholder="Start Date" id="blog-overview-date-range-1">
-                              <input type="text" class="input-sm form-control" name="end" placeholder="End Date" id="blog-overview-date-range-2">
-                              <span class="input-group-append">
-                                <span class="input-group-text">
-                                  <i class="material-icons"></i>
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0">
-                            <button type="button" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
-                          </div>
-                        </div>
-                        <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
-                      </div>
-                    </div>
-                  </div>
-
+                
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
             @stop

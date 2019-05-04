@@ -96,9 +96,7 @@
                        
                    
                     <div class="text-center">
-                        <a href="{{url('/profile/upload-avatar')}}">
-                            <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
-                        </a>
+                      
                     </div>
                     <div class="container">
                         <div class="avatar-upload">
@@ -107,8 +105,13 @@
                                 <label for="imageUpload"><i style="padding:10px" class="fa fa-search"></i></label>
                             </div>
                             <div class="avatar-preview">
+                                    
                                 <div id="imagePreview" style="background-image: url({{ !empty(Auth::user()->image) ? Auth::user()->getAvatar() :  asset('image/x3.jpg')}});">
+                                    <a href="{{url('/profile/upload-avatar')}}">
+                                        <input class="rounded-circle" type="image" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDcMQ6ob11JlE6Q83Akzz4X-8QYnuwuyZnkeA8xdhgH1jM3QJ9'" src="{{$user->{$user->type}->getAvatar()}}" alt="x3" width="180" height="180" >
+                                    </a>
                                 </div>
+                           
                             </div>
                         </div>
                     </div>
@@ -222,7 +225,7 @@
                                         <input  type="text" class="form-control" name="room" id="room"  placeholder="ห้อง" value="{{Request::old('room', $user->{$user->type}->room)}}" />
                                     </div>
                                     @if($errors->has('room'))
-                                        <div class="alert-danger" role="alert">
+                                        <div class="form-text text-danger"role="alert">
                                             {{$errors->first('room')}}
                                         </div>
                                     @endif
@@ -238,7 +241,7 @@
                                     <input type="text" class="form-control" name="email" id="email"  placeholder="Email"  value="{{Request::old('email',$user->{$user->type}->email)}}" />
                                 </div>
                                 @if($errors->has('email'))
-                                    <div class="alert-danger" role="alert">
+                                    <div class="form-text text-danger" role="alert">
                                         {{$errors->first('email')}}
                                     </div>
                                 @endif
@@ -252,7 +255,7 @@
                                     <input type="text" class="form-control" name="tel" id="tel"  placeholder="เบอร์ติดต่อ"   value="{{Request::old('tel', $user->{$user->type}->tel)}}"/>
                                 </div>
                                 @if($errors->has('tel'))
-                                    <div class="alert-danger" role="alert">
+                                    <div class="form-text text-danger" role="alert">
                                         {{$errors->first('tel')}}
                                     </div>
                                 @endif

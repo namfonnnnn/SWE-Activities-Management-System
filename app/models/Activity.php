@@ -1,12 +1,12 @@
 <?php
 class Activity extends Eloquent {
 	protected $table = 'activity';
-
-	public function coverTime($date)
-	{
-		$date = strtr($date, '/', '-');
-		return date("Y-m-d",strtotime($date));
-	}
+  public function getPicture()
+  {
+    if(is_null($this->image))
+      $this->image = 'assets/image/p-image.jpg';
+    return $this->image;
+  }
 	public function getTeacherName()
 	{
 		$teacher_name = "";
@@ -39,6 +39,13 @@ class Activity extends Eloquent {
 			return json_decode($this->student);
 		else
 			return null;
-	}
-	
+  }
+  public function activityDetails()
+  {
+    return $this->hasMany('ActivityDetail');
+  }
+  public function details()
+  {
+    return $this->hasMany('ActivityDetail');
+  }	
 }

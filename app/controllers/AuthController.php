@@ -15,6 +15,7 @@ class AuthController extends BaseController {
 
 	public function actionLogin()
 	{
+		// 61101192
 		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))){
 
 			// if (Auth::user()->isTeacher()) {

@@ -25,12 +25,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function student()
     {
-        return $this->belongsTo('Student');
+        return $this->hasOne('Student');
 	}
 
 	public function teacher()
     {
-        return $this->belongsTo('Teacher');
+        return $this->hasOne('Teacher');
 	}
 
 	public function getAvatar() {

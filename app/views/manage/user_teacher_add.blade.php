@@ -1,33 +1,46 @@
 @extends('manage.layout')
+
 @section('title')
-@if(isset($activity))
-   เพิ่มข้อมูลอาจารย์
-@else
-   แก้ไขข้อมูลอาจารย์
-@endif
+  @if(isset($activity))
+    แก้ไขข้อมูลอาจารย์
+  @else
+    เพิ่มข้อมูลอาจารย์
+  @endif
 @stop
+
+@section('subtitle')
+จัดการข้อมูลนักศึกษา
+@stop
+
 @section('cdn')
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 @stop
+@section('js')
+<script>
+  $(document).ready(function () {
+    $('#firstname').on("keydown", onPressOnlyThaiAndEng);
+    $('#lastname').on("keydown", onPressOnlyThaiAndEng);
+    $('#tel').on("keydown", onPressOnlyNumber);
+    $('#tel').on("keydown", (e)=>{
+      onPressLimit(e,$('#tel').val().length,10)
+    });
+    $('#password').on("keydown", (e)=>{
+      onPressLimit(e,$('#password').val().length,16)
+    });
+  })
+</script>
+@stop
 @section('content')
-
-<form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" method="post">
-   <div class="container">
-      @if(isset($teacher))
-         <h2 style="margin-top:30px">แก้ไขข้อมูลอาจารย์</h2>
-      @else
-         <h2 style="margin-top:30px">เพิ่มข้อมูลอาจารย์</h2>
-      @endif
-      
-      <hr>
-      @include('error')
-      
-      <div class="row justify-content-md-center">
-         <div class="col-sm-6">
-
-            <div class="row">
+<form class="add-new-post" method="post" autocomplete="off" enctype="multipart/form-data" >
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <!-- Add New Post Form -->
+      <div class="card card-small mb-3">
+        <div class="card-body">
+          <form class="form-horizontal" method="post">
+          <div class="row">
                <div class="col">
                   <div class="form-group">
                      <label for="name">บทบาทในระบบ</label>
@@ -116,10 +129,16 @@
                <small class="form-text text-danger">{{$errors->first('password')}}</small>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">บันทึก</button>
-         </div>
+             
+          <button class="btn btn-outline-success ml-auto float-right">
+            <i class="material-icons">save</i> บันทึก
+          </button>
+      
+          </form>
+        </div>
       </div>
-   </div>
-</form>
+      <!-- / Add New Post Form -->
+    </div>
+  </div>
 @stop
 

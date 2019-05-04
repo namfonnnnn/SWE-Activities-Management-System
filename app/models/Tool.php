@@ -1,7 +1,12 @@
 <?php
 class Tool 
 {
-    public function validData($input=null, $obj=null, $default='')
+  public function coverTime($date)
+	{
+		$date = strtr($date, '/', '-');
+		return date("Y-m-d",strtotime($date));
+	}
+  public function validData($input=null, $obj=null, $default='')
 	{
 		if(!is_null($input)){
 			$reuslt = $input;
@@ -12,7 +17,7 @@ class Tool
 		 }
 		 return $reuslt;
 	}
-	public function formatDateToDatepicker($day)
+	public static function formatDateToDatepicker($day)
 	{
 		if($day != ''){
 			$day = strtr($day, '/', '-');
@@ -23,7 +28,6 @@ class Tool
 	}
 	public function formatTimeToDatepicker($time)
 	{
-
 		if($time != ''){
 			$a      = preg_split('/[: ]/', $time);
 			$time = $a[0].':'.$a[1];
@@ -52,5 +56,16 @@ class Tool
 			return true;
 		else
 			return false;
-	}
+  }
+  public function listOfTwoDate($date1,$date2)
+  {
+    $listOfDate = [$date1];
+    $to = \Carbon\Carbon::createFromFormat('Y-m-d', $date1);
+    $from = \Carbon\Carbon::createFromFormat('Y-m-d', $date2);
+    $day = $to->diffInDays($from);
+    for ($i=0; $i < $day; $i++) {
+      $listOfDate[] = $to->addDays(1)->toDateString();
+    }
+    return $listOfDate;
+  }
 }
