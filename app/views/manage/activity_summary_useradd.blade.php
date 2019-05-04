@@ -49,7 +49,7 @@
                 <td>{{$activityDetail->participations()->count()}}</td>
                 <td>
                   @if(!$activityDetail->isPassDayStart())
-                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>  
+                    <a href="{{url('/manage/activity/detail/'.$activityDetail->id.'/participation')}}" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="บันทึกการเข้าร่วม"><i class="far fa-calendar-check"></i></a>
                   @else
                     <small class="text-danger">
                       ยังไม่ถึงเวลาในการจัดกิจกรรม
